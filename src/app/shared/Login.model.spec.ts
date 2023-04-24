@@ -1,6 +1,6 @@
-import { Login } from './inspection-detail.model';
+import { Login } from './Login.model';
 
-describe('InspectionDetail', () => {
+describe('Login', () => {
   it('should create an instance', () => {
     expect(new Login()).toBeTruthy();
   });
