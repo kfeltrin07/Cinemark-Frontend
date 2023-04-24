@@ -7,12 +7,14 @@ import { LoginFormComponent } from './Logins/Login-form/Login-form.component';
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginsComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    NaslovnaStranicaComponent
   ],
   imports: [
     BrowserModule,
