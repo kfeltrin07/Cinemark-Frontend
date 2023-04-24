@@ -8,13 +8,18 @@ import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica.component';
+import { LoginStranicaComponent } from './login-stranica/login-stranica.component';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginsComponent,
     LoginFormComponent,
-    NaslovnaStranicaComponent
+    NaslovnaStranicaComponent,
+    LoginStranicaComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
