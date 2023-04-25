@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>How to make a website</title>
+    <title>Login stranica</title>
     <link rel="stylesheet" href="login-stranica.component.css">
 </head>
 <body>
@@ -12,8 +12,29 @@
                 <li><a href="">Sort By</a></li>
                 <li><a href="">Bookmars</a></li>
                 <li><a routerLink="/login">Log In</a></li>
-            </ul>
+            </ul>  
+        </div>
+
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn"  (click) = "loginACT()">Log In</button>
+                <button type="button" class="toggle-btn" (click) = "registerACT()">Register</button>
+            </div>
+            <form id="loginID" class="input-group">
+                <input type="text" class="input-field" placeholder="User Id" required>
+                <input type="text" class="input-field" placeholder="Enter Password" required>  
+                <button type="submit" class="submit-btn" >Log In</button>         
+            </form>
+            <form id="registerID" class="input-group">
+                <input type="text" class="input-field" placeholder="User Id" required>
+                <input type="email" class="input-field" placeholder="Email" required>
+                <input type="text" class="input-field" placeholder="Enter Password" required>  
+                <button type="submit" class="submit-btn">Register</button>         
+            </form>
         </div>
     </div>
+ 
+    
 </body>
 </html>
