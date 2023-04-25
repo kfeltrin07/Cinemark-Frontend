@@ -18,6 +18,15 @@ export class LoginService {
     return this.http.post(this.baseURL,this.formData);
   }
 
+  putLogins(){
+    return this.http.put(`${this.baseURL}/${this.formData.id_user}`,this.formData);
+  }
+
+  deleteLogin(id:number){
+    return this.http.delete(`${this.baseURL}/${id}`);
+
+  }
+
   refreshList(){
     this.http.get(this.baseURL).toPromise().then(
       res => this.list = res as Login[]);

@@ -6,12 +6,15 @@ import { LoginsComponent } from './Logins/Logins.component';
 import { LoginFormComponent } from './Logins/Login-form/Login-form.component';
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica.component';
+import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginsComponent,
+    NaslovnaStranicaComponent,
     LoginFormComponent
   ],
   imports: [
@@ -20,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

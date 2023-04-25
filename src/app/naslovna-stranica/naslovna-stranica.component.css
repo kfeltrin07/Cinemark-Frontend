@@ -109,3 +109,23 @@ button:hover{
     border: none;
 }
 
+.search-bar{
+    width: 100%;
+    margin-left: 710px;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    
+}
+
+.search-bar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 20px;
+    font-size: 20px;
+    color: #00d6c1;
+}

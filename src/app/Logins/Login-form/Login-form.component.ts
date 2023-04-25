@@ -20,10 +20,32 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
+    if (this.service.formData.id_user==0)
+      this.insertRecord(form);
+    else
+      this.updateRecord(form);
+  }
+
+  insertRecord(form:NgForm){
     this.service.postLogins().subscribe(
       res =>{
         this.resetForm(form);
-        this.toastr.success('Submitted successfully','Inspection Detail');
+        this.service.refreshList();
+        this.toastr.success('Submitted successfully','Login');
+      },
+      err => {
+        console.log(err); 
+        this.toastr.error('User postoji ili grška kod unosa','Login');
+      }
+    );
+  }
+
+  updateRecord(form:NgForm){
+    this.service.putLogins().subscribe(
+      res =>{
+        this.resetForm(form);
+        this.service.refreshList();
+        this.toastr.info('Updated successfully','Login');
       },
       err => {console.log(err); }
     );
