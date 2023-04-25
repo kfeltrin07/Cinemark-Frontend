@@ -11,7 +11,7 @@
                 <li><a href="" >Home</a></li>
                 <li><a href="">Sort By</a></li>
                 <li><a href="">Bookmars</a></li>
-                <li><a routerLink="/login">Log In</a></li>
+                <li><a routerLink="/login" id="LoginStatus" >Log In</a></li>
             </ul>  
         </div>
 
@@ -21,10 +21,10 @@
                 <button type="button" class="toggle-btn"  (click) = "loginACT()">Log In</button>
                 <button type="button" class="toggle-btn" (click) = "registerACT()">Register</button>
             </div>
-            <form id="loginID" class="input-group" novalidate #form="ngForm" (submit)="onSubmit(form)">
+            <form id="loginID" class="input-group" novalidate #form="ngForm">
                 <input type="text" class="input-field" placeholder="Username" required name="username" #Username = "ngModel" [(ngModel)]="service.formData.username" required [class.invalid]="Username.invalid && Username.touched">
-                <input type="text" class="input-field" placeholder="Password" required name="password" #Passwprd = "ngModel" [(ngModel)]="service.formData.password" required minlength="4">  
-                <button type="submit" class="submit-btn" >Log In</button>         
+                <input type="password" class="input-field" placeholder="Password" required name="password" #Passwprd = "ngModel" [(ngModel)]="service.formData.password" required minlength="4">  
+                <button type="submit" class="submit-btn" [disabled]="form.invalid" routerLink="" (click)="onLogIn()">Log In</button>         
             </form>
             <form id="registerID" class="input-group" novalidate #form="ngForm" (submit)="onSubmit(form)">
                 <input type="text" class="input-field" placeholder="Username" name="username" #Username = "ngModel" [(ngModel)]="service.formData.username" required [class.invalid]="Username.invalid && Username.touched">
