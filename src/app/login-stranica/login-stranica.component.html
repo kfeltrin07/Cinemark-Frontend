@@ -26,7 +26,7 @@
                 <input type="text" class="input-field" placeholder="Password" required>  
                 <button type="submit" class="submit-btn" >Log In</button>         
             </form>
-            <form id="registerID" class="input-group">
+            <form id="registerID" class="input-group" novalidate #form="ngForm" (submit)="onSubmit(form)">
                 <input type="text" class="input-field" placeholder="Username" name="username" #Username = "ngModel" [(ngModel)]="service.formData.username" required [class.invalid]="email.invalid && email.touched">
                 <input type="email" class="input-field" placeholder="Email" name="email" #email = "ngModel" [(ngModel)]="service.formData.email" required [class.invalid]="email.invalid && email.touched" >
                 <input type="password" class="input-field" placeholder="Password" name="password" #Passwprd = "ngModel" [(ngModel)]="service.formData.password" required minlength="4">  
