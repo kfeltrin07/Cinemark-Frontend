@@ -44,9 +44,13 @@ export class LoginStranicaComponent implements OnInit{
     this.service.postLogins().subscribe(
       res =>{
         this.resetForm(form);
-        this.toastr.success('Submitted successfully','Inspection Detail');
+        this.service.refreshList();
+        this.toastr.success('Submitted successfully','Login');
       },
-      err => {console.log(err); }
+      err => {
+        console.log(err); 
+        this.toastr.error('User postoji ili grška kod unosa','Login');
+      }
     );
   }
 
