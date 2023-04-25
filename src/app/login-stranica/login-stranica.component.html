@@ -6,7 +6,7 @@
 <body>
     <div class="banner">
         <div class="navbar">
-            <img src="assets/FinalLogo.png" class="logo"/>
+            <img src="assets/FinalLogo.png" class="logo" routerLink=""/>
             <ul>
                 <li><a href="" >Home</a></li>
                 <li><a href="">Sort By</a></li>
@@ -22,14 +22,14 @@
                 <button type="button" class="toggle-btn" (click) = "registerACT()">Register</button>
             </div>
             <form id="loginID" class="input-group">
-                <input type="text" class="input-field" placeholder="User Id" required>
-                <input type="text" class="input-field" placeholder="Enter Password" required>  
+                <input type="text" class="input-field" placeholder="Username" required>
+                <input type="text" class="input-field" placeholder="Password" required>  
                 <button type="submit" class="submit-btn" >Log In</button>         
             </form>
             <form id="registerID" class="input-group">
-                <input type="text" class="input-field" placeholder="User Id" required>
+                <input type="text" class="input-field" placeholder="Username" required>
                 <input type="email" class="input-field" placeholder="Email" required>
-                <input type="text" class="input-field" placeholder="Enter Password" required>  
+                <input type="text" class="input-field" placeholder="Password" required>  
                 <button type="submit" class="submit-btn">Register</button>         
             </form>
         </div>
