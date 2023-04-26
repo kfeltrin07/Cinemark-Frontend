@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica.component';
 import { LoginStranicaComponent } from './login-stranica/login-stranica.component';
 import { RouterModule } from '@angular/router';
+import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     AppComponent,
     NaslovnaStranicaComponent,
     NaslovnaStranicaComponent,
-    LoginStranicaComponent
+    LoginStranicaComponent,
+    BookmarkStranicaComponent
   ],
   imports: [
     BrowserModule,
