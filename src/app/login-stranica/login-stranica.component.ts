@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Router, Routes } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
 import { LoginService } from 'src/app/shared/Login.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Login } from 'src/app/shared/Login.model';
+import { NaslovnaStranicaComponent } from 'src/app/naslovna-stranica/naslovna-stranica.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,11 +16,12 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginStranicaComponent implements OnInit{
 
   constructor(public service:LoginService,
-    private toastr:ToastrService) {}
+    private toastr:ToastrService, private router: Router) {}
 
     ngOnInit(): void {
       
     }
+    
 
   registerACT(){
     var x = document.getElementById("loginID") as HTMLDivElement;
@@ -45,12 +48,29 @@ export class LoginStranicaComponent implements OnInit{
       res =>{
         this.resetForm(form);
         this.service.refreshList();
-        this.toastr.success('Submitted successfully','Login');
+        this.toastr.success('Submitted successfully','Register');
+        this.loginACT;
       },
       err => {
         console.log(err); 
-        this.toastr.error('User postoji ili grška kod unosa','Login');
+        this.toastr.error('User exists or error in input','Register');
       }
+    );
+    
+  }
+
+  onLogin(form:NgForm){
+    this.service.authenticate(form).subscribe(
+      res=>{
+        this.toastr.success('You are logged in');
+        
+
+      },
+      err=>{
+        console.log(err);
+        this.toastr.error('Wrong Username or Password');
+      }
+
     );
   }
 
