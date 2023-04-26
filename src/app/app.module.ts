@@ -11,6 +11,7 @@ import { LoginStranicaComponent } from './login-stranica/login-stranica.componen
 import { RouterModule } from '@angular/router';
 import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica.component';
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
+import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.com
     NaslovnaStranicaComponent,
     LoginStranicaComponent,
     BookmarkStranicaComponent,
-    SortByStranicaComponent
+    SortByStranicaComponent,
+    FilmStranicaComponent
   ],
   imports: [
     BrowserModule,
