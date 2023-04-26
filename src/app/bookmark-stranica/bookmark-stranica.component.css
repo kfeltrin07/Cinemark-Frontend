@@ -69,9 +69,17 @@
     margin-top: 80px;
 }
 
-.popis{
+.bookmark-content{
     color: #fefed6;
+    font-size: 28px;
 }
+
+span{
+    color:#fff;
+    font-size: 15px;
+    font-family: "Nexa Light";
+}
+
 
 
 

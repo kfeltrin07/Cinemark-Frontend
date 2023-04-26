@@ -19,10 +19,11 @@
             <div class="container">
                 <table class="table table-bordered table-striped">
                   <thead>
-                  <tr class="popis">
+                  <tr class="bookmark-content">
                     <th>Title</th>
                     <th>Director</th>
                     <th>Main Actor</th>
+                    <th>Release Date</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -30,6 +31,7 @@
                     <td><span>{{film.title}}</span></td>
                     <td><span>{{film.director}}</span></td>
                     <td><span>{{film.main_actor}}</span></td>
+                    <td><span>{{film.release_date.substring(0,10)}}</span></td>
                   </tr>
                   </tbody>
                 </table>

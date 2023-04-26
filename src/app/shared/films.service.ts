@@ -18,4 +18,5 @@ export class FilmsService {
     this.http.get(this.baseURL).toPromise().then(
       res => this.list = res as Films[]);
   }
+
 }
