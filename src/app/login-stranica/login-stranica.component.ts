@@ -1,10 +1,10 @@
 import { Router, Routes } from '@angular/router';
 import { Component, OnInit} from '@angular/core';
-import { LoginService } from 'src/app/shared/Login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, } from '@angular/core';
 import { Login } from 'src/app/shared/Login.model';
+import { LoginService } from 'src/app/shared/Login.service';
 import { NaslovnaStranicaComponent } from 'src/app/naslovna-stranica/naslovna-stranica.component';
 import { ToastrService } from 'ngx-toastr';
 
@@ -63,7 +63,6 @@ export class LoginStranicaComponent implements OnInit{
     this.service.authenticate(form).subscribe(
       res=>{
         this.toastr.success('You are logged in');
-        
 
       },
       err=>{

@@ -9,15 +9,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica.component';
 import { LoginStranicaComponent } from './login-stranica/login-stranica.component';
 import { RouterModule } from '@angular/router';
-import{BookmarkStranicaComponent}from './bookmark-stranica/bookmark-stranica.component';
+import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica.component';
+import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NaslovnaStranicaComponent,
+    NaslovnaStranicaComponent,
+    LoginStranicaComponent,
     BookmarkStranicaComponent,
-    LoginStranicaComponent
+    SortByStranicaComponent
   ],
   imports: [
     BrowserModule,
