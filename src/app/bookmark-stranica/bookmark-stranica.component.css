@@ -58,7 +58,7 @@
 .content{
     width: 100%;
     position: relative;
-    margin-left: -8%;
+    margin-left: 2%;
     margin-top: 4%;
     transform: translateY(-50%);
     color: #fefed6;
@@ -86,6 +86,10 @@ span{
 .title:hover span{
     color: #00ecd4;
     font-style: italic;
+}
+
+.container{
+    margin-left: 2%;
 }
 
 
