@@ -2,7 +2,7 @@
 <head>
     <style>
         body{
-            background-image: url('background.jpg');
+            background-image: url('header-image.png');
             background-repeat: no-repeat;
             background-attachment: fixed;  
             background-size: cover;
@@ -10,7 +10,19 @@
     </style>
     
 </head>
-    <div class="content">
-        <h1>{{selectedFilm.title}}</h1>
+
+    <div class="film hide-details" id="filmBox">
+        <img src="assets\poster.png" (click)="openInfo()">
+        <div class="info">
+            <h1>{{selectedFilm.title}}</h1>
+            <p>Summary: {{selectedFilm.summary}}</p>
+            <p>Director: {{selectedFilm.director}}</p>
+            <p>Main Actor: {{selectedFilm.main_actor}}</p>
+            <button type="button"><span></span>RATE</button>
+            <button type="button"><span></span>TRAILER</button>
+        </div>
+        <div class="close-icon" (click)="closeInfo()"></div>
     </div>
+    
+    
 </html>

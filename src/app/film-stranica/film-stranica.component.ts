@@ -21,4 +21,14 @@ export class FilmStranicaComponent implements OnInit {
   changeToFilm(){
     this.selectedFilm = this.service.getFilmByName();
   }
+
+  openInfo(){
+    let filmBox = document.getElementById("filmBox") as HTMLDivElement;
+    filmBox.classList.remove("hide-details");
+  }
+
+  closeInfo(){
+    let filmBox = document.getElementById("filmBox") as HTMLDivElement;
+    filmBox.classList.add("hide-details");
+  }
 }
