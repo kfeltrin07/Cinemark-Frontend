@@ -11,13 +11,14 @@ import { FilmStranicaComponent } from '../film-stranica/film-stranica.component'
 })
 export class BookmarkStranicaComponent implements OnInit {
   
-  
+  selectedFilm:Films;
   constructor(public service:FilmsService) {}
 
   ngOnInit(): void {
     this.service.getFilms();
   }
  
-  changeToFilm(film:string){
+  updateSelectedFilm(film:string){
+    this.service.updateFilmByName(film);
   }
 }

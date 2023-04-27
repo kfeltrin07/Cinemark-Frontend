@@ -4,7 +4,7 @@
 .content{
     width: 100%;
     position: relative;
-    margin-left: -8%;
+    margin-left: 2%;
     margin-top: 4%;
     transform: translateY(-50%);
     color: #fefed6;
@@ -33,6 +33,7 @@ span{
     color: #00ecd4;
     font-style: italic;
 }
+
 
 
 
