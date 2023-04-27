@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { Login } from './Login.model';
-import { HttpClient } from "@angular/common/http"
+import { HttpClient } from "@angular/common/http";
+import { environment } from 'src/environments/environment.development';
+import { env } from 'process';
 
 
 @Injectable({
@@ -13,7 +15,7 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
   formData:Login = new Login();
-  readonly baseURL = 'https://localhost:7168/api/Users/'
+  readonly baseURL = environment.baseURL+'/api/Users/'
 
   list : Login[];
 
