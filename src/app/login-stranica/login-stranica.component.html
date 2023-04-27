@@ -1,20 +1,10 @@
 <html>
 <head>
-    <title>Login stranica</title>
+    <title>CineMark</title>
     <link rel="stylesheet" href="login-stranica.component.css">
 </head>
 <body>
-    <div class="banner">
-        <div class="navbar">
-            <img src="assets/FinalLogo.png" class="logo" routerLink=""/>
-            <ul>
-                <li><a href="" >Home</a></li>
-                <li><a routerLink="/sort">Sort By</a></li>
-                <li><a routerLink="/bookmarks">Bookmars</a></li>
-                <li><a routerLink="/login" id="LoginStatus" >Log In</a></li>
-            </ul>  
-        </div>
-
+    
         <div class="form-box">
             <div class="button-box">
                 <div id="btn"></div>
@@ -24,7 +14,7 @@
             <form id="loginID" class="input-group" novalidate #form="ngForm">
                 <input type="text" class="input-field" placeholder="Username" required name="username" #Username = "ngModel" [(ngModel)]="service.formData.username" required [class.invalid]="Username.invalid && Username.touched">
                 <input type="password" class="input-field" placeholder="Password" required name="password" #Passwprd = "ngModel" [(ngModel)]="service.formData.password" required minlength="4">  
-                <button type="submit" class="submit-btn" [disabled]="form.invalid" routerLink="" (click)="onLogIn()">Log In</button>         
+                <button type="submit" class="submit-btn" [disabled]="form.invalid" (click)="onLogin(form)">Log In</button>         
             </form>
             <form id="registerID" class="input-group" novalidate #form="ngForm" (submit)="onSubmit(form)">
                 <input type="text" class="input-field" placeholder="Username" name="username" #Username = "ngModel" [(ngModel)]="service.formData.username" required [class.invalid]="Username.invalid && Username.touched">
@@ -33,7 +23,7 @@
                 <button type="submit" class="submit-btn">Register</button>         
             </form>
         </div>
-    </div>
+   
  
     
 </body>
