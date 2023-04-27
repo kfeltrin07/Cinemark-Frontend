@@ -2,42 +2,29 @@
 <head>
     <title>CineMark</title>
     <link rel="stylesheet" href="bookmark-stranica.component.css">
+    
 </head>
-<body>
-    <div class="banner">
-        <div class="navbar">
-            <img src="assets/FinalLogo.png" class="logo" routerLink=""/>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a routerLink="/sort">Sort By</a></li>
-                <li><a routerLink="/bookmarks">Bookmars</a></li>
-                <li><a routerLink="/login">Log In</a></li>
-            </ul>
-        </div>
-        <div class="content">
-          <h1>YOUR BOOKMARKS:</h1>
-        </div>
-        <div class="container">
-            <table class="table table-bordered table-striped">
-              <thead>
-              <tr class="bookmark-content">
-                <th>Title</th>
-                <th>Director</th>
-                <th>Main Actor</th>
-                <th>Release Date</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let film of service.list">
-                <td class="title" (click)="updateSelectedFilm(film.title)" routerLink="/film"><span>{{film.title}}</span></td>
-                <td><span>{{film.director}}</span></td>
-                <td><span>{{film.main_actor}}</span></td>
-                <td><span>{{film.release_date.substring(0,10)}}</span></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
-    </div>
-</body>
+<div class="content">
+  <h1>YOUR BOOKMARKS:</h1>
+</div>
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr class="bookmark-content">
+        <th>Title</th>
+        <th>Director</th>
+        <th>Main Actor</th>
+        <th>Release Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let film of service.list">
+        <td class="title" (click)="changeToFilm(film.title)" routerLink="/film"><span>{{film.title}}</span></td>
+        <td><span>{{film.director}}</span></td>
+        <td><span>{{film.main_actor}}</span></td>
+        <td><span>{{film.release_date.substring(0,10)}}</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </html>
