@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../shared/films.service';
 import { Films } from '../shared/films.model';
+import { RouterLink } from '@angular/router';
+import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
 
 @Component({
   selector: 'app-bookmark-stranica',
@@ -12,9 +14,10 @@ export class BookmarkStranicaComponent implements OnInit {
   
   constructor(public service:FilmsService) {}
 
-
   ngOnInit(): void {
     this.service.getFilms();
   }
  
+  changeToFilm(film:string){
+  }
 }

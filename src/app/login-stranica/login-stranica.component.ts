@@ -77,4 +77,8 @@ export class LoginStranicaComponent implements OnInit{
     form.form.reset();
     this.service.formData = new Login();
   }
+
+  onLogIn(){
+    alert("Successful log in")
+  }
 }
