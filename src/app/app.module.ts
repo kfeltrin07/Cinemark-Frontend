@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica.component';
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
     LoginStranicaComponent,
     BookmarkStranicaComponent,
     SortByStranicaComponent,
-    FilmStranicaComponent
+    FilmStranicaComponent 
   ],
   imports: [
     BrowserModule,

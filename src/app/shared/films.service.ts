@@ -11,7 +11,7 @@ export class FilmsService {
   constructor(private http:HttpClient) { }
 
   formData:Films = new Films();
-  readonly baseURL = environment.baseURL+'/api/Films/'
+  readonly baseURL = environment.baseURL+'api/Films'
 
   list : Films[];
 
