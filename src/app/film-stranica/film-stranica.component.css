@@ -183,3 +183,12 @@ button:hover{
     transform: translateX(410px);
     box-shadow: 0 0 0 rgba(0,0,0,1)
 }
+
+.rating-info h1{
+    color:#fefed6;
+    font-family: "Nexa";
+    margin-left: 6%;
+}
+
+
+
