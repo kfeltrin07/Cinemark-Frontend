@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 import { Login } from './Login.model';
 import { HttpClient } from "@angular/common/http"
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
 
   constructor(private http:HttpClient) { }
 
   formData:Login = new Login();
-  readonly baseURL = 'https://localhost:7168/api/Logins'
+  readonly baseURL = 'https://localhost:7168/api/Users/'
 
   list : Login[];
 
@@ -26,6 +29,11 @@ export class LoginService {
     return this.http.delete(`${this.baseURL}/${id}`);
 
   }
+  
+  authenticate(login:any){
+    return this.http.post<any>(`${this.baseURL}authenticate`,this.formData);
+  }
+
 
   refreshList(){
     this.http.get(this.baseURL).toPromise().then(
