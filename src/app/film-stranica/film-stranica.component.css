@@ -192,7 +192,9 @@ button:hover{
 
 .container{
     width: 400px;
-    margin:auto;
+    position: absolute;
+    top: 0%;
+    left: 50%;
     background: #111;
     padding: 20px 30px;
     border: 1px solid #444;
@@ -201,7 +203,15 @@ button:hover{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    opacity: 1;
+    transform: translate(-50%,-50%) scale(0.1);
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
 }
 
 .container .star-widget input{

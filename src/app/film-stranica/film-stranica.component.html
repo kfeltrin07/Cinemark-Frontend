@@ -14,13 +14,14 @@
             <p>Director: {{selectedFilm.director}}</p>
             <p>Main Actor: {{selectedFilm.main_actor}}</p>
             <p>Rating: 4.76/5 </p>
-            <button type="button"><span></span>RATE</button>
+            <p>Genre: Action, Comedy</p>
+            <button type="button" (click)="openPopup()"><span></span>RATE</button>
             <button type="button" (click)="trailer()"><span></span>TRAILER</button>
         </div>
         <div class="close-icon" (click)="closeInfo()"></div>
     </div>
 
-    <div class="container">
+    <div class="container" id="popup">
         <div class="star-widget">
             <input type="radio" name="rate" id="rate-5">
             <label for="rate-5" class="fas fa-star"></label>
@@ -35,7 +36,7 @@
             <form action="#">
                 <header></header>
                 <div class="btn">
-                    <button class="rate-btn" type="submit">Post</button>
+                    <button class="rate-btn" type="submit" (click)="closePopup()">Post</button>
                 </div>
             </form>
         </div>
