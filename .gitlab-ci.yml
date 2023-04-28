@@ -1,0 +1,50 @@
+image: docker:latest
+services: 
+  - docker:dind
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+      variables:
+        CONFIGURATION: production
+#        SERVER_KEY: "${SERVER_KEY}"
+#        SERVER_IP: "${SERVER_IP}"
+        DOCKER_IMAGE_NAME: "$CI_REGISTRY_IMAGE/frontend:latest"
+
+stages:     
+  - cleanup     
+  - build
+  - push
+  - deploy
+
+Clean Cache:
+  stage: cleanup
+  script:
+    - rm -rf "%CACHE_PATH%/%CI_PIPELINE_ID%"
+  when: always
+
+Build Docker Image:  
+  stage: build
+  needs: ["Clean Cache"]
+  script:
+    - docker build -t $DOCKER_IMAGE_NAME --build-arg config=$CONFIGURATION .
+
+Push Docker Image:   
+  stage: push
+  needs: ["Build Docker Image"]
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker push $DOCKER_IMAGE_NAME
+    - docker image rm $DOCKER_IMAGE_NAME
+
+#Deploy To Server:   
+#  stage: deploy
+#  needs: ["Push Docker Image"]
+#  before_script:
+#    - eval $(ssh-agent -s)
+#    - echo "${SERVER_KEY}" | ssh-add -
+#    - mkdir -p ~/.ssh
+#    - chmod 700 ~/.ssh
+#  script:
+#    - ssh -o StrictHostKeyChecking=no worker@$SERVER_IP -p 59 "docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD & sh /home/worker/hr-application-deploy/deploy-frontend.sh"
+
