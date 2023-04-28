@@ -5,4 +5,6 @@ export class Films {
     main_actor:string="";
     release_date:string="";
     summary:string="";
+    picture_url:string="";
+    video_url:string="";
 }

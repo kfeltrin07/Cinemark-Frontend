@@ -14,7 +14,7 @@
         <h1>RATING AND REVIEWS</h1>
     </div>
     <div class="film hide-details" id="filmBox">
-        <img src="assets\poster.png" (click)="openInfo()">
+        <img src={{selectedFilm.picture_url}} (click)="openInfo()">
         <div class="info">
             <h1>{{selectedFilm.title}}</h1>
             <p>Summary: {{selectedFilm.summary}}</p>
@@ -22,7 +22,7 @@
             <p>Main Actor: {{selectedFilm.main_actor}}</p>
             <p>Rating: 4.76/5 </p>
             <button type="button"><span></span>RATE</button>
-            <button type="button"><span></span>TRAILER</button>
+            <button type="button" (click)="trailer()"><span></span>TRAILER</button>
         </div>
         <div class="close-icon" (click)="closeInfo()"></div>
     </div>

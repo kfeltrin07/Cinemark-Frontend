@@ -31,4 +31,8 @@ export class FilmStranicaComponent implements OnInit {
     let filmBox = document.getElementById("filmBox") as HTMLDivElement;
     filmBox.classList.add("hide-details");
   }
+
+  trailer(){
+    window.open(this.selectedFilm.video_url,"_blank");
+  }
 }
