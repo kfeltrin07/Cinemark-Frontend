@@ -9,7 +9,7 @@ workflow:
         CONFIGURATION: production
 #        SERVER_KEY: "${SERVER_KEY}"
 #        SERVER_IP: "${SERVER_IP}"
-        DOCKER_IMAGE_NAME: "$CI_REGISTRY_IMAGE/frontend:latest"
+        DOCKER_IMAGE_NAME: "registry.gitlab.com/serengetitech-praksa-2023/movie-review/frontend:latest"
 
 stages:     
   - cleanup     
