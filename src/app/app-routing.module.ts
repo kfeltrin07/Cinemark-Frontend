@@ -6,6 +6,7 @@ import { NaslovnaStranicaComponent } from './naslovna-stranica/naslovna-stranica
 import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica.component';
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
+import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'login', component: LoginStranicaComponent},
   {path: 'bookmarks', component: BookmarkStranicaComponent},
   {path: 'sort', component:SortByStranicaComponent},
-  {path: 'film', component:FilmStranicaComponent}
+  {path: 'film', component:FilmStranicaComponent},
+  {path: 'search', component:SearchStranicaComponent}
 ];
 
 @NgModule({

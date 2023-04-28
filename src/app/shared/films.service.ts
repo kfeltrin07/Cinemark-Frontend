@@ -16,6 +16,8 @@ export class FilmsService {
   list : Films[];
   selectedFilm:Films;
 
+  searchFilms: Films[];
+
   getFilms(){
     this.http.get(this.baseURL).toPromise().then(
       res => this.list = res as Films[]);
@@ -34,6 +36,17 @@ export class FilmsService {
 
   getFilmByName(){
     return this.selectedFilm;
+  }
+
+  getSearchedFilms(searchInput:string){
+    this.http.get(this.baseURL).toPromise().then(
+      res => this.list = res as Films[]);
+    
+      for(var item of this.list){
+          if(searchInput == item.title){
+            this.searchFilms.push(item);
+          }
+      }
   }
 
 }

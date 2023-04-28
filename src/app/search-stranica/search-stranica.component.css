@@ -1,0 +1,29 @@
+*{
+    font-family: sans-serif;
+}
+.content{
+    width: 100%;
+    position: relative;
+    margin-top: 4%;
+    transform: translateY(-50%);
+    color: #fefed6;
+}
+
+.content h1{
+    margin-left: 1%;
+    font-family: "Nexa";
+    font-size: 50px;
+    margin-top: 80px;
+}
+
+.bookmark-content{
+    color: #fefed6;
+    font-size: 28px;
+    font-family: "Nexa";
+}
+
+span{
+    color:#fff;
+    font-size: 15px;
+    font-family: "Nexa Light";
+}
