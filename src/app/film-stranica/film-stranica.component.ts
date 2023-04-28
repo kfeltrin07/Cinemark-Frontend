@@ -13,6 +13,7 @@ export class FilmStranicaComponent implements OnInit {
   constructor(public service:FilmsService) {
   }
 
+  
   ngOnInit(): void {
     this.changeToFilm();
   }
@@ -34,5 +35,6 @@ export class FilmStranicaComponent implements OnInit {
 
   trailer(){
     window.open(this.selectedFilm.video_url,"_blank");
-  }
+  } 
+
 }
