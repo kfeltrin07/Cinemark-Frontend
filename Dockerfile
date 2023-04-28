@@ -5,9 +5,9 @@ WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps
 RUN npm install -g @angular/cli@latest
-RUN ng build --configuration $config
+RUN ng build --project CinemarkAngular --configuration $config
 
 # Serve Application using Nginx Server
 FROM nginx:1.23.1-alpine
-COPY --from=build /app/dist/out/ /usr/share/nginx/html
+COPY --from=build /app/dist/cinemark-angular /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
