@@ -4,7 +4,8 @@ ARG config
 WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps
-RUN npm run build --configuration $config
+RUN npm install -g @angular/cli@latest
+RUN ng build --configuration $config
 
 # Serve Application using Nginx Server
 FROM nginx:1.23.1-alpine
