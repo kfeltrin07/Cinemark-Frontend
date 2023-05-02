@@ -44,3 +44,9 @@
 .navbar ul li:hover::after{
     width: 100%;  
 }
+
+.nav-link2{
+
+    font-family: "Nexa";
+    color: antiquewhite;
+}

@@ -9,7 +9,6 @@ import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
 
-
 const routes: Routes = [
   {path: '', component: NaslovnaStranicaComponent},
   {path: 'login', component: LoginStranicaComponent},
