@@ -36,7 +36,12 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
+
+      if (this.storageService.isLoggedIn()) {
+        this.eventBusService.emit(new EventData('logout', null));
+      }
     }
+
     return next.handle(request);
   }
 }

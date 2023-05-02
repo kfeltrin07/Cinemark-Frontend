@@ -6,6 +6,11 @@ import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +25,7 @@ export class LoginService {
   list : Login[];
 
   postLogins(): Observable<any>{
-    return this.http.post(this.baseURL,this.formData,{ withCredentials: true });
+    return this.http.post(this.baseURL,this.formData,httpOptions);
   }
 
   putLogins(){
@@ -33,7 +38,7 @@ export class LoginService {
   }
   
   authenticate(login:any): Observable<any>{
-    return this.http.post<any>(`${this.baseURL}authenticate`,this.formData);
+    return this.http.post<any>(`${this.baseURL}authenticate`,this.formData,httpOptions);
   }
 
 
