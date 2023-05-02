@@ -28,6 +28,7 @@ export class AppComponent {
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
+      console.log(user);
       this.username = user.username;
     }
 

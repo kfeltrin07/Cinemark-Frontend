@@ -12,10 +12,13 @@ export class NaslovnaStranicaComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getFilms();
+    
   }
 
   onSearchClick(){
     const val = document.getElementById("inputValue") as HTMLInputElement;
     this.service.getSearchedFilms(val.value);
   }
+
+
 }
