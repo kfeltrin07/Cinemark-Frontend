@@ -7,8 +7,8 @@ workflow:
     - if: $CI_COMMIT_BRANCH == "develop"
       variables:
         CONFIGURATION: production
-#        SERVER_KEY: "${SERVER_KEY}"
-#        SERVER_IP: "${SERVER_IP}"
+        SERVER_KEY: "${SERVER_KEY}"
+        SERVER_IP: "${SERVER_IP}"
         DOCKER_IMAGE_NAME: "registry.gitlab.com/serengetitech-praksa-2023/movie-review/frontend:latest"
 
 stages:     
@@ -32,14 +32,14 @@ Dockerize:
     - docker push $DOCKER_IMAGE_NAME
     - docker image rm $DOCKER_IMAGE_NAME
 
-#Deploy To Server:   
-#  stage: deploy
-#  needs: ["Push Docker Image"]
-#  before_script:
-#    - eval $(ssh-agent -s)
-#    - echo "${SERVER_KEY}" | ssh-add -
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#  script:
-#    - ssh -o StrictHostKeyChecking=no worker@$SERVER_IP -p 59 "docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD & sh /home/worker/hr-application-deploy/deploy-frontend.sh"
+Deploy To Server:   
+  stage: deploy
+  needs: ["Dockerize"]
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "${SERVER_KEY}" | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh -o StrictHostKeyChecking=no worker@$SERVER_IP -p 59 "docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD & sh /home/worker/cinemark/deploy-frontend.sh"
 
