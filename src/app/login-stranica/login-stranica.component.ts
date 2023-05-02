@@ -9,6 +9,7 @@ import { NaslovnaStranicaComponent } from 'src/app/naslovna-stranica/naslovna-st
 import { ToastrService } from 'ngx-toastr';
 import { AppComponent } from '../app.component';
 import { StorageService } from '../_services/storage.service';
+import { delay } from 'rxjs';
 
 
 @Component({
@@ -86,7 +87,6 @@ export class LoginStranicaComponent implements OnInit{
         this.isLoggedIn = true;
         this.toastr.success('You are logged in');
         this.router.navigate(['']);
-        this.reloadPage();
         console.log(this.isLoggedIn);
       },
       err=>{

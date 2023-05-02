@@ -23,7 +23,7 @@
                 
                 <input type="password" class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="service.formData.password" required>
                  
-                <button type="submit" class="btn btn-primary btn-block">Register</button>         
+                <button type="submit" [disabled]="form.invalid" class="submit-btn">Register</button>         
             </form>
         </div>
    
