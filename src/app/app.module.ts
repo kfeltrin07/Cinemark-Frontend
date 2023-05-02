@@ -15,6 +15,7 @@ import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { SearchStranicaComponent } from './search-stranica/search-stranica.compo
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

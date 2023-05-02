@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { Login } from './Login.model';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment.development';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -18,26 +19,26 @@ export class LoginService {
 
   list : Login[];
 
-  postLogins(){
-    return this.http.post(this.baseURL,this.formData);
+  postLogins(): Observable<any>{
+    return this.http.post(this.baseURL,this.formData,{ withCredentials: true });
   }
 
   putLogins(){
-    return this.http.put(`${this.baseURL}/${this.formData.id_user}`,this.formData);
+    return this.http.put(`${this.baseURL}/${this.formData.id_user}`,this.formData,{ withCredentials: true });
   }
 
   deleteLogin(id:number){
-    return this.http.delete(`${this.baseURL}/${id}`);
+    return this.http.delete(`${this.baseURL}/${id}`,{ withCredentials: true });
 
   }
   
-  authenticate(login:any){
+  authenticate(login:any): Observable<any>{
     return this.http.post<any>(`${this.baseURL}authenticate`,this.formData);
   }
 
 
   refreshList(){
-    this.http.get(this.baseURL).toPromise().then(
+    this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
       res => this.list = res as Login[]);
   }
   

@@ -9,13 +9,15 @@ import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
 
+
 const routes: Routes = [
   {path: '', component: NaslovnaStranicaComponent},
   {path: 'login', component: LoginStranicaComponent},
   {path: 'bookmarks', component: BookmarkStranicaComponent},
   {path: 'sort', component:SortByStranicaComponent},
   {path: 'film', component:FilmStranicaComponent},
-  {path: 'search', component:SearchStranicaComponent}
+  {path: 'search', component:SearchStranicaComponent},
+  {path: '', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

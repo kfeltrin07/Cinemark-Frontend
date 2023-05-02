@@ -20,13 +20,13 @@ export class FilmsService {
 
 
   getFilms(){
-    this.http.get(this.baseURL).toPromise().then(
+    this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
       res => this.list = res as Films[]);
       
   }
 
   updateFilmByName(filmName:string){
-    this.http.get(this.baseURL).toPromise().then(
+    this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
       res => this.list = res as Films[]);
 
       for(var film of this.list){
