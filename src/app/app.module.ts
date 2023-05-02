@@ -13,6 +13,7 @@ import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
+import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 
@@ -25,6 +26,7 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     BookmarkStranicaComponent,
     SortByStranicaComponent,
     FilmStranicaComponent,
+    SearchStranicaComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Films } from '../shared/films.model';
 import { FilmsService } from '../shared/films.service';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-film-stranica',
@@ -13,8 +14,11 @@ export class FilmStranicaComponent implements OnInit {
   constructor(public service:FilmsService) {
   }
 
+  
   ngOnInit(): void {
     this.changeToFilm();
+
+    setTimeout(this.openInfo,300)
   }
   selectedFilm:Films;
 
@@ -34,5 +38,18 @@ export class FilmStranicaComponent implements OnInit {
 
   trailer(){
     window.open(this.selectedFilm.video_url,"_blank");
+  } 
+
+  openPopup(){
+    let popup = document.getElementById("popup") as HTMLDivElement;
+    
+    popup.classList.add("open-popup");
   }
+
+  closePopup(){
+    let popup = document.getElementById("popup") as HTMLDivElement;
+    
+    popup.classList.remove("open-popup");
+  }
+
 }
