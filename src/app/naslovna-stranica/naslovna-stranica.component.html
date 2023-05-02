@@ -8,10 +8,10 @@
             <h1>MOVIE REVIEWS</h1>
             <p>See all your favourite movie reviews and leave your own comments!</p>
             <form action="" class="search-bar">
-                <input type="text" placeholder="search movie" name="q">
+                <input type="text" placeholder="search movie" name="q" id="inputValue">
             </form>
             <div>
-                <button type="button"><span></span>SEARCH</button>
+                <button type="button" routerLink="/search" (click)="onSearchClick()"><span></span>SEARCH</button>
             </div>
     </div> 
 </body>
