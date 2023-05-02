@@ -15,6 +15,7 @@ export class FilmsService {
 
   list : Films[];
   selectedFilm:Films;
+  rating:number=0;
 
   searchFilms: Films[];
 
@@ -60,6 +61,10 @@ export class FilmsService {
           }
 
       }
+  }
+
+  updateRating(){
+    this.rating=this.selectedFilm.total_rating/this.selectedFilm.rating_count;
   }
 
 }

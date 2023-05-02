@@ -17,6 +17,7 @@ export class FilmStranicaComponent implements OnInit {
   
   ngOnInit(): void {
     this.changeToFilm();
+    this.service.updateRating();
 
     setTimeout(this.openInfo,300)
   }
