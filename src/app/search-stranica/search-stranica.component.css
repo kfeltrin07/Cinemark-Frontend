@@ -27,3 +27,8 @@ span{
     font-size: 15px;
     font-family: "Nexa Light";
 }
+
+.title:hover span{
+    color: #00ecd4;
+    font-style: italic;
+}

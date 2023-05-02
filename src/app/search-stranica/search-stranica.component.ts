@@ -17,4 +17,8 @@ export class SearchStranicaComponent implements OnInit{
 
   }
 
+  updateSelectedFilm(film:string){
+    this.service.updateFilmByName(film);
+  }
+
 }

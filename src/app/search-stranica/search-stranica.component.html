@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let film of service.searchFilms">
-          <td><span>{{film.title}}</span></td>
+          <td class="title" (click)="updateSelectedFilm(film.title)" routerLink="/film"><span>{{film.title}}</span></td>
           <td><span>{{film.director}}</span></td>
           <td><span>{{film.main_actor}}</span></td>
           <td><span>{{film.release_date.substring(0,10)}}</span></td>
