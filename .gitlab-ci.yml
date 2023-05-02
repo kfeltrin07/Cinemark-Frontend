@@ -23,16 +23,11 @@ Clean Cache:
     - rm -rf "%CACHE_PATH%/%CI_PIPELINE_ID%"
   when: always
 
-Build Docker Image:  
+Dockerize:  
   stage: build
   needs: ["Clean Cache"]
   script:
     - docker build -t $DOCKER_IMAGE_NAME --build-arg config=$CONFIGURATION .
-
-Push Docker Image:   
-  stage: push
-  needs: ["Build Docker Image"]
-  script:
     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - docker push $DOCKER_IMAGE_NAME
     - docker image rm $DOCKER_IMAGE_NAME
