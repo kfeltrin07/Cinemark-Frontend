@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Films } from './films.model';
 import { environment } from 'src/environments/environment.development';
+import { StorageService } from '../_services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, public service:StorageService) { }
 
   formData:Films = new Films();
   readonly baseURL = environment.baseURL+'api/Films'
 
   list : Films[];
   selectedFilm:Films;
-
+  user: any;
   searchFilms: Films[];
 
 
@@ -60,6 +61,10 @@ export class FilmsService {
           }
 
       }
+  }
+
+  updateRating(){
+    this.user = this.service.getUser();
   }
 
 }
