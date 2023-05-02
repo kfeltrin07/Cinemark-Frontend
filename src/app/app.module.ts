@@ -14,6 +14,7 @@ import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.com
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
 
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { environment } from 'src/environments/environment';
     LoginStranicaComponent,
     BookmarkStranicaComponent,
     SortByStranicaComponent,
-    FilmStranicaComponent 
+    FilmStranicaComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,7 @@ import { environment } from 'src/environments/environment';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

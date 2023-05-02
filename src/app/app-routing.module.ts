@@ -8,12 +8,14 @@ import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.com
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 
 
+
 const routes: Routes = [
   {path: '', component: NaslovnaStranicaComponent},
   {path: 'login', component: LoginStranicaComponent},
   {path: 'bookmarks', component: BookmarkStranicaComponent},
   {path: 'sort', component:SortByStranicaComponent},
-  {path: 'film', component:FilmStranicaComponent}
+  {path: 'film', component:FilmStranicaComponent},
+  {path: '', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
