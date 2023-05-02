@@ -26,7 +26,7 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     BookmarkStranicaComponent,
     SortByStranicaComponent,
     FilmStranicaComponent,
-    SearchStranicaComponent,
+    SearchStranicaComponent 
   ],
   imports: [
     BrowserModule,
