@@ -13,6 +13,7 @@ import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
+import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { environment } from 'src/environments/environment';
     LoginStranicaComponent,
     BookmarkStranicaComponent,
     SortByStranicaComponent,
-    FilmStranicaComponent 
+    FilmStranicaComponent,
+    SearchStranicaComponent 
   ],
   imports: [
     BrowserModule,

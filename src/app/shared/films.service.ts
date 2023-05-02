@@ -16,9 +16,13 @@ export class FilmsService {
   list : Films[];
   selectedFilm:Films;
 
+  searchFilms: Films[];
+
+
   getFilms(){
     this.http.get(this.baseURL).toPromise().then(
       res => this.list = res as Films[]);
+      
   }
 
   updateFilmByName(filmName:string){
@@ -34,6 +38,28 @@ export class FilmsService {
 
   getFilmByName(){
     return this.selectedFilm;
+  }
+
+  getSearchedFilms(searchInput:string){
+      
+      this.searchFilms = [];
+    
+      for(var item of this.list){
+          if(searchInput.toLowerCase() == item.title.toLowerCase()){
+            this.searchFilms.push(item);
+            break;
+          }
+          if(searchInput.length == 1){
+            if(searchInput[0].toLowerCase() == item.title[0].toLowerCase()){
+              this.searchFilms.push(item);
+            }
+          }
+          else{
+            if(searchInput[0].toLowerCase() == item.title[0].toLowerCase() && searchInput[1].toLowerCase() == item.title[1].toLowerCase())
+            this.searchFilms.push(item);
+          }
+
+      }
   }
 
 }
