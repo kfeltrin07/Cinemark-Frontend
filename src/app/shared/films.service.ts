@@ -16,6 +16,8 @@ export class FilmsService {
   list : Films[];
   selectedFilm:Films;
   rating:number=0;
+  increaseRating:number=0;
+  increaseCount:number=0;
 
   searchFilms: Films[];
 
@@ -65,6 +67,18 @@ export class FilmsService {
 
   updateRating(){
     this.rating=this.selectedFilm.total_rating/this.selectedFilm.rating_count;
+  }
+
+  postNewRating(newRating:number){
+    this.increaseRating = this.selectedFilm.total_rating + newRating;
+    this.increaseCount = this.selectedFilm.rating_count + 1;
+
+    this.selectedFilm.total_rating = this.increaseRating;
+    this.selectedFilm.rating_count = this.increaseCount;
+
+    this.formData = this.selectedFilm;
+    console.log(this.formData.total_rating);
+    return this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData);
   }
 
 }
