@@ -2,15 +2,41 @@
 <head>
     <title>CineMark</title>
     <link rel="stylesheet" href="sort-by-stranica.component.css">
-    <style>
-        body{
-            background-image: url('background.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;  
-            background-size: cover;
-        }
-    </style>
+
 </head>
-<body>
-</body>
+    <div class="content">
+      <h1>SORT BY:</h1>
+      </div>
+
+      <div class="navbar">
+        <ul>
+          <li><a href="">Action</a></li>
+          <li><a href="">Adventure</a></li>
+          <li><a href="">Drama</a></li>
+          <li><a href="">Horror</a></li>
+          <li><a href="">Comedy</a></li>
+          <li><a href="">Sci-Fi</a></li>
+        </ul>
+      </div>
+
+      <div class="container">  
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr class="sort-content">
+              <th>Title</th>
+              <th>Director</th>
+              <th>Main Actor</th>
+              <th>Release Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let film of service.list">
+              <td class="title" (click)="updateSelectedFilm(film.title)" routerLink="/film"><span>{{film.title}}</span></td>
+              <td><span>{{film.director}}</span></td>
+              <td><span>{{film.main_actor}}</span></td>
+              <td><span>{{film.release_date.substring(0,10)}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 </html>
