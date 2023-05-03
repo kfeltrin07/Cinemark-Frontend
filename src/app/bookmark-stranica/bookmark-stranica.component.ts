@@ -5,6 +5,9 @@ import { Films } from '../shared/films.model';
 import { RouterLink } from '@angular/router';
 import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
 import { StorageService } from '../_services/storage.service';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-bookmark-stranica',
@@ -15,13 +18,12 @@ import { StorageService } from '../_services/storage.service';
 export class BookmarkStranicaComponent implements OnInit {
 
   form: any = {
-    id_bookmark:null,
     id_user:null,
     id_film:null
   };
   
   selectedFilm:Films;
-  constructor(public service:FilmsService,public storage:StorageService, public bookmarkservice: BookmarksService) {}
+  constructor(public service:FilmsService,public storage:StorageService,private toastr:ToastrService, public bookmarkservice: BookmarksService) {}
 
   ngOnInit(): void {
     
@@ -33,18 +35,29 @@ export class BookmarkStranicaComponent implements OnInit {
 
   saveBookmarks(id_film:any){
     if(this.storage.isLoggedIn()==true){
-      this.form.id_user=this.storage.getUserID();
+      var id=this.storage.getUserID();
+      this.form.id_user=id.id_user;
       this.form.id_film=id_film;
-      this.bookmarkservice.postBookmarks(this.form.value).subscribe(
+      this.bookmarkservice.checkBookmark(this.form).subscribe(
         res=>{
-            console.log("Bookmark added");
-        },
+          this.bookmarkservice.postBookmarks(this.form).subscribe(
+            res=>{
+              console.log("Dodan Bookmark");
+              },
+            err=>{
+              console.log(err);
+              console.log("Greška kod unosa");
+              }
+            );
+            },
         err=>{
-            console.log(err);
-        }
-      );
+          this.toastr.error("Već ste bookmarkali određen film");
+          console.log("Već ste bookmarkali određen film");
+          console.log(err);
+        });
     }
     else{
+      this.toastr.error("You Can't bookmark if you are not logged in");
       console.error("You Can't bookmark if you are not logged in");
     }
   }

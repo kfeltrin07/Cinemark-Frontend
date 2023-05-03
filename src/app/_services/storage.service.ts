@@ -15,14 +15,14 @@ export class StorageService {
 
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    window.sessionStorage.setItem(USER_KEY, user);
     console.log("Tu sam");
     console.error();
   }
 
   public saveUserID(ID: any): void {
     window.sessionStorage.removeItem(USER_KEY2);
-    window.sessionStorage.setItem(USER_KEY2, JSON.stringify(ID));
+    window.sessionStorage.setItem(USER_KEY2, ID);
     console.log("Tu sam");
     console.error();
   }
