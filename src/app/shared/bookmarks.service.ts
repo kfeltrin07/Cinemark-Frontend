@@ -1,3 +1,4 @@
+import { StorageService } from './../_services/storage.service';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Bookmarks } from './bookmarks.model';
@@ -15,7 +16,7 @@ const httpOptions = {
 
 export class BookmarksService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, public storageService:StorageService) { }
 
   formData:Bookmarks = new Bookmarks();
   readonly baseURL = environment.baseURL+'api/Bookmark/'
@@ -28,11 +29,20 @@ export class BookmarksService {
   }
 
   getBookmarks(){
-    return this.http.get(this.baseURL).toPromise().then(
-      res => this.list = res as Bookmarks[]);
+    this.http.get(this.baseURL).toPromise().then(
+      res =>{ this.list = res as Bookmarks[];
+              console.log(res);
+              console.log(this.list); 
+      })  
+      return this.list;
+     
   }
 
   checkBookmark(bookmark:Bookmarks){
     return this.http.post<any>(`${this.baseURL}find`,bookmark,httpOptions);
+  }
+
+  deleteBookmark(id:number){
+    return this.http.delete(`${this.baseURL}/${id}`,{ withCredentials: true });
   }
 }
