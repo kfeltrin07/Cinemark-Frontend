@@ -21,12 +21,12 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
   declarations: [
     AppComponent,
     NaslovnaStranicaComponent,
-    NaslovnaStranicaComponent,
     LoginStranicaComponent,
     BookmarkStranicaComponent,
     SortByStranicaComponent,
     FilmStranicaComponent,
-    SearchStranicaComponent 
+    SearchStranicaComponent,
+    BookmarkStranicaComponent
   ],
   imports: [
     BrowserModule,

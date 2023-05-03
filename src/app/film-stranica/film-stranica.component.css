@@ -113,7 +113,7 @@
     text-align: center;
     border-radius: 25px;
     font-weight: bold;
-    margin-top: 60px;
+    margin-top: 40px;
     margin-left: 15px;
     border: 2px solid #009688;
     background: transparent;
@@ -303,5 +303,16 @@ form .btn button:hover{
 input:checked ~ form{
     display:block;
 }
+
+.info i{
+    margin-left: 25px;
+}
+
+.info i:hover{
+    color:#009688;
+}
+
+
+
 
 

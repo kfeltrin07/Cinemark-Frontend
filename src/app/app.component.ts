@@ -28,8 +28,10 @@ export class AppComponent {
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
+      const userID = this.storageService.getUserID();
       console.log(user);
       this.username = user.username;
+      console.log(userID);
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {

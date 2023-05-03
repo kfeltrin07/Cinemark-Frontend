@@ -31,7 +31,7 @@ export class LoginStranicaComponent implements OnInit{
   errorMessage = '';
 
   constructor(public service:LoginService,private storageService: StorageService,
-    private toastr:ToastrService, private router: Router, private appcomponent: AppComponent,) {}
+    private toastr:ToastrService, private router: Router) {}
 
     
 
@@ -83,11 +83,14 @@ export class LoginStranicaComponent implements OnInit{
     this.service.authenticate(form).subscribe(
       res=>{
         this.storageService.saveUser(form.value);
+        this.storageService.saveUserID(res);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.toastr.success('You are logged in');
         this.router.navigate(['']);
         console.log(this.isLoggedIn);
+        console.log(res);
+        console.log(form.value);
       },
       err=>{
         console.log(err);
@@ -102,11 +105,6 @@ export class LoginStranicaComponent implements OnInit{
     form.form.reset();
     this.service.formData = new Login();
   }
-/*
-  logout(): void {
-    this.isUserLoggedIn = false;
-       localStorage.removeItem('isUserLoggedIn'); 
-    }*/
 
   reloadPage(): void {
     window.location.reload();
