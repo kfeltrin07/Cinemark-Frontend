@@ -31,8 +31,11 @@ span{
 }
 
 .title:hover span{
-    color: #00ecd4;
-    font-style: italic;
+    font-size: 15px;
+    color: #009688;
+    cursor: pointer;
+    font-family: "Nexa Light";
+    text-decoration: underline;
 }
 
 .navbar{
@@ -79,13 +82,65 @@ span{
 }
 
 .film img{
-    width: 200px;
+    width: 150px;
     cursor: pointer;
     border-radius: 10px;
     position: relative;
     z-index: 100;
     box-shadow: 10px 10px 10px rgba(0,0,0,1);
     transition: transform 1s, box-shadow 1s;
+}
+
+.film-list {
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+.film-list.-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: inline-block;
+}
+
+.grid-container {
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;
+  }
+
+/*.film-list.-grid.-constrained.-p150 {
+
+    max-width: 692px;
+}*/
+
+/*.film-list.-grid.-constrained.-p150>.film, .film-list.-grid.-constrained.-p150>.film-container {
+    margin: 0 0 20px 23px;
+    width: 150px;
+    display: block;
+    padding-left: 10px;
+    background-clip: padding-box;
+    border-radius: 4px;
+    display: inline-block;
+    
+    position: relative;
+}*/
+
+.film img .overlay{
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #009688;
+    border-right-color: #009688;
+    border-bottom-color: #009688;
+    border-left-color: #009688;
 }
 
 .info{

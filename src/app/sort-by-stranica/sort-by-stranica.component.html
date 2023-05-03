@@ -19,7 +19,22 @@
         </ul>
       </div>
 
-      <div class="container">  
+    
+    <div *ngFor="let film of service.list" class="component">
+      <ul class="film-list -grid -container sort-content">  
+        <div class="film img" id="filmBox">
+          <img src={{film.picture_url}} (click)="updateSelectedFilm(film.title)" routerLink="/film" (click)="openInfo()">  
+        </div>
+        <div class="title">
+          <a>
+            <span (click)="updateSelectedFilm(film.title)" routerLink="/film">{{film.title}}</span>
+            <!--<span>{{film.director}}</span>-->
+          </a>  
+        </div>
+      </ul>
+    </div>
+
+      <!--<div class="container">  
         <table class="table table-bordered table-striped">
           <thead>
             <tr class="sort-content">
@@ -38,5 +53,5 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div>-->
 </html>
