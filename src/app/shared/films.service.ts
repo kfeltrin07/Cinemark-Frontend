@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Films } from './films.model';
 import { environment } from 'src/environments/environment.development';
+import { RatingsService } from './ratings.service';
+import { StorageService } from '../_services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService) { }
 
   formData:Films = new Films();
   readonly baseURL = environment.baseURL+'api/Films'
@@ -19,6 +21,7 @@ export class FilmsService {
   increaseRating:number=0;
   increaseCount:number=0;
   check:boolean=false;
+  loggedUser:any;
 
   searchFilms: Films[];
 
@@ -85,6 +88,9 @@ export class FilmsService {
       console.log(this.formData.total_rating);
       console.log(this.formData.rating_count);
       this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+
+      this.loggedUser = this.storageService.getUser();
+      this.ratingService.postRating(this.formData, this.loggedUser, newRating);
 
       this.updateRating();
     }

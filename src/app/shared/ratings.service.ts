@@ -24,7 +24,8 @@ export class RatingsService {
     this.formData.id_film = film.id_film;
     this.formData.rating = rating;
     this.formData.id_user = user.id_user;
-    this.http.post(this.baseURL,this.formData,{ withCredentials: true }).subscribe();
+    console.log(this.formData);
+    
   }
 
   getRatings(){
