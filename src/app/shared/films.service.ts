@@ -78,7 +78,11 @@ export class FilmsService {
 
     this.formData = this.selectedFilm;
     console.log(this.formData.total_rating);
-    return this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData);
+    console.log(this.formData.rating_count);
+    this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+
+    this.updateRating();
   }
+
 
 }
