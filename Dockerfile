@@ -1,11 +1,11 @@
 # Compile and Build Angular Application
 FROM node:16-alpine AS build
-ARG config
+ARG CONFIG
 WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps
 RUN npm install -g @angular/cli@latest
-RUN ng build --project CinemarkAngular --configuration $config
+RUN ng build --project=CinemarkAngular --configuration $CONFIG
 
 # Serve Application using Nginx Server
 FROM nginx:1.23.1-alpine
