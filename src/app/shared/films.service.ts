@@ -18,6 +18,7 @@ export class FilmsService {
   rating:number=0;
   increaseRating:number=0;
   increaseCount:number=0;
+  check:boolean=false;
 
   searchFilms: Films[];
 
@@ -70,18 +71,29 @@ export class FilmsService {
   }
 
   postNewRating(newRating:number){
-    this.increaseRating = this.selectedFilm.total_rating + newRating;
-    this.increaseCount = this.selectedFilm.rating_count + 1;
 
-    this.selectedFilm.total_rating = this.increaseRating;
-    this.selectedFilm.rating_count = this.increaseCount;
+    this.checkIfVoted();
+    
+    if(this.check == false) {
+      this.increaseRating = this.selectedFilm.total_rating + newRating;
+      this.increaseCount = this.selectedFilm.rating_count + 1;
 
-    this.formData = this.selectedFilm;
-    console.log(this.formData.total_rating);
-    console.log(this.formData.rating_count);
-    this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+      this.selectedFilm.total_rating = this.increaseRating;
+      this.selectedFilm.rating_count = this.increaseCount;
 
-    this.updateRating();
+      this.formData = this.selectedFilm;
+      console.log(this.formData.total_rating);
+      console.log(this.formData.rating_count);
+      this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+
+      this.updateRating();
+    }
+    else{
+      alert("Already voted!");
+    }
+  }
+
+  checkIfVoted(){
   }
 
 

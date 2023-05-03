@@ -304,4 +304,8 @@ input:checked ~ form{
     display:block;
 }
 
-
+form .btn p{
+    color:#fefed6;
+    margin-top: 3px;
+    visibility: hidden;
+}
