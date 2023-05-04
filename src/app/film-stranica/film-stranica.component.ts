@@ -1,7 +1,10 @@
+import { BookmarkStranicaComponent } from './../bookmark-stranica/bookmark-stranica.component';
+import { LoginService } from 'src/app/shared/Login.service';
+import { StorageService } from './../_services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { Films } from '../shared/films.model';
 import { FilmsService } from '../shared/films.service';
-import {timer} from 'rxjs';
+
 
 @Component({
   selector: 'app-film-stranica',
@@ -11,7 +14,7 @@ import {timer} from 'rxjs';
 export class FilmStranicaComponent implements OnInit {
   
   
-  constructor(public service:FilmsService) {
+  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService) {
   }
 
   ratingOfFilm:number=0;
@@ -82,4 +85,7 @@ export class FilmStranicaComponent implements OnInit {
     
   }
 
+  saveBookmark(id_film:any){
+      //this.bookmark.saveBookmarks(id_film);
+  }
 }

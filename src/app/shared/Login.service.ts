@@ -2,8 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { Login } from './Login.model';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 
 @Injectable({
@@ -20,7 +25,7 @@ export class LoginService {
   list : Login[];
 
   postLogins(): Observable<any>{
-    return this.http.post(this.baseURL,this.formData,{ withCredentials: true });
+    return this.http.post(this.baseURL,this.formData,httpOptions);
   }
 
   putLogins(){
@@ -33,7 +38,7 @@ export class LoginService {
   }
   
   authenticate(login:any): Observable<any>{
-    return this.http.post<any>(`${this.baseURL}authenticate`,this.formData);
+    return this.http.post<any>(`${this.baseURL}authenticate`,this.formData,httpOptions);
   }
 
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Films } from './films.model';
-import { environment } from 'src/environments/environment.development';
 import { RatingsService } from './ratings.service';
+import { environment } from 'src/environments/environment';
 import { StorageService } from '../_services/storage.service';
 
 @Injectable({
@@ -10,7 +10,9 @@ import { StorageService } from '../_services/storage.service';
 })
 export class FilmsService {
 
+
   constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService) { }
+
 
   formData:Films = new Films();
   readonly baseURL = environment.baseURL+'api/Films'
@@ -22,6 +24,8 @@ export class FilmsService {
   increaseCount:number=0;
   check:boolean=false;
   loggedUser:any;
+
+  user: any;
 
   searchFilms: Films[];
 
@@ -101,6 +105,7 @@ export class FilmsService {
 
   checkIfVoted(){
   }
-
+    this.user = this.service.getUser();
+  }
 
 }
