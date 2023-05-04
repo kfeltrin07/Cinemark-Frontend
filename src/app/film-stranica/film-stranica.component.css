@@ -304,6 +304,12 @@ input:checked ~ form{
     display:block;
 }
 
+form .btn p{
+    color:#fefed6;
+    margin-top: 3px;
+    visibility: hidden;
+}
+
 .info i{
     margin-left: 25px;
 }
@@ -311,8 +317,3 @@ input:checked ~ form{
 .info i:hover{
     color:#009688;
 }
-
-
-
-
-

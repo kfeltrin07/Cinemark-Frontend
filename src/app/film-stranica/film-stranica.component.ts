@@ -17,9 +17,11 @@ export class FilmStranicaComponent implements OnInit {
   constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent) {
   }
 
+  ratingOfFilm:number=0;
   
   ngOnInit(): void {
     this.changeToFilm();
+    this.service.updateRating();
 
     setTimeout(this.openInfo,300)
   }
@@ -53,6 +55,34 @@ export class FilmStranicaComponent implements OnInit {
     let popup = document.getElementById("popup") as HTMLDivElement;
     
     popup.classList.remove("open-popup");
+    
+    var rate1 = document.getElementById("rate-1") as HTMLInputElement;
+    var rate2 = document.getElementById("rate-2") as HTMLInputElement;
+    var rate3 = document.getElementById("rate-3") as HTMLInputElement;
+    var rate4 = document.getElementById("rate-4") as HTMLInputElement;
+    var rate5 = document.getElementById("rate-5") as HTMLInputElement;
+
+    if(rate1.checked){
+      this.ratingOfFilm=parseInt(rate1.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate2.checked){
+      this.ratingOfFilm=parseInt(rate2.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate3.checked){
+      this.ratingOfFilm=parseInt(rate3.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate4.checked){
+      this.ratingOfFilm=parseInt(rate4.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate5.checked){
+      this.ratingOfFilm=parseInt(rate5.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }  
+    
   }
 
   saveBookmark(id_film:any){
