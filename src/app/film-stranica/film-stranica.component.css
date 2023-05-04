@@ -317,3 +317,104 @@ form .btn p{
 .info i:hover{
     color:#009688;
 }
+
+.comment-section{
+    margin-top:10%;
+}
+.comment-box{
+    width: min(90%,1140px);
+    margin: 3rem auto;
+}
+
+.comment-section h1{
+    color:#fefed6;
+    font-family: "Nexa";
+    margin-left: 6%;
+}
+
+.comment-container{
+    position:relative;
+}
+
+.comment-container::before{
+    content:"";
+    background-color: rgb(107, 107, 107);
+    position:absolute;
+    min-height:100%;
+    width: 1px;
+    left: -10px;
+}
+
+.comment-card{
+    padding: 20px;
+    background-color: #111;
+    border: 1px solid rgb(47, 47, 47);
+    border-radius: .5rem;
+    min-width: 100%;
+    box-shadow: 0 0 50px black;
+}
+
+.comment-card h3{
+    font-family: "Nexa";
+    font-size: 22px;
+    color:#fefed6;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.comment-card p{
+    font-family: "Nexa-Light";
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.add-comment{
+    height: 150px;
+    border: 1px solid rgb(47, 47, 47);
+    display:flex;
+    background-color: #111;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.add-comment .profile-pic{
+    margin-top: 3%;
+    margin-left: 4%;
+}
+
+.profile-pic img{
+    border-radius: 50%;
+    width: 60px;
+}
+
+.add-comment .comment-input{
+    margin:auto;
+    width:70%;
+    border: 1px solid #eaecf1;
+    background-color: #353535;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    height: 100px;
+    padding: 15px 25px;
+    position:relative;
+    resize: none;
+}
+
+.add-comment .send-btn-container{
+    margin-top: 4%;
+    margin-right:4%;
+    align-items: flex-start;
+    display:flex;
+    justify-content: space-between;
+}
+
+.add-comment .add-btn{
+    background: #5457b6;
+    border: 0;
+    border-radius: 10px;
+    color: #fff;
+    cursor:pointer;
+    font-weight: 700;
+    padding: 15px 30px;
+    text-transform: uppercase;
+}
