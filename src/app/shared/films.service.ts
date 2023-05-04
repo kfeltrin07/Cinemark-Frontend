@@ -23,7 +23,6 @@ export class FilmsService {
   increaseRating:number=0;
   increaseCount:number=0;
   check:boolean=false;
-  loggedUser:any;
 
   user: any;
 
@@ -93,8 +92,7 @@ export class FilmsService {
       console.log(this.formData.rating_count);
       this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
 
-      this.loggedUser = this.storageService.getUser();
-      this.ratingService.postRating(this.formData, this.loggedUser, newRating);
+      this.ratingService.postRating(this.formData, newRating);
 
       this.updateRating();
     }
@@ -104,8 +102,7 @@ export class FilmsService {
   }
 
   checkIfVoted(){
+    const user = this.storageService.getUserID();
   }
-    this.user = this.service.getUser();
-  }
-
+    
 }
