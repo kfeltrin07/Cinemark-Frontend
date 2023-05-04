@@ -30,7 +30,6 @@ export class BookmarkStranicaComponent implements OnInit {
     id_film:null
   }
   Films : Films[];
-  
 
   constructor(public service:FilmsService,public storage:StorageService,private toastr:ToastrService, public bookmarkservice: BookmarksService) {}
 
@@ -74,21 +73,17 @@ export class BookmarkStranicaComponent implements OnInit {
   }
 
   getBookmarksByUser(){
-
+    
     this.Films=[];
     
     if(this.storage.isLoggedIn()==true){
       var id_us= this.storage.getUserID();
       this.service.getFilms();
-      console.log(this.bookmarkservice.list);
       for(var films of this.bookmarkservice.list){
-        console.log(id_us);
-        console.log(films);
         if(films.id_user == id_us.id_user){
           for( var film of this.service.list){
             if( films.id_film== film.id_film){
-              this.Films.push(film);
-              console.log(this.Films);
+              this.Films.push(film);;
             }
           }
         }
@@ -96,8 +91,8 @@ export class BookmarkStranicaComponent implements OnInit {
       }
       }
     else{
-      this.toastr.error("You Can't bookmark if you are not logged in");
-      console.error("You Can't bookmark if you are not logged in");
+      this.toastr.error("You Can't view bookmarks if you are not logged in");
+      console.error("You Can't view bookmarks if you are not logged in");
     }
   }
 }

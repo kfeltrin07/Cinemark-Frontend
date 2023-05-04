@@ -14,7 +14,7 @@
             <p>Director: {{selectedFilm.director}}</p>
             <p>Main Actor: {{selectedFilm.main_actor}}</p>
             <p>Rating: {{selectedFilm.total_rating}} </p>
-            <p>Genre: Action, Comedy</p>
+            <p>Genre: {{" "+genre[0]+" "+genre[1]+" "+genre[2]}}</p>
             <button type="button" (click)="openPopup()"><span></span>RATE</button>
             <button type="button" (click)="trailer()"><span></span>TRAILER</button>
             <i class="far fa-bookmark fa-2xl" (click)="saveBookmark(selectedFilm.id_film)"></i>

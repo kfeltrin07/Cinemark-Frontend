@@ -28,6 +28,7 @@ export class LoginStranicaComponent implements OnInit{
   isLoginFailed = false;
   isSuccessful = false;
   isSignUpFailed = false;
+  LoginPgStatus=false;
   errorMessage = '';
 
   constructor(public service:LoginService,private storageService: StorageService,
@@ -86,11 +87,9 @@ export class LoginStranicaComponent implements OnInit{
         this.storageService.saveUserID(res);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
         this.router.navigate(['']);
-        console.log(this.isLoggedIn);
-        console.log(res);
-        console.log(form.value);
       },
       err=>{
         console.log(err);
