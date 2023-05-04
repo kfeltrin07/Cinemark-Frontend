@@ -8,4 +8,5 @@ export class Films {
     picture_url:string="";
     video_url:string="";
     total_rating:number=0;
+    rating_count:number=0;
 }

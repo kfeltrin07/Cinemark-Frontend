@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Films } from './films.model';
+import { RatingsService } from './ratings.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../_services/storage.service';
 
@@ -9,14 +10,23 @@ import { StorageService } from '../_services/storage.service';
 })
 export class FilmsService {
 
-  constructor(private http:HttpClient, public service:StorageService) { }
+
+  constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService) { }
+
 
   formData:Films = new Films();
   readonly baseURL = environment.baseURL+'api/Films'
 
   list : Films[];
   selectedFilm:Films;
+  rating:number=0;
+  increaseRating:number=0;
+  increaseCount:number=0;
+  check:boolean=false;
+  loggedUser:any;
+
   user: any;
+
   searchFilms: Films[];
 
 
@@ -64,6 +74,37 @@ export class FilmsService {
   }
 
   updateRating(){
+    this.rating=this.selectedFilm.total_rating/this.selectedFilm.rating_count;
+  }
+
+  postNewRating(newRating:number){
+
+    this.checkIfVoted();
+    
+    if(this.check == false) {
+      this.increaseRating = this.selectedFilm.total_rating + newRating;
+      this.increaseCount = this.selectedFilm.rating_count + 1;
+
+      this.selectedFilm.total_rating = this.increaseRating;
+      this.selectedFilm.rating_count = this.increaseCount;
+
+      this.formData = this.selectedFilm;
+      console.log(this.formData.total_rating);
+      console.log(this.formData.rating_count);
+      this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+
+      this.loggedUser = this.storageService.getUser();
+      this.ratingService.postRating(this.formData, this.loggedUser, newRating);
+
+      this.updateRating();
+    }
+    else{
+      alert("Already voted!");
+    }
+  }
+
+  checkIfVoted(){
+  }
     this.user = this.service.getUser();
   }
 

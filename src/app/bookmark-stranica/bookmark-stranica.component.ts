@@ -24,7 +24,7 @@ export class BookmarkStranicaComponent implements OnInit {
   constructor(public service:FilmsService,public storage:StorageService, public bookmarkservice: BookmarksService) {}
 
   ngOnInit(): void {
-    
+    this.service.getFilms();
   }
  
   updateSelectedFilm(film:string){
