@@ -14,7 +14,7 @@ import { FilmsService } from '../shared/films.service';
 export class FilmStranicaComponent implements OnInit {
   
   
-  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService) {
+  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent) {
   }
 
   ratingOfFilm:number=0;
@@ -86,6 +86,7 @@ export class FilmStranicaComponent implements OnInit {
   }
 
   saveBookmark(id_film:any){
-      //this.bookmark.saveBookmarks(id_film);
+    console.log(id_film)
+      this.bookmark.saveBookmarks(id_film);
   }
 }

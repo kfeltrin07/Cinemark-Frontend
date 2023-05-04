@@ -1,3 +1,4 @@
+import { BookmarksService } from './../shared/bookmarks.service';
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../shared/films.service';
 
@@ -8,11 +9,11 @@ import { FilmsService } from '../shared/films.service';
 })
 export class NaslovnaStranicaComponent implements OnInit {
 
-  constructor(public service:FilmsService) {}
+  constructor(public service:FilmsService, public bookmarkservice:BookmarksService) {}
 
   ngOnInit(): void {
     this.service.getFilms();
-    
+    this.bookmarkservice.getBookmarks();
   }
 
   onSearchClick(){

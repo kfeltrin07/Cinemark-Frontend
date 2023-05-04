@@ -16,6 +16,9 @@ import { environment } from 'src/environments/environment';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { BookmarksService } from './shared/bookmarks.service';
+import { FilmsService } from './shared/films.service';
+import { LoginService } from './shared/Login.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,12 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders,
+              BookmarksService,
+              FilmsService,
+              LoginService,
+              BookmarkStranicaComponent
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
