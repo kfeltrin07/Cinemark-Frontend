@@ -25,7 +25,6 @@ export class RatingsService {
     this.formData.id_film = film.id_film;
     this.formData.rating = rating;
     this.formData.id_user = userID.id_user;
-    console.log(this.formData);
     
     this.http.post(this.baseURL,this.formData).subscribe();
 
