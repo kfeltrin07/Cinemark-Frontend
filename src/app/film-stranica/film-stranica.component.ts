@@ -6,6 +6,8 @@ import { StorageService } from './../_services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { Films } from '../shared/films.model';
 import { FilmsService } from '../shared/films.service';
+import { CommentsService } from '../shared/comments.service';
+import { ToastrService } from 'ngx-toastr';
 import { Genres } from '../shared/genre.model';
 
 
@@ -18,8 +20,9 @@ import { Genres } from '../shared/genre.model';
 export class FilmStranicaComponent implements OnInit {
   
   
-  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, public genreservice:GenreService) {
-  }
+
+  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService) {}
+
 
   ratingOfFilm:number=0;
   
@@ -96,5 +99,12 @@ export class FilmStranicaComponent implements OnInit {
   saveBookmark(id_film:any){
     console.log(id_film)
       this.bookmark.saveBookmarks(id_film);
+  }
+
+  saveComment(){
+    const val = document.getElementById("commentInput") as HTMLInputElement;
+    this.commentService.postComment(this.selectedFilm,val.value);
+    this.toastr.success("Comment posted.","Success!")
+    val.value = "";
   }
 }
