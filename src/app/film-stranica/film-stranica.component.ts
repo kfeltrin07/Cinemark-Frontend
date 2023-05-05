@@ -57,9 +57,14 @@ export class FilmStranicaComponent implements OnInit {
   } 
 
   openPopup(){
-    let popup = document.getElementById("popup") as HTMLDivElement;
-    
-    popup.classList.add("open-popup");
+    if(this.storage.isLoggedIn()==true){
+      let popup = document.getElementById("popup") as HTMLDivElement;
+      popup.classList.add("open-popup");
+    }
+    else{
+      this.toastr.error("You are not logged in!","Can't rate")
+    }
+
   }
 
   closePopup(){

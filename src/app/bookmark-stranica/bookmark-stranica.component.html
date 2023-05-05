@@ -4,10 +4,8 @@
     <link rel="stylesheet" href="bookmark-stranica.component.css">
     
 </head>
-<div class="content">
-  <h1>YOUR BOOKMARKS:</h1>
-</div>
-<div class="container">
+
+<!-- <div class="container">
   <table class="table table-bordered table-striped">
     <thead>
       <tr class="bookmark-content">
@@ -26,5 +24,36 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
+
+<main class="table">
+  <section class="table_header">
+    <h1>Your bookmarked movies:</h1>
+  </section>
+  <section class="table_body">
+    <table>
+      <thead>
+        <tr>
+          <th>Film</th>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Year</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (click)="updateSelectedFilm(film.title)" routerLink="/film" *ngFor="let film of Films">
+          <td><img src={{film.picture_url}} alt=""></td>
+          <td>{{film.title}}</td>
+          <td>{{film.director}}</td>
+          <td>{{film.release_date.substring(0,4)}}</td>
+          <td>
+            <p class="status bookmarked">UNBOOKMARK</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
 </html>
