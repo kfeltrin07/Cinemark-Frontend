@@ -21,17 +21,16 @@
 
     
     <div *ngFor="let film of service.list" class="component">
-      <ul class="film-list -grid -container sort-content">  
+      <div class="film-list">  
         <div class="film img" id="filmBox">
-          <img src={{film.picture_url}} (click)="updateSelectedFilm(film.title)" routerLink="/film" (click)="openInfo()">  
+          <img src={{film.picture_url}} (click)="updateSelectedFilm(film.title)" alt="film picture" routerLink="/film" (click)="openInfo()">
+            <div class="title" >
+              <span (click)="updateSelectedFilm(film.title)" routerLink="/film">{{film.title}} ({{film.release_date.substring(0,4)}})</span>
+              <p class="info">Director: {{film.director}}</p>
+              <p class="info">{{film.summary}}</p>
+            </div>
         </div>
-        <div class="title">
-          <a>
-            <span (click)="updateSelectedFilm(film.title)" routerLink="/film">{{film.title}}</span>
-            <!--<span>{{film.director}}</span>-->
-          </a>  
-        </div>
-      </ul>
+      </div>
     </div>
 
       <!--<div class="container">  
