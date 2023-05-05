@@ -55,11 +55,10 @@
                 </div>
             </div>
             <div class="comment-container">
-                <div class="comment-card">
-                    <h3 class="comment-title">Mirko Filipović</h3>
+                <div class="comment-card" *ngFor="let user of username; index as i; first as isFirst">
+                    <h3 class="comment-title">{{user}}</h3>
                     <p>
-                        Meni se ovaj film strašno svidio! Jedino što mi nije bilo dobro je to što je film kratko trajao xd Naravno
-                        da sam dao ovom filmu 5 zvjezdica. Ljudi ovo je must watch! Ako niste pogledali obavezno stavite u bookmarks!
+                        {{comment[i]}}
                     </p>
                 </div>
             </div>

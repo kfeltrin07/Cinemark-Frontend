@@ -65,20 +65,10 @@ export class GenreService {
             this.selectedGenres.push(genres.name);
             console.log(this.selectedGenres);
           }
-        //this.selectedFilmGenres.push(filmgenres.id_genre);
         }
       } 
     } 
-    //console.log(this.selectedFilmGenres);
-    /*
-    for(var genres of this.listGenres){
-      for( var idgenres of this.selectedFilmGenres){
-      if(genres.id_genre == idgenres){          
-          this.selectedGenres.push(genres.name);
-          console.log(this.selectedGenres);
-        }
-      }  
-    }*/
+    
     console.log(this.selectedGenres);   
     return this.selectedGenres;
   }

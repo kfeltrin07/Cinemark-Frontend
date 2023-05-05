@@ -9,6 +9,8 @@ import { FilmsService } from '../shared/films.service';
 import { CommentsService } from '../shared/comments.service';
 import { ToastrService } from 'ngx-toastr';
 import { Genres } from '../shared/genre.model';
+import { Comments } from '../shared/comments.model';
+import { Login } from '../shared/Login.model';
 
 
 
@@ -36,10 +38,39 @@ export class FilmStranicaComponent implements OnInit {
   genres:Genres[];
   genre:string[];
   Film_Genre:Film_Genre;
+  listComments:Comments[];
+  selectedComments:Comments[];
+  AllUsers:Login[];
+  username:string[];
+  comment:string[];
 
   changeToFilm(){
     this.selectedFilm = this.service.getFilmByName();
     this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
+    this.listComments=this.commentService.getComments();
+    this.AllUsers=this.loginservice.GetAllUsers();
+
+    this.selectedComments=[];
+    this.comment=[];
+    this.username=[];
+
+    for(var comments of this.listComments){
+      if(this.selectedFilm.id_film == comments.id_film){
+            this.selectedComments.push(comments);        
+      } 
+    }
+    for(var comm of this.selectedComments){
+      this.comment.push(comm.comment);
+    }
+    for(var user of this.AllUsers){
+      for(var comuser of this.selectedComments){
+        if(user.id_user==comuser.id_user){
+          this.username.push(user.username);
+        }
+      }
+    }
+    console.log(this.username);
+    console.log(this.selectedComments);
   }
 
   openInfo(){
@@ -104,7 +135,6 @@ export class FilmStranicaComponent implements OnInit {
   saveComment(){
     const val = document.getElementById("commentInput") as HTMLInputElement;
     this.commentService.postComment(this.selectedFilm,val.value);
-    this.toastr.success("Comment posted.","Success!")
     val.value = "";
   }
 }

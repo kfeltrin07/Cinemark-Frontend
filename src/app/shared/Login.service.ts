@@ -22,7 +22,7 @@ export class LoginService {
   formData:Login = new Login();
   readonly baseURL = environment.baseURL+'api/Users/'
 
-  list : Login[];
+  Allusers : Login[];
 
   postLogins(): Observable<any>{
     return this.http.post(this.baseURL,this.formData,httpOptions);
@@ -42,9 +42,10 @@ export class LoginService {
   }
 
 
-  refreshList(){
+  GetAllUsers(){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
-      res => this.list = res as Login[]);
+      res => this.Allusers = res as Login[]);
+      return this.Allusers
   }
   
 }
