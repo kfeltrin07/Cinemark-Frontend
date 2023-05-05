@@ -1,12 +1,19 @@
+import { BookmarksService } from './../shared/bookmarks.service';
+import { FilmsService } from './../shared/films.service';
 import { Router, Routes } from '@angular/router';
 import { Component, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgModule, } from '@angular/core';
 import { Login } from 'src/app/shared/Login.model';
 import { LoginService } from 'src/app/shared/Login.service';
 import { NaslovnaStranicaComponent } from 'src/app/naslovna-stranica/naslovna-stranica.component';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from '../app.component';
+import { StorageService } from '../_services/storage.service';
+import { delay } from 'rxjs';
+import { GenreService } from '../shared/genre.service';
+
 
 @Component({
   selector: 'app-login-stranica',
@@ -15,11 +22,33 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginStranicaComponent implements OnInit{
 
-  constructor(public service:LoginService,
-    private toastr:ToastrService, private router: Router) {}
+  form: any = {
+    username: null,
+    email: null,
+    password: null
+  };
+  isLoggedIn = false;
+  isLoginFailed = false;
+  isSuccessful = false;
+  isSignUpFailed = false;
+  LoginPgStatus=false;
+  errorMessage = '';
+
+  constructor(public service:LoginService,private storageService: StorageService,
+    private toastr:ToastrService, private router: Router,public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService) {}
+
+    
 
     ngOnInit(): void {
-      
+      if (this.storageService.isLoggedIn()) {
+        this.isLoggedIn = true;
+        this.bookmarkService.getBookmarks();
+      const user = this.storageService.getUser();
+      const userID = this.storageService.getUserID();
+      }
+      this.filmsService.getFilms();
+      this.genreService.GetFilmGenre();
+      this.genreService.GetGenres();
     }
     
 
@@ -43,31 +72,38 @@ export class LoginStranicaComponent implements OnInit{
     z.style.left = "0px";
   }
 
-  onSubmit(form:NgForm){
-    this.service.postLogins().subscribe(
-      res =>{
-        this.resetForm(form);
-        this.service.refreshList();
+  onSubmit(form:NgForm):void{
+    this.service.postLogins().subscribe({ 
+      next: res =>{
+        console.log(res);
         this.toastr.success('Submitted successfully','Register');
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
         this.loginACT;
       },
-      err => {
-        console.log(err); 
+      error: err => {
+        console.log(err);
+        this.isSignUpFailed = true; 
         this.toastr.error('User exists or error in input','Register');
       }
-    );
-    
+    });  
   }
 
   onLogin(form:NgForm){
     this.service.authenticate(form).subscribe(
       res=>{
+        this.storageService.saveUser(form.value);
+        this.storageService.saveUserID(res);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
-
+        this.router.navigate(['']);
       },
       err=>{
         console.log(err);
         this.toastr.error('Wrong Username or Password');
+        this.isLoginFailed = true;
       }
 
     );
@@ -78,7 +114,7 @@ export class LoginStranicaComponent implements OnInit{
     this.service.formData = new Login();
   }
 
-  onLogIn(){
-    alert("Successful log in")
+  reloadPage(): void {
+    window.location.reload();
   }
 }

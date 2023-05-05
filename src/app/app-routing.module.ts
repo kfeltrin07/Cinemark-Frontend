@@ -15,7 +15,8 @@ const routes: Routes = [
   {path: 'bookmarks', component: BookmarkStranicaComponent},
   {path: 'sort', component:SortByStranicaComponent},
   {path: 'film', component:FilmStranicaComponent},
-  {path: 'search', component:SearchStranicaComponent}
+  {path: 'search', component:SearchStranicaComponent},
+  {path: '', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

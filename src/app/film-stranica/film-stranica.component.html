@@ -13,34 +13,58 @@
             <p>Summary: {{selectedFilm.summary}}</p>
             <p>Director: {{selectedFilm.director}}</p>
             <p>Main Actor: {{selectedFilm.main_actor}}</p>
-            <p>Rating: 4.76/5 </p>
-            <p>Genre: Action, Comedy</p>
+            <p>Rating: {{service.rating.toFixed(2)}} </p>
+            <p class="genre">Genres:<var *ngFor="let genr of genre; index as i; first as isFirst">{{" "+genr+" "}}</var></p>
             <button type="button" (click)="openPopup()"><span></span>RATE</button>
             <button type="button" (click)="trailer()"><span></span>TRAILER</button>
+            <i class="far fa-bookmark fa-2xl" (click)="saveBookmark(selectedFilm.id_film)"></i>
         </div>
         <div class="close-icon" (click)="closeInfo()"></div>
-    </div>
-
-    <div class="container" id="popup">
-        <div class="star-widget">
-            <input type="radio" name="rate" id="rate-5">
-            <label for="rate-5" class="fas fa-star"></label>
-            <input type="radio" name="rate" id="rate-4">
-            <label for="rate-4" class="fas fa-star"></label>
-            <input type="radio" name="rate" id="rate-3">
-            <label for="rate-3" class="fas fa-star"></label>
-            <input type="radio" name="rate" id="rate-2">
-            <label for="rate-2" class="fas fa-star"></label>
-            <input type="radio" name="rate" id="rate-1">
-            <label for="rate-1" class="fas fa-star"></label>
-            <form action="#">
-                <header></header>
-                <div class="btn">
-                    <button class="rate-btn" type="submit" (click)="closePopup()">Post</button>
-                </div>
-            </form>
+        <div class="container" id="popup">
+            <div class="star-widget">
+                <input type="radio" name="rate" id="rate-5" value="5">
+                <label for="rate-5" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-4" value="4">
+                <label for="rate-4" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-3" value="3">
+                <label for="rate-3" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-2" value="2">
+                <label for="rate-2" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-1" value="1">
+                <label for="rate-1" class="fas fa-star"></label>
+                <form action="#">
+                    <header></header>
+                    <div class="btn">
+                        <button class="rate-btn" type="submit" (click)="closePopup()">Post</button>
+                        <p id="votingCheck">You already voted!</p>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <section class="comment-section">
+        <h1>COMMENTS</h1>
+        <div class="comment-box">
+            <div class="add-comment">
+                <div class="profile-pic">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                </div>
+                <textarea class="comment-input" id="commentInput" placeholder="Add a comment"></textarea>
+                <div class="send-btn-container">
+                    <button class="add-btn" (click)="saveComment()">send</button>
+                </div>
+            </div>
+            <div class="comment-container">
+                <div class="comment-card">
+                    <h3 class="comment-title">Mirko Filipović</h3>
+                    <p>
+                        Meni se ovaj film strašno svidio! Jedino što mi nije bilo dobro je to što je film kratko trajao xd Naravno
+                        da sam dao ovom filmu 5 zvjezdica. Ljudi ovo je must watch! Ako niste pogledali obavezno stavite u bookmarks!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
 </html>

@@ -1,7 +1,16 @@
+import { Film_Genre } from './../shared/film_genre.model';
+import { GenreService } from './../shared/genre.service';
+import { BookmarkStranicaComponent } from './../bookmark-stranica/bookmark-stranica.component';
+import { LoginService } from 'src/app/shared/Login.service';
+import { StorageService } from './../_services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { Films } from '../shared/films.model';
 import { FilmsService } from '../shared/films.service';
-import {timer} from 'rxjs';
+import { CommentsService } from '../shared/comments.service';
+import { ToastrService } from 'ngx-toastr';
+import { Genres } from '../shared/genre.model';
+
+
 
 @Component({
   selector: 'app-film-stranica',
@@ -11,19 +20,26 @@ import {timer} from 'rxjs';
 export class FilmStranicaComponent implements OnInit {
   
   
-  constructor(public service:FilmsService) {
-  }
 
+  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService) {}
+
+
+  ratingOfFilm:number=0;
   
   ngOnInit(): void {
     this.changeToFilm();
+    this.service.updateRating();
 
     setTimeout(this.openInfo,300)
   }
   selectedFilm:Films;
+  genres:Genres[];
+  genre:string[];
+  Film_Genre:Film_Genre;
 
   changeToFilm(){
     this.selectedFilm = this.service.getFilmByName();
+    this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
   }
 
   openInfo(){
@@ -50,6 +66,45 @@ export class FilmStranicaComponent implements OnInit {
     let popup = document.getElementById("popup") as HTMLDivElement;
     
     popup.classList.remove("open-popup");
+    
+    var rate1 = document.getElementById("rate-1") as HTMLInputElement;
+    var rate2 = document.getElementById("rate-2") as HTMLInputElement;
+    var rate3 = document.getElementById("rate-3") as HTMLInputElement;
+    var rate4 = document.getElementById("rate-4") as HTMLInputElement;
+    var rate5 = document.getElementById("rate-5") as HTMLInputElement;
+
+    if(rate1.checked){
+      this.ratingOfFilm=parseInt(rate1.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate2.checked){
+      this.ratingOfFilm=parseInt(rate2.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate3.checked){
+      this.ratingOfFilm=parseInt(rate3.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate4.checked){
+      this.ratingOfFilm=parseInt(rate4.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }
+    if(rate5.checked){
+      this.ratingOfFilm=parseInt(rate5.value,10);
+      this.service.postNewRating(this.ratingOfFilm);
+    }  
+    
   }
 
+  saveBookmark(id_film:any){
+    console.log(id_film)
+      this.bookmark.saveBookmarks(id_film);
+  }
+
+  saveComment(){
+    const val = document.getElementById("commentInput") as HTMLInputElement;
+    this.commentService.postComment(this.selectedFilm,val.value);
+    this.toastr.success("Comment posted.","Success!")
+    val.value = "";
+  }
 }

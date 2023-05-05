@@ -15,17 +15,21 @@ import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { BookmarksService } from './shared/bookmarks.service';
+import { FilmsService } from './shared/films.service';
+import { LoginService } from './shared/Login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NaslovnaStranicaComponent,
-    NaslovnaStranicaComponent,
     LoginStranicaComponent,
     BookmarkStranicaComponent,
     SortByStranicaComponent,
     FilmStranicaComponent,
-    SearchStranicaComponent 
+    SearchStranicaComponent,
+    BookmarkStranicaComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,13 @@ import { SearchStranicaComponent } from './search-stranica/search-stranica.compo
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders,
+              BookmarksService,
+              FilmsService,
+              LoginService,
+              BookmarkStranicaComponent,
+              LoginStranicaComponent
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
