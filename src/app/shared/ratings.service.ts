@@ -14,7 +14,7 @@ export class RatingsService {
   constructor(private http:HttpClient, public storageService:StorageService) { }
 
   formData:Ratings = new Ratings();
-  readonly baseURL = environment.baseURL+'api/Ratings'
+  readonly baseURL = environment.baseURL+'api/Ratings';
   list : Ratings[];
 
   postRating(film:Films, rating:number){

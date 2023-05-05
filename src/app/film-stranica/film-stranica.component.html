@@ -53,9 +53,9 @@
                 <div class="profile-pic">
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
                 </div>
-                <textarea class="comment-input" placeholder="Add a comment"></textarea>
+                <textarea class="comment-input" id="commentInput" placeholder="Add a comment"></textarea>
                 <div class="send-btn-container">
-                    <button class="add-btn">send</button>
+                    <button class="add-btn" (click)="saveComment()">send</button>
                 </div>
             </div>
             <div class="comment-container">

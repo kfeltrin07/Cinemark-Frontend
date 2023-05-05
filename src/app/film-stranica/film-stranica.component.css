@@ -383,7 +383,6 @@ form .btn p{
 }
 
 .profile-pic img{
-    border-radius: 50%;
     width: 60px;
 }
 
@@ -417,4 +416,8 @@ form .btn p{
     font-weight: 700;
     padding: 15px 30px;
     text-transform: uppercase;
+}
+
+.add-comment .add-btn:hover{
+    background: #6e71c6;
 }
