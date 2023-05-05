@@ -4,6 +4,7 @@ import { BookmarksService } from './../shared/bookmarks.service';
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../shared/films.service';
 import { LoginStranicaComponent } from '../login-stranica/login-stranica.component';
+import { RatingsService } from '../shared/ratings.service';
 
 @Component({
   selector: 'app-naslovna-stranica',
@@ -15,7 +16,7 @@ export class NaslovnaStranicaComponent implements OnInit {
   LoginPgStatus=false;
   isLoggedIn=false;
 
-  constructor(public filmsService:FilmsService, public bookmarkService:BookmarksService, public loginserv:LoginStranicaComponent, public storageService:StorageService, public genreService:GenreService) {}
+  constructor(public filmsService:FilmsService, public bookmarkService:BookmarksService, public loginserv:LoginStranicaComponent, public storageService:StorageService, public genreService:GenreService, public ratingservice:RatingsService) {}
 
   ngOnInit(): void {
     this.filmsService.getFilms();
@@ -28,6 +29,8 @@ export class NaslovnaStranicaComponent implements OnInit {
     this.filmsService.getFilms();
     this.genreService.GetFilmGenre();
     this.genreService.GetGenres();
+    this.ratingservice.getRatings();
+
   }
 
   onSearchClick(){

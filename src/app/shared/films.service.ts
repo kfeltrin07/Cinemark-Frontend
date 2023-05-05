@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Films } from './films.model';
+import { RatingsService } from './ratings.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../_services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmsService {
 
-  constructor(private http:HttpClient, public service:StorageService) { }
+
+  constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService,
+    private toastr:ToastrService) { }
+
 
   formData:Films = new Films();
   readonly baseURL = environment.baseURL+'api/Films'
 
   list : Films[];
   selectedFilm:Films;
+  rating:number=0;
+  increaseRating:number=0;
+  increaseCount:number=0;
+  check:boolean=false;
+
   user: any;
+
   searchFilms: Films[];
 
 
@@ -64,7 +75,46 @@ export class FilmsService {
   }
 
   updateRating(){
-    this.user = this.service.getUser();
+    this.rating=this.selectedFilm.total_rating/this.selectedFilm.rating_count;
   }
 
+  postNewRating(newRating:number){
+
+    this.checkIfVoted();
+    
+    if(this.check == false) {
+      this.increaseRating = this.selectedFilm.total_rating + newRating;
+      this.increaseCount = this.selectedFilm.rating_count + 1;
+
+      this.selectedFilm.total_rating = this.increaseRating;
+      this.selectedFilm.rating_count = this.increaseCount;
+
+      this.formData = this.selectedFilm;
+      console.log(this.formData.total_rating);
+      console.log(this.formData.rating_count);
+      this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+
+      this.ratingService.postRating(this.formData, newRating);
+
+      this.updateRating();
+      this.toastr.success('Ratings saved.','Thank you!')
+    }
+    else{
+      this.toastr.error('Already voted!','Cannot do that.');
+    }
+  }
+
+  checkIfVoted(){
+    const user = this.storageService.getUserID();
+
+    this.check = false;
+
+    for(var rating of this.ratingService.list){
+      if(this.selectedFilm.id_film == rating.id_film && user.id_user == rating.id_user){
+        this.check = true;
+      }
+    }
+    
+  }
+    
 }
