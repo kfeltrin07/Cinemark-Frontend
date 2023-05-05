@@ -13,28 +13,13 @@
             <p>Summary: {{selectedFilm.summary}}</p>
             <p>Director: {{selectedFilm.director}}</p>
             <p>Main Actor: {{selectedFilm.main_actor}}</p>
-            <p>Rating: {{selectedFilm.total_rating}} </p>
-            <p class="genre">Genres:<a *ngFor="let genr of genre; index as i; first as isFirst">{{" "+genr+" "}}</a></p>
+            <p>Rating: {{service.rating.toFixed(2)}} </p>
+            <p class="genre">Genres:<var *ngFor="let genr of genre; index as i; first as isFirst">{{" "+genr+" "}}</var></p>
             <button type="button" (click)="openPopup()"><span></span>RATE</button>
             <button type="button" (click)="trailer()"><span></span>TRAILER</button>
             <i class="far fa-bookmark fa-2xl" (click)="saveBookmark(selectedFilm.id_film)"></i>
         </div>
-        <div class="film hide-details" id="filmBox">
-            <img src={{selectedFilm.picture_url}} (click)="openInfo()">
-            <div class="info">
-                <h1>{{selectedFilm.title}}</h1>
-                <p>Summary: {{selectedFilm.summary}}</p>
-                <p>Director: {{selectedFilm.director}}</p>
-                <p>Main Actor: {{selectedFilm.main_actor}}</p>
-                <p>Rating: {{service.rating.toFixed(2)}} </p>
-                <p>Genre: Action, Comedy</p>
-                <button type="button" (click)="openPopup()"><span></span>RATE</button>
-                <button type="button" (click)="trailer()"><span></span>TRAILER</button>
-                <i class="far fa-bookmark fa-2xl" (click)="saveBookmark(selectedFilm.id_film)"></i>
-            </div>
-            <div class="close-icon" (click)="closeInfo()"></div>
-        </div>
-
+        <div class="close-icon" (click)="closeInfo()"></div>
         <div class="container" id="popup">
             <div class="star-widget">
                 <input type="radio" name="rate" id="rate-5" value="5">
@@ -56,8 +41,7 @@
                 </form>
             </div>
         </div>
-    </section>
-
+    </div>
     <section class="comment-section">
         <h1>COMMENTS</h1>
         <div class="comment-box">
