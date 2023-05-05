@@ -1,3 +1,5 @@
+import { GenreService } from './shared/genre.service';
+import { BookmarksService } from './shared/bookmarks.service';
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './shared/Login.service';
@@ -20,13 +22,17 @@ export class AppComponent {
   eventBusSub?: Subscription;
 
   constructor(
-    private storageService: StorageService,private eventBusService: EventBusService
-  ) {}
+    private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService
+    , public genreservice:GenreService
+      ) {}
 
   ngOnInit(): void {
+    this.genreservice.GetFilmGenre();
+    this.genreservice.GetGenres();
     this.isLoggedIn = this.storageService.isLoggedIn();
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {
+      this.bookmarkservice.getBookmarks();
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
       console.log(user);
