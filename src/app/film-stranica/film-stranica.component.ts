@@ -9,6 +9,7 @@ import { FilmsService } from '../shared/films.service';
 import { Genres } from '../shared/genre.model';
 
 
+
 @Component({
   selector: 'app-film-stranica',
   templateUrl: './film-stranica.component.html',

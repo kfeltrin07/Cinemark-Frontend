@@ -1,3 +1,5 @@
+import { BookmarksService } from './../shared/bookmarks.service';
+import { FilmsService } from './../shared/films.service';
 import { Router, Routes } from '@angular/router';
 import { Component, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppComponent } from '../app.component';
 import { StorageService } from '../_services/storage.service';
 import { delay } from 'rxjs';
+import { GenreService } from '../shared/genre.service';
 
 
 @Component({
@@ -32,14 +35,20 @@ export class LoginStranicaComponent implements OnInit{
   errorMessage = '';
 
   constructor(public service:LoginService,private storageService: StorageService,
-    private toastr:ToastrService, private router: Router) {}
+    private toastr:ToastrService, private router: Router,public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService) {}
 
     
 
     ngOnInit(): void {
       if (this.storageService.isLoggedIn()) {
         this.isLoggedIn = true;
+        this.bookmarkService.getBookmarks();
+      const user = this.storageService.getUser();
+      const userID = this.storageService.getUserID();
       }
+      this.filmsService.getFilms();
+      this.genreService.GetFilmGenre();
+      this.genreService.GetGenres();
     }
     
 
