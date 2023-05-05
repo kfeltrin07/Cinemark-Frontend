@@ -3,9 +3,21 @@
 <link rel="stylesheet" href="film-stranica.component.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-    <section class="film-section">
-        <div class="rating-info">
-            <h1>RATING AND REVIEWS</h1>
+    <div class="rating-info">
+        <h1>RATING AND REVIEWS</h1>
+    </div>
+    <div class="film hide-details" id="filmBox">
+        <img src={{selectedFilm.picture_url}} (click)="openInfo()">
+        <div class="info">
+            <h1>{{selectedFilm.title}}</h1>
+            <p>Summary: {{selectedFilm.summary}}</p>
+            <p>Director: {{selectedFilm.director}}</p>
+            <p>Main Actor: {{selectedFilm.main_actor}}</p>
+            <p>Rating: {{selectedFilm.total_rating}} </p>
+            <p class="genre">Genres:<a *ngFor="let genr of genre; index as i; first as isFirst">{{" "+genr+" "}}</a></p>
+            <button type="button" (click)="openPopup()"><span></span>RATE</button>
+            <button type="button" (click)="trailer()"><span></span>TRAILER</button>
+            <i class="far fa-bookmark fa-2xl" (click)="saveBookmark(selectedFilm.id_film)"></i>
         </div>
         <div class="film hide-details" id="filmBox">
             <img src={{selectedFilm.picture_url}} (click)="openInfo()">

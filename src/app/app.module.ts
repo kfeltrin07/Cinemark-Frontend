@@ -44,7 +44,8 @@ import { LoginService } from './shared/Login.service';
               BookmarksService,
               FilmsService,
               LoginService,
-              BookmarkStranicaComponent
+              BookmarkStranicaComponent,
+              LoginStranicaComponent
             ],
   bootstrap: [AppComponent]
 })

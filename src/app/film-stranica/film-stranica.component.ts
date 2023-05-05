@@ -1,3 +1,5 @@
+import { Film_Genre } from './../shared/film_genre.model';
+import { GenreService } from './../shared/genre.service';
 import { BookmarkStranicaComponent } from './../bookmark-stranica/bookmark-stranica.component';
 import { LoginService } from 'src/app/shared/Login.service';
 import { StorageService } from './../_services/storage.service';
@@ -6,6 +8,8 @@ import { Films } from '../shared/films.model';
 import { FilmsService } from '../shared/films.service';
 import { CommentsService } from '../shared/comments.service';
 import { ToastrService } from 'ngx-toastr';
+import { Genres } from '../shared/genre.model';
+
 
 
 @Component({
@@ -16,8 +20,9 @@ import { ToastrService } from 'ngx-toastr';
 export class FilmStranicaComponent implements OnInit {
   
   
-  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, public commentService:CommentsService, private toastr:ToastrService) {
-  }
+
+  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService) {}
+
 
   ratingOfFilm:number=0;
   
@@ -28,9 +33,13 @@ export class FilmStranicaComponent implements OnInit {
     setTimeout(this.openInfo,300)
   }
   selectedFilm:Films;
+  genres:Genres[];
+  genre:string[];
+  Film_Genre:Film_Genre;
 
   changeToFilm(){
     this.selectedFilm = this.service.getFilmByName();
+    this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
   }
 
   openInfo(){
