@@ -31,8 +31,6 @@ export class BookmarksService {
   getBookmarks(){
     this.http.get(this.baseURL).toPromise().then(
       res =>{ this.list = res as Bookmarks[];
-              console.log(res);
-              console.log(this.list); 
       })  
       return this.list;
      

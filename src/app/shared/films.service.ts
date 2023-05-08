@@ -5,6 +5,7 @@ import { RatingsService } from './ratings.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../_services/storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class FilmsService {
   getFilms(){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
       res => this.list = res as Films[]);
-      
+      return this.list;
   }
 
   updateFilmByName(filmName:string){

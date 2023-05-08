@@ -15,7 +15,8 @@ import { GenreService } from '../shared/genre.service';
 @Component({
   selector: 'app-bookmark-stranica',
   templateUrl: './bookmark-stranica.component.html',
-  styleUrls: ['./bookmark-stranica.component.css']
+  styleUrls: ['./bookmark-stranica.component.css'],
+  //providers: [FilmsService,GenreService,BookmarksService]
 })
 
 export class BookmarkStranicaComponent implements OnInit {
@@ -32,21 +33,32 @@ export class BookmarkStranicaComponent implements OnInit {
   }
   Films : Films[];
   isLoggedIn = false;
+  selectedFilm:Films[];
+  bookmark:Bookmarks[];
 
-  constructor(public filmsService:FilmsService,public storageService:StorageService,private toastr:ToastrService, public bookmarkService: BookmarksService, public genreService:GenreService) {}
+
+  constructor(public filmsService:FilmsService,public storageService:StorageService,private toastr:ToastrService, public bookmarkService: BookmarksService, 
+    public genreService:GenreService) {
+      
+    }
 
   ngOnInit(): void {
+    this.selectedFilm=this.filmsService.getFilms();
+      this.genreService.GetFilmGenre();
+      this.genreService.GetGenres();
+      this.bookmarkService.getBookmarks();
+      console.log("hey");
+      console.log(this.selectedFilm);
     
     this.getBookmarksByUser();
+    console.log(this.selectedFilm);
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.bookmarkService.getBookmarks();
+      
     const user = this.storageService.getUser();
     const userID = this.storageService.getUserID();
     }
-    this.filmsService.getFilms();
-    this.genreService.GetFilmGenre();
-    this.genreService.GetGenres();
+    
   }
  
   updateSelectedFilm(film:string){
@@ -85,14 +97,18 @@ export class BookmarkStranicaComponent implements OnInit {
 
   getBookmarksByUser(){
     
+    this.bookmark=[];
     this.Films=[];
+
+    this.selectedFilm=this.filmsService.getFilms();
+    this.bookmarkService.getBookmarks();
     
+    console.log(this.bookmarkService.list);
     if(this.storageService.isLoggedIn()==true){
       var id_us= this.storageService.getUserID();
-      this.filmsService.getFilms();
       for(var films of this.bookmarkService.list){
         if(films.id_user == id_us.id_user){
-          for( var film of this.filmsService.list){
+          for( var film of this.selectedFilm){
             if( films.id_film== film.id_film){
               this.Films.push(film);;
             }

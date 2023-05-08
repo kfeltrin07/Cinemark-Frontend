@@ -11,13 +11,15 @@ import { ToastrService } from 'ngx-toastr';
 import { Genres } from '../shared/genre.model';
 import { Comments } from '../shared/comments.model';
 import { Login } from '../shared/Login.model';
+import { BookmarksService } from '../shared/bookmarks.service';
 
 
 
 @Component({
   selector: 'app-film-stranica',
   templateUrl: './film-stranica.component.html',
-  styleUrls: ['./film-stranica.component.css']
+  styleUrls: ['./film-stranica.component.css'],
+  //providers: [FilmsService,GenreService,BookmarksService,LoginService,CommentsService]
 })
 export class FilmStranicaComponent implements OnInit {
   
