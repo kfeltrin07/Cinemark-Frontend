@@ -31,13 +31,18 @@ export class BookmarksService {
   getBookmarks(){
     this.http.get(this.baseURL).toPromise().then(
       res =>{ this.list = res as Bookmarks[];
+        this.storageService.saveBookmarks(this.list);
+        return this.list;
       })  
-      return this.list;
      
   }
 
-  checkBookmark(bookmark:Bookmarks){
+  authBookmark(bookmark:Bookmarks){
     return this.http.post<any>(`${this.baseURL}find`,bookmark,httpOptions);
+  }
+
+  checkBookmark(bookmark:Bookmarks){
+    return this.http.post<any>(`${this.baseURL}check`,bookmark,httpOptions);
   }
 
   deleteBookmark(id:number){

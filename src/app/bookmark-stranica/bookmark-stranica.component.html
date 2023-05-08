@@ -48,7 +48,7 @@
           <td>{{film.director}}</td>
           <td>{{film.release_date.substring(0,4)}}</td>
           <td>
-            <p class="status bookmarked" (click)="saveBookmarks(film.id_film)">UNBOOKMARK</p>
+            <p class="status bookmarked" (click)="saveBookmarks(film.id_film) "routerLink="/bookmarks">UNBOOKMARK</p>
           </td>
         </tr>
       </tbody>

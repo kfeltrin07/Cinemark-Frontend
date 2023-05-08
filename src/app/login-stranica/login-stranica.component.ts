@@ -22,7 +22,7 @@ import { GenreService } from '../shared/genre.service';
   //providers: [FilmsService,GenreService,BookmarksService,LoginService,StorageService]
 
 })
-export class LoginStranicaComponent implements OnInit{
+export class LoginStranicaComponent{
 
   form: any = {
     username: null,
@@ -37,11 +37,8 @@ export class LoginStranicaComponent implements OnInit{
   errorMessage = '';
 
   constructor(public service:LoginService,private storageService: StorageService,
-    private toastr:ToastrService, private router: Router,public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService) {}
+    private toastr:ToastrService, private router: Router,public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService) {
 
-    
-
-    ngOnInit(): void {
       if (this.storageService.isLoggedIn()) {
         this.isLoggedIn = true;
         this.bookmarkService.getBookmarks();
@@ -49,10 +46,8 @@ export class LoginStranicaComponent implements OnInit{
       const userID = this.storageService.getUserID();
       }
       this.filmsService.getFilms();
-      this.genreService.GetFilmGenre();
-      this.genreService.GetGenres();
+
     }
-    
 
   registerACT(){
     var x = document.getElementById("loginID") as HTMLDivElement;
@@ -117,6 +112,6 @@ export class LoginStranicaComponent implements OnInit{
   }
 
   reloadPage(): void {
-    window.location.reload();
+    location.reload();
   }
 }

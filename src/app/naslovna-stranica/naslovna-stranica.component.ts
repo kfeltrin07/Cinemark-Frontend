@@ -13,31 +13,25 @@ import { RatingsService } from '../shared/ratings.service';
   templateUrl: './naslovna-stranica.component.html',
   styleUrls: ['./naslovna-stranica.component.css']
 })
-export class NaslovnaStranicaComponent implements OnInit {
+export class NaslovnaStranicaComponent {
 
   LoginPgStatus=false;
   isLoggedIn=false;
 
   constructor(public filmsService:FilmsService, public bookmarkService:BookmarksService, public loginserv:LoginStranicaComponent, 
     public storageService:StorageService, public genreService:GenreService, public ratingservice:RatingsService, 
-    public commentService:CommentsService, public loginService:LoginService) {}
-
-  ngOnInit(): void {
-    this.filmsService.getFilms();
+    public commentService:CommentsService, public loginService:LoginService) 
+    {
+      this.filmsService.getFilms();
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.bookmarkService.getBookmarks();
     const user = this.storageService.getUser();
     const userID = this.storageService.getUserID();
     }
-    this.filmsService.getFilms();
-    this.genreService.GetFilmGenre();
-    this.genreService.GetGenres();
-    this.ratingservice.getRatings();
-    this.commentService.getComments();
-    this.loginService.GetAllUsers();
+    }
 
-  }
+
 
   onSearchClick(){
     const val = document.getElementById("inputValue") as HTMLInputElement;

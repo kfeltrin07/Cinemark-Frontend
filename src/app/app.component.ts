@@ -1,3 +1,5 @@
+import { CommentsService } from './shared/comments.service';
+import { FilmsService } from './shared/films.service';
 import { GenreService } from './shared/genre.service';
 import { BookmarksService } from './shared/bookmarks.service';
 import { Component } from '@angular/core';
@@ -23,12 +25,14 @@ export class AppComponent {
 
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService
-    , public genreservice:GenreService
+    , public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService
       ) {}
 
   ngOnInit(): void {
     this.genreservice.GetFilmGenre();
     this.genreservice.GetGenres();
+    this.filmService.getFilms();
+    this.commentsService.getComments();
     this.isLoggedIn = this.storageService.isLoggedIn();
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {

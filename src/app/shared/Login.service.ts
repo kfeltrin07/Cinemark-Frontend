@@ -1,3 +1,4 @@
+import { StorageService } from './../_services/storage.service';
 import { Injectable } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { Login } from './Login.model';
@@ -17,7 +18,7 @@ const httpOptions = {
 
 export class LoginService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, public storageService:StorageService) { }
 
   formData:Login = new Login();
   readonly baseURL = environment.baseURL+'api/Users/'
@@ -44,8 +45,10 @@ export class LoginService {
 
   GetAllUsers(){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
-      res => this.Allusers = res as Login[]);
-      return this.Allusers
+      res =>{ this.Allusers = res as Login[];
+              this.storageService.saveUsers(this.Allusers);
+      });
+      
   }
   
 }

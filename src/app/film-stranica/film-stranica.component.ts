@@ -21,21 +21,28 @@ import { BookmarksService } from '../shared/bookmarks.service';
   styleUrls: ['./film-stranica.component.css'],
   //providers: [FilmsService,GenreService,BookmarksService,LoginService,CommentsService]
 })
-export class FilmStranicaComponent implements OnInit {
+export class FilmStranicaComponent{
   
   
 
-  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService) {}
+  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
+    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService) 
+    {
+      this.selectedFilm = this.storage.getFilm();
+      this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
+      this.commentService.getComments();
+      this.loginservice.GetAllUsers();
+      this.changeToFilm();
+    this.service.updateRating();
+
+    setTimeout(this.openInfo,300)
+
+    }
 
 
   ratingOfFilm:number=0;
   
-  ngOnInit(): void {
-    this.changeToFilm();
-    this.service.updateRating();
-
-    setTimeout(this.openInfo,300)
-  }
+  
   selectedFilm:Films;
   genres:Genres[];
   genre:string[];
@@ -47,32 +54,38 @@ export class FilmStranicaComponent implements OnInit {
   comment:string[];
 
   changeToFilm(){
-    this.selectedFilm = this.service.getFilmByName();
-    this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
-    this.listComments=this.commentService.getComments();
-    this.AllUsers=this.loginservice.GetAllUsers();
-
+    
+    const listcomments=this.storage.getComments();
+    const Allusers=this.storage.getUsers();
     this.selectedComments=[];
     this.comment=[];
     this.username=[];
+    console.log(Allusers);
 
-    for(var comments of this.listComments){
-      if(this.selectedFilm.id_film == comments.id_film){
-            this.selectedComments.push(comments);        
-      } 
-    }
-    for(var comm of this.selectedComments){
-      this.comment.push(comm.comment);
-    }
-    for(var user of this.AllUsers){
-      for(var comuser of this.selectedComments){
-        if(user.id_user==comuser.id_user){
-          this.username.push(user.username);
+    if(listcomments!=null){
+      for(var comments of listcomments){
+        if(this.selectedFilm.id_film == comments.id_film){
+              this.selectedComments.push(comments);        
+        } 
+      }
+      for(var comm of this.selectedComments){
+        this.comment.push(comm.comment);
+      }
+      for(var user of Allusers){
+        for(var comuser of this.selectedComments){
+          if(user.id_user==comuser.id_user){
+            this.username.push(user.username);
+          }
         }
       }
+      console.log(this.username);
+      console.log(this.selectedComments);
     }
-    console.log(this.username);
-    console.log(this.selectedComments);
+    else{
+      console.log("there are no comments");
+    }
+
+    
   }
 
   openInfo(){
@@ -90,14 +103,9 @@ export class FilmStranicaComponent implements OnInit {
   } 
 
   openPopup(){
-    if(this.storage.isLoggedIn()==true){
-      let popup = document.getElementById("popup") as HTMLDivElement;
-      popup.classList.add("open-popup");
-    }
-    else{
-      this.toastr.error("You are not logged in!","Can't rate")
-    }
-
+    let popup = document.getElementById("popup") as HTMLDivElement;
+    
+    popup.classList.add("open-popup");
   }
 
   closePopup(){
@@ -136,7 +144,7 @@ export class FilmStranicaComponent implements OnInit {
 
   saveBookmark(id_film:any){
     console.log(id_film)
-      this.bookmark.saveBookmarks(id_film);
+    this.bookmark.saveBookmarks(id_film);
   }
 
   saveComment(){
