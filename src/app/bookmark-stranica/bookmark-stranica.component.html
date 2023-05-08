@@ -42,13 +42,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr (click)="updateSelectedFilm(film.title)" routerLink="/film" *ngFor="let film of Films">
-          <td><img src={{film.picture_url}} alt=""></td>
-          <td>{{film.title}}</td>
+        <tr *ngFor="let film of Films">
+          <td class="filmPicture" (click)="updateSelectedFilm(film.title)" routerLink="/film"><img src={{film.picture_url}} alt=""></td>
+          <td class="filmTitle" (click)="updateSelectedFilm(film.title)" routerLink="/film" >{{film.title}}</td>
           <td>{{film.director}}</td>
           <td>{{film.release_date.substring(0,4)}}</td>
           <td>
-            <p class="status bookmarked">UNBOOKMARK</p>
+            <p class="status bookmarked" (click)="saveBookmarks(film.id_film)">UNBOOKMARK</p>
           </td>
         </tr>
       </tbody>

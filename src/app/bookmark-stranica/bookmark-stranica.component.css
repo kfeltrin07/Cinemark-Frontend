@@ -159,6 +159,15 @@ tbody tr:hover{
     font-family: "Nexa";
 }
 
+.table_body .filmTitle:hover{
+    color:#00ecd4;
+    cursor: pointer;
+}
+
+.table_body .filmPicture{
+    cursor: pointer;
+}
+
 
 
 
