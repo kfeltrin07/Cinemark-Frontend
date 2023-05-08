@@ -46,8 +46,8 @@ export class CommentsService {
       res =>{ this.listComments = res as Comments[];
               console.log(res);
               console.log(this.listComments); 
+              this.storageService.saveComments(this.listComments);
       })  
-      return this.listComments;
   }
 
 

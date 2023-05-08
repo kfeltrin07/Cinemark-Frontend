@@ -14,11 +14,14 @@ import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.com
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
-
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { BookmarksService } from './shared/bookmarks.service';
 import { FilmsService } from './shared/films.service';
 import { LoginService } from './shared/Login.service';
+import { StorageService } from './_services/storage.service';
+import { GenreService } from './shared/genre.service';
+import { RatingsService } from './shared/ratings.service';
+import { CommentsService } from './shared/comments.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,11 @@ import { LoginService } from './shared/Login.service';
               FilmsService,
               LoginService,
               BookmarkStranicaComponent,
-              LoginStranicaComponent
+              LoginStranicaComponent,
+              StorageService,
+              GenreService,
+              RatingsService,
+              CommentsService
             ],
   bootstrap: [AppComponent]
 })

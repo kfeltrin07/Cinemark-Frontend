@@ -10,20 +10,23 @@
 
       <div class="navbar">
         <ul>
-          <li><a href="">Action</a></li>
-          <li><a href="">Adventure</a></li>
-          <li><a href="">Drama</a></li>
-          <li><a href="">Horror</a></li>
-          <li><a href="">Comedy</a></li>
-          <li><a href="">Sci-Fi</a></li>
+          <li><a (click) ="sortFilmByGenre(1)">Action</a></li>
+          <li><a (click) ="sortFilmByGenre(2)">Romance</a></li>
+          <li><a (click) ="sortFilmByGenre(3)">Drama</a></li>
+          <li><a (click) ="sortFilmByGenre(4)">Historical</a></li>
+          <li><a (click) ="sortFilmByGenre(5)">Adventure</a></li>
+          <li><a (click) ="sortFilmByGenre(6)">War</a></li>
+          <li><a (click) ="sortFilmByGenre(7)">Comedy</a></li>
+          <li><a (click) ="sortFilmByGenre(8)">Fantasy</a></li>
+          <li><a (click) ="sortFilmByGenre(9)">Horror</a></li>
         </ul>
       </div>
 
     
-    <div *ngFor="let film of service.list" class="component">
+    <div *ngFor="let film of sortedFilms" class="component">
       <div class="film-list">  
         <div class="film img" id="filmBox">
-          <img src={{film.picture_url}} (click)="updateSelectedFilm(film.title)" alt="film picture" routerLink="/film" (click)="openInfo()">
+          <img src={{film.picture_url}} (click)="updateSelectedFilm(film.title)" alt="film picture" routerLink="/film">
             <div class="title" >
               <span (click)="updateSelectedFilm(film.title)" routerLink="/film">{{film.title}} ({{film.release_date.substring(0,4)}})</span>
               <p class="info">Director: {{film.director}}</p>

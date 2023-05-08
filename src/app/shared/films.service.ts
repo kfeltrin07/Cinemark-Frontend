@@ -5,6 +5,7 @@ import { RatingsService } from './ratings.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../_services/storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,9 @@ export class FilmsService {
 
   getFilms(){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
-      res => this.list = res as Films[]);
-      
+      res =>{this.list = res as Films[];
+          this.storageService.saveFilms(this.list);
+      });
   }
 
   updateFilmByName(filmName:string){
@@ -44,6 +46,7 @@ export class FilmsService {
       for(var film of this.list){
         if(film.title == filmName){
           this.selectedFilm = film;
+          this.storageService.saveFilm(this.selectedFilm);
         }
       }
   }
@@ -75,7 +78,8 @@ export class FilmsService {
   }
 
   updateRating(){
-    this.rating=this.selectedFilm.total_rating/this.selectedFilm.rating_count;
+    const selectedfilm=this.storageService.getFilm()
+    this.rating=selectedfilm.total_rating/selectedfilm.rating_count;
   }
 
   postNewRating(newRating:number){
