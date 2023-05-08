@@ -3,6 +3,8 @@ import { FilmsService } from '../shared/films.service';
 import { Films } from '../shared/films.model';
 import { RouterLink } from '@angular/router';
 import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
+import { GenreService } from '../shared/genre.service';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-sort-by-stranica',
@@ -12,18 +14,36 @@ import { FilmStranicaComponent } from '../film-stranica/film-stranica.component'
 export class SortByStranicaComponent implements OnInit {
 
   selectedFilm:Films;
-  constructor(public service:FilmsService) {}
+  sortedFilms:Films[];
+  constructor(public service:FilmsService, public genreService:GenreService, public storageService:StorageService) {}
 
   ngOnInit(): void {
     this.service.getFilms();
+    this.getAllFilms();
   }
  
   updateSelectedFilm(film:string){
     this.service.updateFilmByName(film);
   }
 
-  openInfo(){
-    let filmBox = document.getElementById("filmBox") as HTMLDivElement;
-    filmBox.classList.remove("hide-details");
+  sortFilmByGenre(id_genre:number){
+    this.sortedFilms = [];
+    console.log("test");
+    const filmgenre=this.storageService.getFilmGenres()
+    const films= this.storageService.getFilms()
+    for(var item of filmgenre){
+      if(id_genre == item.id_genre){
+        for(var film of films){
+          if(item.id_film == film.id_film){
+            this.sortedFilms.push(film);
+          }
+        }
+      }
+    }
+  }
+
+  getAllFilms(){
+    const films= this.storageService.getFilms()
+    this.sortedFilms = films;
   }
 }
