@@ -56,4 +56,16 @@
   </section>
 </main>
 
+<section class="recommended-movies">
+  <h1> RECOMMENDED MOVIES </h1>
+  <div class="recommended">
+    <div class="row" *ngFor="let film of Films">
+      <div class="col-3">
+        <td (click)="updateSelectedFilm(film.title)" routerLink="/film"><img src={{film.picture_url}}></td>
+        <p>{{film.title}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </html>
