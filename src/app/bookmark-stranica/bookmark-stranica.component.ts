@@ -122,6 +122,10 @@ export class BookmarkStranicaComponent implements OnInit {
       console.error("You Can't view bookmarks if you are not logged in");
     }
   }
+
+
 }
+
+
 
 
