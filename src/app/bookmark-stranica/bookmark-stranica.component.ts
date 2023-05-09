@@ -65,7 +65,6 @@ export class BookmarkStranicaComponent {
               this.bookmarkService.getBookmarks();
               this.getBookmarksByUser();
               delay(5000);
-              location.reload();
               },
             err=>{
               console.log(err);
@@ -79,8 +78,7 @@ export class BookmarkStranicaComponent {
           console.log(err);
           this.bookmarkService.getBookmarks();
           this.getBookmarksByUser();
-          delay(5000);
-          location.reload();          
+          delay(5000);        
         });
     }
     else{
