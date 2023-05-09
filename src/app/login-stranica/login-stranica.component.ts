@@ -19,7 +19,6 @@ import { GenreService } from '../shared/genre.service';
   selector: 'app-login-stranica',
   templateUrl: './login-stranica.component.html',
   styleUrls: ['./login-stranica.component.css'],
-  //providers: [FilmsService,GenreService,BookmarksService,LoginService,StorageService]
 
 })
 export class LoginStranicaComponent{
