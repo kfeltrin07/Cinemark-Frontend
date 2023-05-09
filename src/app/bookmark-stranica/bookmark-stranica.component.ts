@@ -30,10 +30,12 @@ export class BookmarkStranicaComponent {
     id_user:null,
     id_film:null
   }
+  recommendedFilms: Films[];
   Films : Films[];
   isLoggedIn = false;
   selectedFilm:Films[];
   bookmark:Bookmarks[];
+  check:boolean=false;
 
   constructor(public filmsService:FilmsService,public storageService:StorageService,private toastr:ToastrService, public bookmarkService: BookmarksService, 
     public genreService:GenreService) {
@@ -44,7 +46,8 @@ export class BookmarkStranicaComponent {
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
       }
-      this.getBookmarksByUser();      
+      this.getBookmarksByUser();    
+      this.getRecommendedMovies();  
     }
  
   updateSelectedFilm(film:string){
@@ -127,7 +130,50 @@ export class BookmarkStranicaComponent {
       console.error("You Can't bookmark if you are not logged in");
     }
   }
+
+  getRecommendedMovies(){
+    this.recommendedFilms = [];
+    const films = this.storageService.getFilms();
+    do{
+      //stavi checker na false u svakoj iteraciji
+      this.check=false;
+
+      //generiranje random broja od 0-20
+      let x = Math.round(Math.random()*20);
+
+      //prolaz kroz listu svih filmova
+      for(var film of films){
+
+        //ako je id filma isti random generiranom broju
+        if(film.id_film == x){
+
+          //provjera da li se ponavlja isti film u recommended listi
+          for(var reclist of this.recommendedFilms){
+            if(reclist.id_film == film.id_film){
+              this.check=true;
+            }
+          }
+
+          //provjera da li korisnik ima bookmarkan film (ako da onda nece biti u recommended listi)
+          for(var booklist of this.Films){
+            if(booklist.id_film == film.id_film){
+              this.check=true;
+            }
+          }
+
+          //ako je su sve provjere uspješno prošle dodaj recommended film u listu
+          if(this.check==false){
+            this.recommendedFilms.push(film);  
+          } 
+        }
+      }
+      //ponavljaj sve dok nemamo 4 filma
+    }while(this.recommendedFilms.length<4);
+  }
+  
 }
+
+
 
 
 
