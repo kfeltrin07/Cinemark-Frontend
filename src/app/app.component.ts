@@ -25,7 +25,7 @@ export class AppComponent {
 
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService
-    , public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService
+    , public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService
       ) {}
 
   ngOnInit(): void {
@@ -33,6 +33,7 @@ export class AppComponent {
     this.genreservice.GetGenres();
     this.filmService.getFilms();
     this.commentsService.getComments();
+    this.loginservice.GetAllUsers();
     this.isLoggedIn = this.storageService.isLoggedIn();
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {

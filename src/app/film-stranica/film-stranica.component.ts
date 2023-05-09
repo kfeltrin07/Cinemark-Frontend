@@ -33,7 +33,7 @@ export class FilmStranicaComponent{
       this.commentService.getComments();
       this.loginservice.GetAllUsers();
       this.changeToFilm();
-    this.service.updateRating();
+      this.service.updateRating();
 
     setTimeout(this.openInfo,300)
 
@@ -52,6 +52,7 @@ export class FilmStranicaComponent{
   AllUsers:Login[];
   username:string[];
   comment:string[];
+  date:string[];
 
   changeToFilm(){
     
@@ -60,6 +61,7 @@ export class FilmStranicaComponent{
     this.selectedComments=[];
     this.comment=[];
     this.username=[];
+    this.date=[];
     console.log(Allusers);
 
     if(listcomments!=null){
@@ -75,6 +77,7 @@ export class FilmStranicaComponent{
         for(var comuser of this.selectedComments){
           if(user.id_user==comuser.id_user){
             this.username.push(user.username);
+            this.date.push(user.insert_date);
           }
         }
       }

@@ -57,6 +57,7 @@
             <div class="comment-container">
                 <div class="comment-card" *ngFor="let user of username; index as i; first as isFirst">
                     <h3 class="comment-title">{{user}}</h3>
+                    <h3 class="comment-title">{{date[i]}}</h3>
                     <p>
                         {{comment[i]}}
                     </p>

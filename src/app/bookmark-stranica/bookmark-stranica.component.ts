@@ -80,8 +80,7 @@ export class BookmarkStranicaComponent {
           this.bookmarkService.getBookmarks();
           this.getBookmarksByUser();
           delay(5000);
-          location.reload();
-          
+          location.reload();          
         });
     }
     else{
