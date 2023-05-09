@@ -40,6 +40,28 @@ export class SortByStranicaComponent implements OnInit {
     }
   }
 
+  sortFilmByBestRated(){
+    this.sortedFilms = [];
+    console.log("testBestRated");
+
+    for(var item of this.service.list){
+      if((item.total_rating)/(item.rating_count) >= 4.4){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
+  sortFilmByRatingCount(){
+    this.sortedFilms = [];
+    console.log("testRatingCount");
+
+    for(var item of this.service.list){
+      if(item.rating_count >= 15){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
   getAllFilms(){
     this.sortedFilms = this.service.list;
   }
