@@ -32,6 +32,8 @@ export class RatingsService {
 
   getRatings(){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
-      res => this.list = res as Ratings[]);
+      res => {this.list = res as Ratings[];
+      this.storageService.saveRatings(this.list);
+    });
   }
 }

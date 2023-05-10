@@ -116,16 +116,15 @@ export class FilmsService {
 
   checkIfVoted(){
     const user = this.storageService.getUserID();
+    const ratings=this.storageService.getRatings();
 
     this.check = false;
 
-    for(var rating of this.ratingService.list){
+    for(var rating of ratings){
       if(this.selectedFilm.id_film == rating.id_film && user.id_user == rating.id_user){
         this.check = true;
         this.changeRating = rating.rating;
       }
     }
-    
   }
-    
 }

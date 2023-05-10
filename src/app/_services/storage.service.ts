@@ -9,6 +9,7 @@ const FILM_KEY= 'film';
 const GENRES_KEY= 'genres';
 const FILMGENRES_KEY= 'filmgenres';
 const COMMENTS_KEY= 'comments';
+const RATINGS_KEY= 'ratings';
 
 
 
@@ -25,63 +26,60 @@ export class StorageService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveUserID(ID: any): void {
     window.sessionStorage.removeItem(USER_KEY2);
     window.sessionStorage.setItem(USER_KEY2, JSON.stringify(ID));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveUsers(users: any): void {
     window.sessionStorage.removeItem(USERS_KEY);
     window.sessionStorage.setItem(USERS_KEY, JSON.stringify(users));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveBookmarks(bookmarks: any): void {
     window.sessionStorage.removeItem(BOOKMARKS_KEY);
     window.sessionStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveFilms(films: any): void {
     window.sessionStorage.removeItem(FILMS_KEY);
     window.sessionStorage.setItem(FILMS_KEY, JSON.stringify(films));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveFilm(film: any): void {
     window.sessionStorage.removeItem(FILM_KEY);
     window.sessionStorage.setItem(FILM_KEY, JSON.stringify(film));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveGenres(genres: any): void {
     window.sessionStorage.removeItem(GENRES_KEY);
     window.sessionStorage.setItem(GENRES_KEY, JSON.stringify(genres));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveFilmGenres(filmgenres: any): void {
     window.sessionStorage.removeItem(FILMGENRES_KEY);
     window.sessionStorage.setItem(FILMGENRES_KEY, JSON.stringify(filmgenres));
-    console.log("Tu sam");
     console.error();
   }
 
   public saveComments(comments: any): void {
     window.sessionStorage.removeItem(COMMENTS_KEY);
     window.sessionStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
-    console.log("Tu sam");
+    console.error();
+  }
+
+  public saveRatings(ratings: any): void {
+    window.sessionStorage.removeItem(RATINGS_KEY);
+    window.sessionStorage.setItem(RATINGS_KEY, JSON.stringify(ratings));
     console.error();
   }
 
@@ -158,14 +156,22 @@ export class StorageService {
   }
 
   public getUserID(): any {
-    const userID = window.sessionStorage.getItem(USER_KEY2);
-    if (userID) {
-      return JSON.parse(userID);
+    const vars = window.sessionStorage.getItem(USER_KEY2);
+    if (vars) {
+      return JSON.parse(vars);
     }
 
     return {};
   }
 
+  public getRatings(): any {
+    const vars = window.sessionStorage.getItem(RATINGS_KEY);
+    if (vars) {
+      return JSON.parse(vars);
+    }
+
+    return {};
+  }
 
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
