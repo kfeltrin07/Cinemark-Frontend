@@ -26,6 +26,7 @@ export class FilmsService {
   increaseRating:number=0;
   increaseCount:number=0;
   check:boolean=false;
+  changeRating:number=0;
 
   user: any;
 
@@ -78,8 +79,7 @@ export class FilmsService {
   }
 
   updateRating(){
-    const selectedfilm=this.storageService.getFilm()
-    this.rating=selectedfilm.total_rating/selectedfilm.rating_count;
+    this.rating=this.selectedFilm.total_rating/this.selectedFilm.rating_count;
   }
 
   postNewRating(newRating:number){
@@ -94,8 +94,7 @@ export class FilmsService {
       this.selectedFilm.rating_count = this.increaseCount;
 
       this.formData = this.selectedFilm;
-      console.log(this.formData.total_rating);
-      console.log(this.formData.rating_count);
+      
       this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
 
       this.ratingService.postRating(this.formData, newRating);
@@ -104,7 +103,14 @@ export class FilmsService {
       this.toastr.success('Ratings saved.','Thank you!')
     }
     else{
-      this.toastr.error('Already voted!','Cannot do that.');
+      this.increaseRating = this.selectedFilm.total_rating + newRating - this.changeRating;
+      this.selectedFilm.total_rating = this.increaseRating;
+      this.formData = this.selectedFilm;
+
+      this.http.put(`${this.baseURL}/${this.formData.id_film}`,this.formData).subscribe();
+      this.ratingService.postRating(this.formData, newRating);
+      this.updateRating();
+      this.toastr.success('Rating changed!','Thank you for voting.');
     }
   }
 
@@ -116,6 +122,7 @@ export class FilmsService {
     for(var rating of this.ratingService.list){
       if(this.selectedFilm.id_film == rating.id_film && user.id_user == rating.id_user){
         this.check = true;
+        this.changeRating = rating.rating;
       }
     }
     
