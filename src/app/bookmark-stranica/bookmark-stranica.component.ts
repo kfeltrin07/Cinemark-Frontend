@@ -46,11 +46,13 @@ export class BookmarkStranicaComponent {
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
       }
+      this.filmsService.getFilms();
       this.getBookmarksByUser();    
       this.getRecommendedMovies();  
     }
  
   updateSelectedFilm(film:string){
+    
     this.filmsService.updateFilmByName(film);
   }
 
