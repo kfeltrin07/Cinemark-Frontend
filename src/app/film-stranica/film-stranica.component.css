@@ -310,11 +310,11 @@ form .btn p{
     visibility: hidden;
 }
 
-.info i{
+.info svg{
     margin-left: 25px;
 }
 
-.info i:hover{
+.info svg:hover{
     color:#009688;
 }
 

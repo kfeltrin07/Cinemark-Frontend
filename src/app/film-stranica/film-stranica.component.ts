@@ -26,15 +26,16 @@ export class FilmStranicaComponent{
   
   
 
-  constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
-    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService) 
+  constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
+    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, public bookmarkService:BookmarksService) 
     {
-      this.selectedFilm = this.storage.getFilm();
+      this.selectedFilm = this.storageService.getFilm();
       this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
       this.commentService.getComments();
       this.loginservice.GetAllUsers();
       this.changeToFilm();
       this.service.updateRating();
+      this.Checkifbookmarked();
       window.scrollTo({ top: 0, behavior: 'smooth' })
       setTimeout(this.openInfo,400)
 
@@ -43,7 +44,11 @@ export class FilmStranicaComponent{
 
   ratingOfFilm:number=0;
   
-  
+  form: any = {
+    id_user:null,
+    id_film:null
+  };
+
   selectedFilm:Films;
   genres:Genres[];
   genre:string[];
@@ -54,11 +59,12 @@ export class FilmStranicaComponent{
   username:string[];
   comment:string[];
   date:string[];
+  bookmarked=false;
 
   changeToFilm(){
     
-    const listcomments=this.storage.getComments();
-    const Allusers=this.storage.getUsers();
+    const listcomments=this.storageService.getComments();
+    const Allusers=this.storageService.getUsers();
     this.selectedComments=[];
     this.comment=[];
     this.username=[];
@@ -155,5 +161,23 @@ export class FilmStranicaComponent{
     const val = document.getElementById("commentInput") as HTMLInputElement;
     this.commentService.postComment(this.selectedFilm,val.value);
     val.value = "";
+  }
+
+  Checkifbookmarked(){
+    if(this.storageService.isLoggedIn()==true){
+      var id=this.storageService.getUserID();
+      const filmid=this.storageService.getFilm();
+      this.form.id_user=id.id_user;
+      this.form.id_film=filmid.id_film;
+      this.bookmarkService.checkBookmark(this.form).subscribe(
+        res=>{
+          this.bookmarked=true;
+          console.log("movie is bookmared");
+            },
+        err=>{
+          this.bookmarked=false;
+          console.log("movie is not bookmared");
+        });
+    }
   }
 }

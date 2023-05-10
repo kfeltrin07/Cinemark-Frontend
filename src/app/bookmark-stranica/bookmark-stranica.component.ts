@@ -46,8 +46,9 @@ export class BookmarkStranicaComponent {
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
       }
+      this.filmsService.getFilms();
       this.getBookmarksByUser();    
-      this.getRecommendedMovies();  
+      this.getRecommendedMovies(); 
     }
  
   updateSelectedFilm(film:string){
@@ -110,24 +111,7 @@ export class BookmarkStranicaComponent {
     }
   }
 
-  Checkifbookmarked(id_film:any){
-    if(this.storageService.isLoggedIn()==true){
-      var id=this.storageService.getUserID();
-      this.form.id_user=id.id_user;
-      this.form.id_film=id_film;
-      this.bookmarkService.checkBookmark(this.form).subscribe(
-        res=>{
-          true;
-            },
-        err=>{
-          false
-        });
-    }
-    else{
-      this.toastr.error("You Can't bookmark if you are not logged in");
-      console.error("You Can't bookmark if you are not logged in");
-    }
-  }
+  
 
   getRecommendedMovies(){
     this.recommendedFilms = [];
