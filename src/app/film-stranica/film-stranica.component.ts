@@ -12,6 +12,7 @@ import { Genres } from '../shared/genre.model';
 import { Comments } from '../shared/comments.model';
 import { Login } from '../shared/Login.model';
 import { BookmarksService } from '../shared/bookmarks.service';
+import { RatingsService } from '../shared/ratings.service';
 
 
 
@@ -26,7 +27,7 @@ export class FilmStranicaComponent{
   
 
   constructor(public service:FilmsService, public storage:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
-    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService) 
+    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService) 
     {
       this.selectedFilm = this.storage.getFilm();
       this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);

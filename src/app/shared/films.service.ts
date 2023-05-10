@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { StorageService } from '../_services/storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { Ratings } from './ratings.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,6 @@ export class FilmsService {
   updateFilmByName(filmName:string){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
       res => this.list = res as Films[]);
-
       for(var film of this.list){
         if(film.title == filmName){
           this.selectedFilm = film;
@@ -81,12 +81,13 @@ export class FilmsService {
   updateRating(){
     const film= this.storageService.getFilm();
     this.rating=film.total_rating/film.rating_count;
+    this.ratingService.getRatings();
   }
 
   postNewRating(newRating:number){
     const film= this.storageService.getFilm();
     this.selectedFilm=film;
-
+    this.ratingService.getRatings();
     this.checkIfVoted();
     
     if(this.check == false) {
@@ -121,14 +122,14 @@ export class FilmsService {
 
   checkIfVoted(){
     const user = this.storageService.getUserID();
-    const ratings=this.storageService.getRatings();
     const film=this.storageService.getFilm();
-
+    const ratings = this.storageService.getRatings();
     this.check = false;
 
     for(var rating of ratings){
       if(film.id_film == rating.id_film && user.id_user == rating.id_user){
         this.check = true;
+        console.log(rating.rating);
         this.changeRating = rating.rating;
       }
     }

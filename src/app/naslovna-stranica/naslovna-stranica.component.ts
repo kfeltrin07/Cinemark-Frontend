@@ -23,7 +23,6 @@ export class NaslovnaStranicaComponent {
     public storageService:StorageService, public genreService:GenreService, public ratingservice:RatingsService, 
     public commentService:CommentsService, public loginService:LoginService, private router: Router) 
     {
-      this.ratingservice.getRatings();
       this.filmsService.getFilms();
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
