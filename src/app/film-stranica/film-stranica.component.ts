@@ -34,8 +34,8 @@ export class FilmStranicaComponent{
       this.loginservice.GetAllUsers();
       this.changeToFilm();
       this.service.updateRating();
-
-    setTimeout(this.openInfo,300)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setTimeout(this.openInfo,400)
 
     }
 
