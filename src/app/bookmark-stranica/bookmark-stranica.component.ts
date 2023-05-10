@@ -52,6 +52,7 @@ export class BookmarkStranicaComponent {
     }
  
   updateSelectedFilm(film:string){
+    
     this.filmsService.updateFilmByName(film);
   }
 

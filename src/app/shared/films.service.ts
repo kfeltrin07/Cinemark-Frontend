@@ -129,7 +129,6 @@ export class FilmsService {
     for(var rating of ratings){
       if(film.id_film == rating.id_film && user.id_user == rating.id_user){
         this.check = true;
-        console.log(rating.rating);
         this.changeRating = rating.rating;
       }
     }
