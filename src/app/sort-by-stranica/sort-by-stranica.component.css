@@ -103,9 +103,9 @@ span{
 }
 
 .film-list {
-    margin-top: 5%;
     position:relative;
     z-index: 0;
+    margin-bottom: 3%;
 }
 
 .info{
@@ -126,7 +126,9 @@ span{
 
 .dropdown{
     margin-left: 10%;
+    margin-right: -9%;
     display:inline-block;
+    margin-bottom: 3%;
 }
 
 .dropdown.rating{
@@ -176,9 +178,11 @@ span{
   
 .dropdown .dropbtn {
     border: none;
+    border-radius: 5%;
     outline: none;
     color: white;
-    background-color:slategray;
+    text-transform: uppercase;
+    background-color:rgb(59, 59, 59);
     font-family: "Nexa";
     padding: 14px 16px;
     margin: 0;

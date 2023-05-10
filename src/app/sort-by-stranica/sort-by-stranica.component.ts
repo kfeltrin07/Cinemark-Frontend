@@ -62,6 +62,72 @@ export class SortByStranicaComponent implements OnInit {
     }
   }
 
+  sortFilmByYear2023(){
+    this.sortedFilms = [];
+    console.log("testYear2023");
+
+    for(var item of this.service.list){
+      if(item.release_date.substring(0,4) == "2023"){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
+  sortFilmByYear2021_2022(){
+    this.sortedFilms = [];
+    console.log("testYear21/22");
+
+    for(var item of this.service.list){
+      if(item.release_date.substring(0,4) >= "2021" && item.release_date.substring(0,4) < "2023"){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
+  sortFilmByYear2010_2020(){
+    this.sortedFilms = [];
+    console.log("testYear10/20");
+
+    for(var item of this.service.list){
+      if(item.release_date.substring(0,4) >= "2010" && item.release_date.substring(0,4) < "2020"){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
+  sortFilmByYear2000_2010(){
+    this.sortedFilms = [];
+    console.log("testYear00/10");
+
+    for(var item of this.service.list){
+      if(item.release_date.substring(0,4) >= "2000" && item.release_date.substring(0,4) < "2010"){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
+  sortFilmByYear1990_2000(){
+    this.sortedFilms = [];
+    console.log("testYear90/00");
+
+    for(var item of this.service.list){
+      if(item.release_date.substring(0,4) >= "1990" && item.release_date.substring(0,4) < "2000"){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
+  sortFilmByYearOlder(){
+    this.sortedFilms = [];
+    console.log("testYearOlder");
+
+    for(var item of this.service.list){
+      if(item.release_date.substring(0,4) <= "1990"){
+        this.sortedFilms.push(item);
+      }
+    }
+  }
+
   getAllFilms(){
     this.sortedFilms = this.service.list;
   }

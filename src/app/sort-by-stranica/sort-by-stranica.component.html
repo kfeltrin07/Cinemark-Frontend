@@ -23,6 +23,8 @@
             <li><a (click) ="sortFilmByGenre(8)">Fantasy</a></li>
             <li><a (click) ="sortFilmByGenre(9)">Horror</a></li>
             <li><a (click) ="sortFilmByGenre(10)">Sci-Fi</a></li>
+            <li><a (click) ="sortFilmByGenre(11)">Mystery</a></li>
+            <li><a (click) ="sortFilmByGenre(12)">Thriller</a></li>
           </ul>
       </div>
     </div>
@@ -37,6 +39,20 @@
     </div>
   </div>
 
+    <div class="dropdown">
+      <button class="dropbtn">Year</button>
+      <div class="dropdown-content">
+        <ul>
+          <li><a (click)="sortFilmByYear2023()">2023</a></li>
+          <li><a (click)="sortFilmByYear2021_2022()">2021 - 2022</a></li>
+          <li><a (click)="sortFilmByYear2010_2020()">2010 - 2020</a></li>
+          <li><a (click)="sortFilmByYear2000_2010()">2000 - 2010</a></li>
+          <li><a (click)="sortFilmByYear1990_2000()">1990 - 2000</a></li>
+          <li><a (click)="sortFilmByYearOlder()">Older</a></li>
+        </ul>
+      </div>
+    </div>
+
     
     <div *ngFor="let film of sortedFilms" class="component">
       <div class="film-list">  
@@ -46,6 +62,7 @@
               <span (click)="updateSelectedFilm(film.title)" routerLink="/film">{{film.title}} ({{film.release_date.substring(0,4)}})</span>
               <p class="info">Director: {{film.director}}</p>
               <p class="info">{{film.summary}}</p>
+              <p class="info">Rating: {{(film.total_rating/film.rating_count).toFixed(2)}}</p>
             </div>
         </div>
       </div>
