@@ -105,6 +105,7 @@ span{
 .film-list {
     position:relative;
     z-index: 0;
+    margin-bottom: 3%;
 }
 
 .info{
@@ -121,4 +122,73 @@ span{
 .hide-details .info{
     transform: translateX(50px);
     opacity: 0;
+}
+
+.dropdown{
+    margin-left: 10%;
+    margin-right: -9%;
+    display:inline-block;
+    margin-bottom: 3%;
+}
+
+.dropdown.rating{
+    margin-left: 5%;
+}
+
+.dropdown ul{
+    padding-left: 0%;
+    margin-block-end: auto;
+}
+
+.dropdown ul li{
+    list-style: none;
+}
+
+.dropdown-content {
+    font-family: "Nexa";
+    display: none;
+    position: absolute;
+    background-color:#fff2;
+    backdrop-filter: blur(7px);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition-delay: 0.2s;
+}
+  
+.dropdown-content a {
+    float:none;
+    font-family: "Nexa";
+    color: #fff;
+    list-style: none;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+.dropdown-content a:hover {
+    list-style: none;
+    background-color: #009688;
+}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+.dropdown .dropbtn {
+    border: none;
+    border-radius: 5%;
+    outline: none;
+    color: white;
+    text-transform: uppercase;
+    background-color:rgb(59, 59, 59);
+    font-family: "Nexa";
+    padding: 14px 16px;
+    margin: 0;
+    
+}
+
+.dropdown:hover .dropbtn {
+    transition-delay: 0,2s;
 }
