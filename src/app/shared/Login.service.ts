@@ -29,6 +29,10 @@ export class LoginService {
     return this.http.post(this.baseURL,this.formData,httpOptions);
   }
 
+  postRegister(): Observable<any>{
+    return this.http.post<any>(`${this.baseURL}register`,this.formData,httpOptions);
+  }
+
   putLogins(){
     return this.http.put(`${this.baseURL}/${this.formData.id_user}`,this.formData,{ withCredentials: true });
   }
