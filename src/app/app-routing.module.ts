@@ -8,6 +8,7 @@ import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.com
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 import { AppComponent } from './app.component';
+import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'sort', component:SortByStranicaComponent},
   {path: 'film', component:FilmStranicaComponent},
   {path: 'search', component:SearchStranicaComponent},
+  {path: 'unos', component:UnosStranicaComponent},
   {path: '', redirectTo: 'navbar', pathMatch: 'full' }
 ];
 
