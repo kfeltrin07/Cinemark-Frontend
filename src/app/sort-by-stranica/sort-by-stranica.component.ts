@@ -3,7 +3,9 @@ import { FilmsService } from '../shared/films.service';
 import { Films } from '../shared/films.model';
 import { RouterLink } from '@angular/router';
 import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
-import { GenreService } from '../shared/genre.service';
+import { Film_Genre } from './../shared/film_genre.model';
+import { GenreService } from './../shared/genre.service';
+import { Genres } from '../shared/genre.model';
 import { StorageService } from '../_services/storage.service';
 
 @Component({
@@ -15,7 +17,13 @@ export class SortByStranicaComponent implements OnInit {
 
   selectedFilm:Films;
   sortedFilms:Films[];
-  constructor(public service:FilmsService, public genreService:GenreService, public storageService:StorageService) {}
+  page: number = 1;
+  pageSize: number = 5;
+  genres:Genres[];
+  genre:string[];
+  Film_Genre:Film_Genre;
+  constructor(public service:FilmsService, public genreService:GenreService, public storageService:StorageService) {
+  }
 
   ngOnInit(): void {
     this.service.getFilms();
@@ -134,4 +142,9 @@ export class SortByStranicaComponent implements OnInit {
     const films= this.storageService.getFilms()
     this.sortedFilms = films;
   }
+
+  scrollToTop(event: any){
+    window.scrollTo({top:0, behavior: 'smooth'})
+  }
+
 }
