@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment';
 import { LoginService } from './shared/Login.service';
 import { StorageService } from './_services/storage.service';
 import { EventBusService } from './shared/event-bus.service';
-import { Subscription } from 'rxjs';
+import { Subscription,timer } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,34 +25,11 @@ export class AppComponent {
   eventBusSub?: Subscription;
 
   constructor(
-    private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService
-    , public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService
-      ) {}
+                private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService, 
+                public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService,
+                public router:Router
+              ) 
+      {    }
 
-  ngOnInit(): void {
-    this.genreservice.GetFilmGenre();
-    this.genreservice.GetGenres();
-    this.filmService.getFilms();
-    this.commentsService.getComments();
-    this.loginservice.GetAllUsers();
-    this.isLoggedIn = this.storageService.isLoggedIn();
-    console.log(this.isLoggedIn);
-    if (this.isLoggedIn) {
-      this.bookmarkservice.getBookmarks();
-      const user = this.storageService.getUser();
-      const userID = this.storageService.getUserID();
-      console.log(user);
-      this.username = user.username;
-      console.log(userID);
-    }
-
-    this.eventBusSub = this.eventBusService.on('logout', () => {
-      this.logout();
-    });
-  }
-
-  logout(): void {
-        this.storageService.clean();
-        window.location.reload(); 
-  }
+  
 }

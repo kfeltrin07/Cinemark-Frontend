@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="unos-stranica.component.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+
+        <div class="container">
+            <form>
+                <i class="fa-solid fa-film"></i>
+        
+              <div class="input-group">
+                <label>Movie Title</label>
+                <input type="text" id="titleID" placeholder="Enter movie title">
+              </div>
+        
+              <div class="input-group">
+                <label>Director</label>
+                <input type="text" id="directorID" placeholder="Enter director name">
+              </div>
+        
+              <div class="input-group">
+                <label>Main Actor</label>
+                <input type="text" id="actorID" placeholder="Enter actor name">
+              </div>   
+
+              <div class="input-group">
+                <label>Release date</label>
+                <input type="text" id="dateID" placeholder="YYYY-MM-DD">
+              </div>
+
+              <div class="input-group">
+                <label>Picture</label>
+                <input type="text" id="pictureID" placeholder="Picture img link url">
+              </div>
+
+              <div class="input-group">
+                <label>Trailer</label>
+                <input type="text" id="trailerID" placeholder="Trailer video link url">
+              </div>
+
+              <div class="input-group">
+                <label>Genre</label>
+                <select name="format" id="selectedGenre">
+                    <option selected disabled>Choose a genre</option>
+                    <option value="1">Action</option>
+                    <option value="2">Romance</option>
+                    <option value="3">Drama</option>
+                    <option value="4">Historical</option>
+                    <option value="5">Adventure</option>
+                    <option value="6">War</option>
+                    <option value="7">Comedy</option>
+                    <option value="8">Fantasy</option>
+                    <option value="9">Horror</option>
+                    <option value="10">Sci-Fi</option>
+                    <option value="11">Mystery</option>
+                    <option value="12">Thriller</option>
+                </select>
+              </div>
+        
+              <div class="input-group">
+                <label>Summary</label>
+                <textarea rows="5" id="summaryID" placeholder="Enter the summary of the movie"></textarea>
+              </div>
+        
+                <button (click)="addNewMovie()" >ADD MOVIE</button>
+           </form>
+        </div>
+    </body>
+</html>

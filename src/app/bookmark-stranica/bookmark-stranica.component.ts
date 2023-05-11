@@ -45,9 +45,9 @@ export class BookmarkStranicaComponent {
         
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
+      this.getBookmarksByUser();
       }
       this.filmsService.getFilms();
-      this.getBookmarksByUser();    
       this.getRecommendedMovies(); 
     }
  
@@ -56,41 +56,7 @@ export class BookmarkStranicaComponent {
     this.filmsService.updateFilmByName(film);
   }
 
-  saveBookmarks(id_film:any){
-    if(this.storageService.isLoggedIn()==true){
-      var id=this.storageService.getUserID();
-      this.form.id_user=id.id_user;
-      this.form.id_film=id_film;
-      this.bookmarkService.authBookmark(this.form).subscribe(
-        res=>{
-          this.bookmarkService.postBookmarks(this.form).subscribe(
-            res=>{
-              this.toastr.success("Added Bookmark");
-              console.log("Added Bookmark");
-              this.bookmarkService.getBookmarks();
-              this.getBookmarksByUser();
-              delay(5000);
-              },
-            err=>{
-              console.log(err);
-              console.log("Greška kod unosa");
-              }
-            );
-            },
-        err=>{
-          this.toastr.success("Bookmark Removed");
-          console.log("Već ste bookmarkali određen film");
-          console.log(err);
-          this.bookmarkService.getBookmarks();
-          this.getBookmarksByUser();
-          delay(5000);        
-        });
-    }
-    else{
-      this.toastr.error("You Can't bookmark if you are not logged in");
-      console.error("You Can't bookmark if you are not logged in");
-    }
-  }
+  
 
   getBookmarksByUser(){
     this.Films=[];
@@ -111,8 +77,6 @@ export class BookmarkStranicaComponent {
       }
     }
   }
-
-  
 
   getRecommendedMovies(){
     this.recommendedFilms = [];
@@ -152,6 +116,43 @@ export class BookmarkStranicaComponent {
       }
       //ponavljaj sve dok nemamo 4 filma
     }while(this.recommendedFilms.length<4);
+  }
+  saveBookmarks(id_film:any){
+    if(this.storageService.isLoggedIn()==true){
+      var id=this.storageService.getUserID();
+      this.form.id_user=id.id_user;
+      this.form.id_film=id_film;
+      this.bookmarkService.authBookmark(this.form).subscribe(
+        res=>{
+          this.bookmarkService.postBookmarks(this.form).subscribe(
+            res=>{
+              this.toastr.success("Added Bookmark");
+              console.log("Added Bookmark");
+              this.bookmarkService.getBookmarks();
+              this.getBookmarksByUser();
+              delay(5000);
+              history.go(0);
+              },
+            err=>{
+              console.log(err);
+              console.log("Greška kod unosa");
+              }
+            );
+            },
+        err=>{
+          this.toastr.success("Bookmark Removed");
+          console.log("Već ste bookmarkali određen film");
+          console.log(err);
+          this.bookmarkService.getBookmarks();
+          this.getBookmarksByUser();
+          delay(5000);
+          history.go(0);        
+        });
+    }
+    else{
+      this.toastr.error("You Can't bookmark if you are not logged in");
+      console.error("You Can't bookmark if you are not logged in");
+    }
   }
   
 }

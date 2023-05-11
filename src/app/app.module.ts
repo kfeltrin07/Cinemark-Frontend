@@ -22,6 +22,8 @@ import { StorageService } from './_services/storage.service';
 import { GenreService } from './shared/genre.service';
 import { RatingsService } from './shared/ratings.service';
 import { CommentsService } from './shared/comments.service';
+import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
@@ -33,7 +35,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SortByStranicaComponent,
     FilmStranicaComponent,
     SearchStranicaComponent,
-    BookmarkStranicaComponent
+    BookmarkStranicaComponent,
+    UnosStranicaComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
               StorageService,
               GenreService,
               RatingsService,
+              NavbarComponent,
               CommentsService
             ],
   bootstrap: [AppComponent]
