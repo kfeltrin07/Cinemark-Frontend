@@ -18,8 +18,13 @@
                         </ng-template>
                     </li>
                    
-                    <li class="nav-item2"*ngIf="isLoggedIn">
-                        <a class="nav-link2">{{ username }}</a>
+                    <li class="nav-item2" *ngIf="isLoggedIn">
+                        <div *ngIf="rolestatus; else isuser">
+                            <a class="nav-link2" routerLink="/unos">{{ username }}</a>
+                        </div>
+                        <ng-template #isuser>
+                            <a class="nav-link2" >{{ username }}</a>
+                        </ng-template>
                     </li>
                 </ul>
             </div>

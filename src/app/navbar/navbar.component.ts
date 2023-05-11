@@ -9,6 +9,7 @@ import { StorageService } from '../_services/storage.service';
 import { EventBusService } from '../shared/event-bus.service';
 import { Subscription,timer } from 'rxjs';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,9 +18,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
 
   isLoggedIn = false;
+  rolestatus = false;
   username?: string;
   eventBusSub?: Subscription;
-  
+
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService, 
     public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService,
@@ -37,9 +39,21 @@ export class NavbarComponent {
       this.bookmarkservice.getBookmarks();
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
+      console.log(userID.role)
+      if(userID.role==1){
+        this.rolestatus=true;
+        console.log(userID.role);
+        console.log(this.rolestatus);
+
+      }
+      else{
+        this.rolestatus=false;
+        console.log(userID.role);
+        console.log(this.rolestatus);
+      }
       console.log(user);
       this.username = user.username;
-      console.log(userID);
+      console.log(userID.id_user);
       timer(1000);
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
