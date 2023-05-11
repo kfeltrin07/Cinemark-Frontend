@@ -94,7 +94,7 @@ export class LoginStranicaComponent{
         this.isLoggedIn = true;
         this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
-        this.router.navigate(['']);
+        this.redirectTo('home');
       },
       err=>{
         console.log(err);
@@ -113,4 +113,9 @@ export class LoginStranicaComponent{
   reloadPage(): void {
     location.reload();
   }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate([uri]));
+ }
 }

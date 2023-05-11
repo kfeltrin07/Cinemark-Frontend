@@ -7,10 +7,12 @@ import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
   {path: '', component: NaslovnaStranicaComponent},
+  {path: 'home', component: AppComponent},
   {path: 'login', component: LoginStranicaComponent},
   {path: 'bookmarks', component: BookmarkStranicaComponent},
   {path: 'sort', component:SortByStranicaComponent},

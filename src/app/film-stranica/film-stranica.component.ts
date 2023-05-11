@@ -163,7 +163,7 @@ export class FilmStranicaComponent{
     this.commentService.postComment(this.selectedFilm,val.value);
     val.value = "";
     this.commentService.getComments();
-    history.go(0);
+    
   }
 
   Checkifbookmarked(){

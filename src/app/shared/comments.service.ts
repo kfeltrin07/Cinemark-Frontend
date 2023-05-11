@@ -34,7 +34,6 @@ export class CommentsService {
 
     this.http.post(this.baseURL,this.formData).subscribe();
     this.toastr.success("Comment posted.","Success!")
-    history.go(0);
     }
     else{
       this.toastr.error("You Can't comment if you are not logged in");

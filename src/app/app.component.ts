@@ -8,6 +8,7 @@ import { LoginService } from './shared/Login.service';
 import { StorageService } from './_services/storage.service';
 import { EventBusService } from './shared/event-bus.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class AppComponent {
 
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService
-    , public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService
+    , public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService,
+    public router:Router
       ) {}
 
   ngOnInit(): void {
@@ -44,9 +46,11 @@ export class AppComponent {
       this.username = user.username;
       console.log(userID);
     }
+    this.router.navigate(['']);
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
+      
     });
   }
 

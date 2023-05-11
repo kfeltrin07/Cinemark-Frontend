@@ -27,8 +27,8 @@ export class NaslovnaStranicaComponent {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.bookmarkService.getBookmarks();
-    const user = this.storageService.getUser();
-    const userID = this.storageService.getUserID();
+      this.storageService.getUser();
+      this.storageService.getUserID();
     }
     }
 
