@@ -22,6 +22,7 @@ import { StorageService } from './_services/storage.service';
 import { GenreService } from './shared/genre.service';
 import { RatingsService } from './shared/ratings.service';
 import { CommentsService } from './shared/comments.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CommentsService } from './shared/comments.service';
     SortByStranicaComponent,
     FilmStranicaComponent,
     SearchStranicaComponent,
-    BookmarkStranicaComponent
+    BookmarkStranicaComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { CommentsService } from './shared/comments.service';
               StorageService,
               GenreService,
               RatingsService,
+              NavbarComponent,
               CommentsService
             ],
   bootstrap: [AppComponent]

@@ -13,6 +13,7 @@ import { AppComponent } from '../app.component';
 import { StorageService } from '../_services/storage.service';
 import { delay } from 'rxjs';
 import { GenreService } from '../shared/genre.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
@@ -35,14 +36,15 @@ export class LoginStranicaComponent{
   LoginPgStatus=false;
   errorMessage = '';
 
-  constructor(public service:LoginService,private storageService: StorageService,
-    private toastr:ToastrService, private router: Router,public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService) {
+  constructor(public service:LoginService,private storageService: StorageService,private toastr:ToastrService, private router: Router,
+    public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService, public navbar:NavbarComponent) {
 
       if (this.storageService.isLoggedIn()) {
         this.isLoggedIn = true;
         this.bookmarkService.getBookmarks();
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
+      this.navbar.checkreload(0);
       }
       this.filmsService.getFilms();
 
@@ -94,7 +96,8 @@ export class LoginStranicaComponent{
         this.isLoggedIn = true;
         this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
-        this.router.navigate(['']);
+        window.location.reload();
+        //this.redirectTo('');
       },
       err=>{
         console.log(err);
@@ -113,4 +116,9 @@ export class LoginStranicaComponent{
   reloadPage(): void {
     location.reload();
   }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('navbar', { skipLocationChange: true }).then(() =>
+    this.router.navigate([uri]));
+ }
 }

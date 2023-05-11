@@ -7,16 +7,20 @@ import { BookmarkStranicaComponent } from './bookmark-stranica/bookmark-stranica
 import { SortByStranicaComponent } from './sort-by-stranica/sort-by-stranica.component';
 import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 const routes: Routes = [
+  {path: 'home', component: AppComponent},
   {path: '', component: NaslovnaStranicaComponent},
+  {path: 'navbar', component: NavbarComponent},
   {path: 'login', component: LoginStranicaComponent},
   {path: 'bookmarks', component: BookmarkStranicaComponent},
   {path: 'sort', component:SortByStranicaComponent},
   {path: 'film', component:FilmStranicaComponent},
   {path: 'search', component:SearchStranicaComponent},
-  {path: '', redirectTo: '', pathMatch: 'full' }
+  {path: '', redirectTo: 'navbar', pathMatch: 'full' }
 ];
 
 @NgModule({

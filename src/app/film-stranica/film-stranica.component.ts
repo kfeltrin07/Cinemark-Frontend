@@ -80,8 +80,8 @@ export class FilmStranicaComponent{
       for(var comm of this.selectedComments){
         this.comment.push(comm.comment);
       }
-      for(var user of Allusers){
-        for(var comuser of this.selectedComments){
+      for(var comuser of this.selectedComments){
+        for(var user of Allusers){
           if(user.id_user==comuser.id_user){
             this.username.push(user.username);
             this.date.push(user.insert_date);
@@ -155,23 +155,27 @@ export class FilmStranicaComponent{
   saveBookmark(id_film:any){
     console.log(id_film)
     this.bookmark.saveBookmarks(id_film);
+    this.Checkifbookmarked();
   }
 
   saveComment(){
     const val = document.getElementById("commentInput") as HTMLInputElement;
     this.commentService.postComment(this.selectedFilm,val.value);
     val.value = "";
+    this.commentService.getComments();
+    
   }
 
   Checkifbookmarked(){
     if(this.storageService.isLoggedIn()==true){
-      var id=this.storageService.getUserID();
+      const id=this.storageService.getUserID();
       const filmid=this.storageService.getFilm();
       this.form.id_user=id.id_user;
       this.form.id_film=filmid.id_film;
       this.bookmarkService.checkBookmark(this.form).subscribe(
         res=>{
           this.bookmarked=true;
+          
           console.log("movie is bookmared");
             },
         err=>{
