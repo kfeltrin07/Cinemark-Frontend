@@ -22,7 +22,9 @@ import { StorageService } from './_services/storage.service';
 import { GenreService } from './shared/genre.service';
 import { RatingsService } from './shared/ratings.service';
 import { CommentsService } from './shared/comments.service';
+import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     FilmStranicaComponent,
     SearchStranicaComponent,
     BookmarkStranicaComponent,
+    UnosStranicaComponent,
     NavbarComponent
   ],
   imports: [
@@ -43,7 +46,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [httpInterceptorProviders,
               BookmarksService,

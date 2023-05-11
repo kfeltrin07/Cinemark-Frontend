@@ -3,4 +3,5 @@ export class Login {
     username:string="";
     password:string="";
     email:string="";
+    role:number=0;
 }

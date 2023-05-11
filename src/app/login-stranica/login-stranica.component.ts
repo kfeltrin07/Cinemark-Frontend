@@ -110,14 +110,14 @@ export class LoginStranicaComponent{
   onLogin(form:NgForm){
     this.service.authenticate(form).subscribe(
       res=>{
+        console.log(res);
         this.storageService.saveUser(form.value);
-        this.storageService.saveUserID(res);
+        this.storageService.saveUserID(res.user);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
         window.location.reload();
-        //this.redirectTo('');
       },
       err=>{
         console.log(err);
