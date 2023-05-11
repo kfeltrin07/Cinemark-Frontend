@@ -22,6 +22,7 @@ import { StorageService } from './_services/storage.service';
 import { GenreService } from './shared/genre.service';
 import { RatingsService } from './shared/ratings.service';
 import { CommentsService } from './shared/comments.service';
+import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CommentsService } from './shared/comments.service';
     SortByStranicaComponent,
     FilmStranicaComponent,
     SearchStranicaComponent,
-    BookmarkStranicaComponent
+    BookmarkStranicaComponent,
+    UnosStranicaComponent
   ],
   imports: [
     BrowserModule,

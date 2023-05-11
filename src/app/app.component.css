@@ -46,7 +46,11 @@
 }
 
 .nav-link2{
-
+    cursor: pointer;
     font-family: "Nexa";
     color: antiquewhite;
+}
+
+.nav-link{
+    cursor: pointer;
 }
