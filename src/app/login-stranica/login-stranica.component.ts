@@ -117,8 +117,4 @@ export class LoginStranicaComponent{
     location.reload();
   }
 
-  redirectTo(uri: string) {
-    this.router.navigateByUrl('navbar', { skipLocationChange: true }).then(() =>
-    this.router.navigate([uri]));
- }
 }

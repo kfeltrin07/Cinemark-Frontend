@@ -4,6 +4,7 @@ const USER_KEY = 'auth-user';
 const USERS_KEY = 'users';
 const USER_KEY2 = 'auth-user-ID';
 const BOOKMARKS_KEY= 'bookmark';
+const MYBOOKMARKS_KEY= 'mybookmarks';
 const FILMS_KEY= 'films';
 const FILM_KEY= 'film';
 const GENRES_KEY= 'genres';
@@ -46,6 +47,12 @@ export class StorageService {
   public saveBookmarks(bookmarks: any): void {
     window.localStorage.removeItem(BOOKMARKS_KEY);
     window.localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+    console.error();
+  }
+
+  public saveMyBookmarks(bookmarks: any): void {
+    window.localStorage.removeItem(MYBOOKMARKS_KEY);
+    window.localStorage.setItem(MYBOOKMARKS_KEY, JSON.stringify(bookmarks));
     console.error();
   }
 
@@ -123,6 +130,15 @@ export class StorageService {
 
   public getBookmarks(): any {
     const vars = window.localStorage.getItem(BOOKMARKS_KEY);
+    if (vars) {
+      return JSON.parse(vars);
+    }
+
+    return {};
+  }
+
+  public getMyBookmarks(): any {
+    const vars = window.localStorage.getItem(MYBOOKMARKS_KEY);
     if (vars) {
       return JSON.parse(vars);
     }
