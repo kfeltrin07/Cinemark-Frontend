@@ -196,9 +196,9 @@ span{
     color: #fff;
 }
 
-.pagination li a {
-    background-color: #007bff;
-    color: #fff;
+.pagination .ngx-pagination li:not(.active):hover a {
+    background-color: #eee;
+    color: #007bff;
     border-color: #007bff;
   }
 

@@ -142,4 +142,9 @@ export class SortByStranicaComponent implements OnInit {
     const films= this.storageService.getFilms()
     this.sortedFilms = films;
   }
+
+  scrollToTop(event: any){
+    window.scrollTo({top:0, behavior: 'smooth'})
+  }
+
 }
