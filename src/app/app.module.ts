@@ -22,6 +22,7 @@ import { StorageService } from './_services/storage.service';
 import { GenreService } from './shared/genre.service';
 import { RatingsService } from './shared/ratings.service';
 import { CommentsService } from './shared/comments.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CommentsService } from './shared/comments.service';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [httpInterceptorProviders,
               BookmarksService,
