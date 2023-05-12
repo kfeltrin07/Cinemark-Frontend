@@ -25,6 +25,7 @@ import { CommentsService } from './shared/comments.service';
 import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SearchStranicaComponent,
     BookmarkStranicaComponent,
     UnosStranicaComponent,
-    NavbarComponent
+    NavbarComponent,
+    AdminStranicaComponent
   ],
   imports: [
     BrowserModule,

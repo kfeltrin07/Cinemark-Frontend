@@ -20,7 +20,7 @@
                    
                     <li class="nav-item2" *ngIf="isLoggedIn">
                         <div *ngIf="rolestatus; else isuser">
-                            <a class="nav-link2" routerLink="/unos">{{ username }}</a>
+                            <a class="nav-link2" routerLink="/admin">{{ username }}</a>
                         </div>
                         <ng-template #isuser>
                             <a class="nav-link2" >{{ username }}</a>
