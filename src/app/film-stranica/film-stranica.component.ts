@@ -20,28 +20,9 @@ import { RatingsService } from '../shared/ratings.service';
   selector: 'app-film-stranica',
   templateUrl: './film-stranica.component.html',
   styleUrls: ['./film-stranica.component.css'],
-  //providers: [FilmsService,GenreService,BookmarksService,LoginService,CommentsService]
 })
 export class FilmStranicaComponent{
   
-  
-
-  constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
-    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, public bookmarkService:BookmarksService) 
-    {
-      this.selectedFilm = this.storageService.getFilm();
-      this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
-      this.commentService.getComments();
-      this.loginservice.GetAllUsers();
-      this.changeToFilm();
-      this.service.updateRating();
-      this.Checkifbookmarked();
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      setTimeout(this.openInfo,400)
-
-    }
-
-
   ratingOfFilm:number=0;
   
   form: any = {
@@ -57,18 +38,51 @@ export class FilmStranicaComponent{
   selectedComments:Comments[];
   AllUsers:Login[];
   username:string[];
-  comment:string[];
-  date:string[];
+
+  comment:any[];
+  id_comment:number[];
+  id_commuser:number[];
+
+  date:any;
   bookmarked=false;
+  isuser=false;
+  User:any;
+
+  constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
+    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, public bookmarkService:BookmarksService) 
+    {
+      this.selectedComments=[];
+      this.comment=[];
+      this.username=[];
+      this.date=[];
+      this.id_comment=[];
+      this.id_commuser=[];
+      this.selectedFilm = this.storageService.getFilm();
+      this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
+      this.commentService.getComments();
+      this.loginservice.GetAllUsers();
+      this.service.updateRating();
+      this.changeToFilm();
+      this.Checkifbookmarked();
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setTimeout(this.openInfo,400)
+    }
+
+
+  
 
   changeToFilm(){
-    
+
+    this.commentService.getComments();
+    this.User=this.storageService.getUserID();
     const listcomments=this.storageService.getComments();
     const Allusers=this.storageService.getUsers();
     this.selectedComments=[];
     this.comment=[];
     this.username=[];
     this.date=[];
+    this.id_comment=[];
+    this.id_commuser=[];
     console.log(Allusers);
 
     if(listcomments!=null){
@@ -78,13 +92,13 @@ export class FilmStranicaComponent{
         } 
       }
       for(var comm of this.selectedComments){
-        this.comment.push(comm.comment);
+        this.comment.push(comm);
+        this.date.push(comm.insert_date);
       }
       for(var comuser of this.selectedComments){
         for(var user of Allusers){
           if(user.id_user==comuser.id_user){
             this.username.push(user.username);
-            this.date.push(user.insert_date);
           }
         }
       }
@@ -175,13 +189,23 @@ export class FilmStranicaComponent{
       this.bookmarkService.checkBookmark(this.form).subscribe(
         res=>{
           this.bookmarked=true;
-          
-          console.log("movie is bookmared");
             },
         err=>{
           this.bookmarked=false;
-          console.log("movie is not bookmared");
         });
     }
+  }
+
+  deleteComment(id:number,usid:number){
+    console.log(id);
+      if(this.User.role==1){
+          this.commentService.deleteComment(id);
+          this.toastr.success("User's comment will be permanently deleted after refresh")
+      }
+      else if (this.User.id_user==usid) {
+          this.commentService.deleteComment(id);
+      } else {
+        this.toastr.error("You cannot delete this comment")
+      }
   }
 }

@@ -6,13 +6,14 @@ import { environment } from 'src/environments/environment';
 import { Comments } from './comments.model';
 import { Bookmarks } from './bookmarks.model';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentsService {
 
-  constructor(private http:HttpClient, public storageService:StorageService, public toastr:ToastrService) { }
+  constructor(private http:HttpClient, public storageService:StorageService, public toastr:ToastrService, public router:Router) { }
 
   readonly baseURL = environment.baseURL+'api/Comments'
   formData:Comments = new Comments();
@@ -50,6 +51,12 @@ export class CommentsService {
       })  
   }
 
+  deleteComment(id:number){
+    console.log(id);
+    this.http.delete(`${this.baseURL}/${id}`).subscribe();
+    this.getComments();
+    history.go(0);
+  }
 
     
 }

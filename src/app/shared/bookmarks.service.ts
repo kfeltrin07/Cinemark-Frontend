@@ -108,24 +108,5 @@ export class BookmarksService {
     }
   }
 
-  getBookmarksByUser(){
-    this.Films=[];
-    const bookmark = this.storageService.getBookmarks();
-    const filmsl = this.storageService.getFilms();
-    
-    console.log(bookmark);
-    if(this.storageService.isLoggedIn()==true){
-      const id_us= this.storageService.getUserID();
-      for(var films of bookmark){
-        if(films.id_user == id_us.id_user){
-          for( var film of filmsl){
-            if( films.id_film== film.id_film){
-              this.Films.push(film);;
-            }
-          }
-        }       
-      }
-    }
-    this.storageService.saveMyBookmarks(this.Films);
-  }
+  
 }
