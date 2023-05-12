@@ -123,10 +123,10 @@ form button:hover{
 
 .izbornik button{
     font-family: "Nexa";
-    background: #5457b6;
+    background: #0009;
+    border: 1px solid rgb(73, 73, 73);
     color: #fff;
     border-radius: 4px;
-    border: 0;
     padding: 10px 40px;
     outline: 0;
     cursor: pointer;
@@ -135,7 +135,7 @@ form button:hover{
 }
 
 .izbornik button:hover{
-    background: #6e71c6;
+    background: #2b2b2b;
 }
 
 .izbornik h3{
