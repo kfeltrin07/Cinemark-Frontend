@@ -56,13 +56,13 @@ export class AdminStranicaComponent {
   
   updateUser(form: NgForm){
     this.http.put(`${this.baseURL}/${this.user.id_user}`,this.user).subscribe();
-    this.toastr.info("Updated.","All changes saved!")
+    this.toastr.info("All changes saved.","Updated!")
     this.refreshList();
   }
 
   insertUser(form:NgForm){
     this.http.post(this.baseURL,this.user).subscribe();
-    this.toastr.success("Success!", "New User Added!");
+    this.toastr.success("New User Added.", "Success!");
     this.refreshList();
   }
 
@@ -75,7 +75,7 @@ export class AdminStranicaComponent {
     console.log(id);
     this.http.delete(`${this.baseURL}/${id}`).subscribe();
     this.refreshList();
-    this.toastr.error("Deleted!","User viped out.")
+    this.toastr.error("User Viped Out.","Deleted!")
     this.refreshList();
 
   }

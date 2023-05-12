@@ -52,7 +52,7 @@
                         <td (click)="populateForm(us)">{{us.username}}</td>
                         <td (click)="populateForm(us)">{{us.password.substring(0,7)}}</td>
                         <td (click)="populateForm(us)">{{us.email}}</td>
-                        <td (click)="populateForm(us)">{{us.role}}</td>
+                        <td class="role" (click)="populateForm(us)">{{us.role}}</td>
                         <td>
                             <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(us.id_user)"></i>
                         </td>
@@ -60,6 +60,11 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="izbornik">
+        <button routerLink="/unos">ADD MORE MOVIES</button>
+        <h3>SUPER ADMIN MANAGEMENT BOARD </h3>
     </div>
 
 </html>
