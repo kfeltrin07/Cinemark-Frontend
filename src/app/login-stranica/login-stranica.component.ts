@@ -59,7 +59,6 @@ export class LoginStranicaComponent{
     if (this.activationCode && this.idUser) {
       this.service.postActivateUser(this.activationCode,this.idUser).subscribe({ 
         next: res =>{
-          console.log(res);
           this.toastr.success('Your account has been activated');
         },
         error: err => {
