@@ -14,6 +14,8 @@ import { StorageService } from '../_services/storage.service';
 import { delay } from 'rxjs';
 import { GenreService } from '../shared/genre.service';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -23,6 +25,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
 
 })
 export class LoginStranicaComponent{
+  activationCode: string | null;
+  idUser: number;
 
   form: any = {
     username: null,
@@ -37,8 +41,7 @@ export class LoginStranicaComponent{
   errorMessage = '';
 
   constructor(public service:LoginService,private storageService: StorageService,private toastr:ToastrService, private router: Router,
-    public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService, public navbar:NavbarComponent) {
-
+    public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService, public navbar:NavbarComponent,private route: ActivatedRoute) {
       if (this.storageService.isLoggedIn()) {
         this.isLoggedIn = true;
         this.bookmarkService.getBookmarks();
@@ -50,6 +53,23 @@ export class LoginStranicaComponent{
 
     }
 
+    ngOnInit() {
+    this.activationCode = this.route.snapshot.queryParamMap.get('activate');
+    this.idUser = Number(this.route.snapshot.queryParamMap.get('idUser'));
+    if (this.activationCode && this.idUser) {
+      this.service.postActivateUser(this.activationCode,this.idUser).subscribe({ 
+        next: res =>{
+          console.log(res);
+          this.toastr.success('Your account has been activated');
+        },
+        error: err => {
+          console.log(err);
+          this.toastr.error('There was an error');
+        }
+      });
+      }
+    }
+   
   registerACT(){
     var x = document.getElementById("loginID") as HTMLDivElement;
     var y = document.getElementById("registerID") as HTMLDivElement;
@@ -71,7 +91,7 @@ export class LoginStranicaComponent{
   }
 
   onSubmit(form:NgForm):void{
-    this.service.postLogins().subscribe({ 
+    this.service.postRegister().subscribe({ 
       next: res =>{
         console.log(res);
         this.toastr.success('Submitted successfully','Register');

@@ -6,11 +6,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +26,21 @@ export class LoginService {
   postLogins(): Observable<any>{
     return this.http.post(this.baseURL,this.formData,httpOptions);
   }
+
+  postRegister(): Observable<any>{
+    return this.http.post<any>(`${this.baseURL}register`,this.formData,httpOptions);
+  }
+
+ postActivateUser(activationCode: string, idUser: number): Observable<any>{
+    const body = ({
+      activationCode: activationCode,
+      idUser: idUser
+    });
+    console.log("URL:" + `${this.baseURL}activate`);
+    return this.http.post<any>(`${this.baseURL}activate?activationCode=${activationCode}&idUser=${idUser}`, httpOptions);
+
+  }
+
 
   putLogins(){
     return this.http.put(`${this.baseURL}/${this.formData.id_user}`,this.formData,{ withCredentials: true });
