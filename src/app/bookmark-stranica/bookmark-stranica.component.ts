@@ -119,6 +119,10 @@ export class BookmarkStranicaComponent {
     }
     this.storageService.saveMyBookmarks(this.Films);
   }
+
+  refreshpage(){
+    history.go(0);
+  }
 }
 
 

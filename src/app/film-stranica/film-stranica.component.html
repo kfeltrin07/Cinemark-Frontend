@@ -68,11 +68,12 @@
             <div class="comment-container">
                 <div class="comment-card" *ngFor="let comm of comment; index as i; first as isFirst">
                     <h3 class="comment-title">{{username[i]}}</h3>
-                    <h3 class="comment-title">{{date[i].substring(0,10)}}</h3>
-                    <button class="add-btn" (click)="deleteComment(comm.id_comment,comm.id_user)">Delete</button>
+                    <h3 class="date">{{date[i].substring(0,10)}}</h3>
+                    
                     <p>
                         {{comm.comment}}
                     </p>
+                    <button class="delete" (click)="deleteComment(comm.id_comment,comm.id_user)">Delete</button>
                 </div>
             </div>
         </div>
