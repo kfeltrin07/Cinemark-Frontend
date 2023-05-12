@@ -4,6 +4,11 @@ import { Injectable } from '@angular/core';
 import { Bookmarks } from './bookmarks.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Films } from '../shared/films.model';
+
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,9 +21,14 @@ const httpOptions = {
 
 export class BookmarksService {
 
-  constructor(private http:HttpClient, public storageService:StorageService) { }
+  constructor(private http:HttpClient, public storageService:StorageService,public router:Router, public toastr:ToastrService) { }
 
   formData:Bookmarks = new Bookmarks();
+  form: any = {
+    id_user:null,
+    id_film:null
+  };
+  Films : Films[];
   readonly baseURL = environment.baseURL+'api/Bookmark/'
 
   list : Bookmarks[];
@@ -47,5 +57,75 @@ export class BookmarksService {
 
   deleteBookmark(id:number){
     return this.http.delete(`${this.baseURL}/${id}`,{ withCredentials: true });
+  }
+
+  saveBookmarks(id_film:any){
+    if(this.storageService.isLoggedIn()==true){
+      var id=this.storageService.getUserID();
+      this.form.id_user=id.id_user;
+      this.form.id_film=id_film;
+      this.authBookmark(this.form).subscribe(
+        res=>{
+          this.postBookmarks(this.form).subscribe(
+            res=>{
+              this.toastr.success("Added Bookmark");
+              console.log("Added Bookmark");
+              this.checkreload(0);
+            },
+            err=>{
+              console.log(err);
+              console.log("Greška kod unosa");
+              }
+            );
+            },
+        err=>{
+          this.toastr.success("Bookmark Removed");
+          console.log("Već ste bookmarkali određen film");
+          console.log(err);
+          this.checkreload(0);
+        });
+    }
+    else{
+      this.toastr.error("You Can't bookmark if you are not logged in");
+      console.error("You Can't bookmark if you are not logged in");
+    }
+  }
+
+  checkreload(num:number){
+    let reloadstate=num
+    if(reloadstate==0){
+      if(this.router.url=='/bookmarks'){
+      history.go(0)
+      this.router.navigateByUrl('home', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['bookmarks']);
+      reloadstate=1;
+      ;});}
+      else{
+        history.go(0);
+        reloadstate=1;
+      }
+    
+    }
+  }
+
+  getBookmarksByUser(){
+    this.Films=[];
+    const bookmark = this.storageService.getBookmarks();
+    const filmsl = this.storageService.getFilms();
+    
+    console.log(bookmark);
+    if(this.storageService.isLoggedIn()==true){
+      const id_us= this.storageService.getUserID();
+      for(var films of bookmark){
+        if(films.id_user == id_us.id_user){
+          for( var film of filmsl){
+            if( films.id_film== film.id_film){
+              this.Films.push(film);;
+            }
+          }
+        }       
+      }
+    }
+    this.storageService.saveMyBookmarks(this.Films);
   }
 }

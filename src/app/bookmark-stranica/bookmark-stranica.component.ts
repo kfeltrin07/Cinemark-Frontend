@@ -3,7 +3,7 @@ import { BookmarksService } from './../shared/bookmarks.service';
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../shared/films.service';
 import { Films } from '../shared/films.model';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
 import { StorageService } from '../_services/storage.service';
 import { ToastrService } from 'ngx-toastr';
@@ -38,17 +38,13 @@ export class BookmarkStranicaComponent {
   check:boolean=false;
 
   constructor(public filmsService:FilmsService,public storageService:StorageService,private toastr:ToastrService, public bookmarkService: BookmarksService, 
-    public genreService:GenreService) {
-
-      if (this.storageService.isLoggedIn()) {
-        this.isLoggedIn = true;
-        
-      const user = this.storageService.getUser();
-      const userID = this.storageService.getUserID();
+    public genreService:GenreService, public router:Router) {
+      if (this.storageService.isLoggedIn()==true) {
       this.getBookmarksByUser();
-      }
       this.filmsService.getFilms();
-      this.getRecommendedMovies(); 
+      this.getRecommendedMovies();
+      this.Films=this.storageService.getMyBookmarks();
+      }
     }
  
   updateSelectedFilm(film:string){
@@ -58,29 +54,10 @@ export class BookmarkStranicaComponent {
 
   
 
-  getBookmarksByUser(){
-    this.Films=[];
-    const bookmark = this.storageService.getBookmarks();
-    const filmsl = this.storageService.getFilms();
-    
-    console.log(bookmark);
-    if(this.storageService.isLoggedIn()==true){
-      const id_us= this.storageService.getUserID();
-      for(var films of bookmark){
-        if(films.id_user == id_us.id_user){
-          for( var film of filmsl){
-            if( films.id_film== film.id_film){
-              this.Films.push(film);;
-            }
-          }
-        }       
-      }
-    }
-  }
-
   getRecommendedMovies(){
     this.recommendedFilms = [];
     const films = this.storageService.getFilms();
+    const mybookmarks=this.storageService.getMyBookmarks()
     do{
       //stavi checker na false u svakoj iteraciji
       this.check=false;
@@ -102,7 +79,7 @@ export class BookmarkStranicaComponent {
           }
 
           //provjera da li korisnik ima bookmarkan film (ako da onda nece biti u recommended listi)
-          for(var booklist of this.Films){
+          for(var booklist of mybookmarks){
             if(booklist.id_film == film.id_film){
               this.check=true;
             }
@@ -117,44 +94,31 @@ export class BookmarkStranicaComponent {
       //ponavljaj sve dok nemamo 4 filma
     }while(this.recommendedFilms.length<4);
   }
+
   saveBookmarks(id_film:any){
-    if(this.storageService.isLoggedIn()==true){
-      var id=this.storageService.getUserID();
-      this.form.id_user=id.id_user;
-      this.form.id_film=id_film;
-      this.bookmarkService.authBookmark(this.form).subscribe(
-        res=>{
-          this.bookmarkService.postBookmarks(this.form).subscribe(
-            res=>{
-              this.toastr.success("Added Bookmark");
-              console.log("Added Bookmark");
-              this.bookmarkService.getBookmarks();
-              this.getBookmarksByUser();
-              delay(5000);
-              history.go(0);
-              },
-            err=>{
-              console.log(err);
-              console.log("Greška kod unosa");
-              }
-            );
-            },
-        err=>{
-          this.toastr.success("Bookmark Removed");
-          console.log("Već ste bookmarkali određen film");
-          console.log(err);
-          this.bookmarkService.getBookmarks();
-          this.getBookmarksByUser();
-          delay(5000);
-          history.go(0);        
-        });
-    }
-    else{
-      this.toastr.error("You Can't bookmark if you are not logged in");
-      console.error("You Can't bookmark if you are not logged in");
-    }
+    this.bookmarkService.saveBookmarks(id_film);
   }
   
+  getBookmarksByUser(){
+    this.Films=[];
+    const bookmark = this.storageService.getBookmarks();
+    const filmsl = this.storageService.getFilms();
+    
+    console.log(bookmark);
+    if(this.storageService.isLoggedIn()==true){
+      const id_us= this.storageService.getUserID();
+      for(var films of bookmark){
+        if(films.id_user == id_us.id_user){
+          for( var film of filmsl){
+            if( films.id_film== film.id_film){
+              this.Films.push(film);;
+            }
+          }
+        }       
+      }
+    }
+    this.storageService.saveMyBookmarks(this.Films);
+  }
 }
 
 
