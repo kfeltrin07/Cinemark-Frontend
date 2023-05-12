@@ -121,6 +121,8 @@ export class BookmarkStranicaComponent {
   }
 
   refreshpage(){
+    this.bookmarkService.getBookmarks();
+    this.getBookmarksByUser();
     history.go(0);
   }
 }

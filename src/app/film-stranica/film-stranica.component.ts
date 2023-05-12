@@ -72,8 +72,6 @@ export class FilmStranicaComponent{
   
 
   changeToFilm(){
-
-    this.commentService.getComments();
     this.User=this.storageService.getUserID();
     const listcomments=this.storageService.getComments();
     const Allusers=this.storageService.getUsers();
@@ -200,12 +198,16 @@ export class FilmStranicaComponent{
     console.log(id);
       if(this.User.role==1){
           this.commentService.deleteComment(id);
-          this.toastr.success("User's comment will be permanently deleted after refresh")
+          this.toastr.success("User's comment will be permanently deleted after refresh");
+          history.go(0);
       }
       else if (this.User.id_user==usid) {
           this.commentService.deleteComment(id);
+          this.toastr.success("User's comment will be permanently deleted after refresh");
+          history.go(0);
       } else {
-        this.toastr.error("You cannot delete this comment")
+        this.toastr.error("You cannot delete this comment");
+        
       }
   }
 }
