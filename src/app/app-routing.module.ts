@@ -10,6 +10,7 @@ import { SearchStranicaComponent } from './search-stranica/search-stranica.compo
 import { AppComponent } from './app.component';
 import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'film', component:FilmStranicaComponent},
   {path: 'search', component:SearchStranicaComponent},
   {path: 'unos', component:UnosStranicaComponent},
+  {path: 'admin', component:AdminStranicaComponent},
   {path: '', redirectTo: 'navbar', pathMatch: 'full' }
 ];
 
