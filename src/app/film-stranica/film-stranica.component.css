@@ -362,7 +362,7 @@ form .btn p{
     color:#ffffff;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    margin-left: 25cm;
+    margin-left: 90%;
     
 }
 
@@ -370,7 +370,7 @@ form .btn p{
     font-family: "Nexa";
     font-size: 22px;
     color:#fefed6;
-    
+    margin-top: 1rem;
     text-transform: uppercase;
 }
 
@@ -448,7 +448,7 @@ form .btn p{
     text-align: center;
     color: white;
     width: 20%;
-    margin-left: 22cm;
+    margin-left: 80%;
     margin-top: 1rem;
 }
 
