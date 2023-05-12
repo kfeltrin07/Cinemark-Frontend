@@ -63,8 +63,9 @@ export class LoginStranicaComponent{
           this.toastr.success('Your account has been activated');
         },
         error: err => {
-          console.log(err);
-          this.toastr.error('There was an error');
+          const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived =json.message;
+        this.toastr.error(messageReceived);
         }
       });
       }
@@ -100,9 +101,10 @@ export class LoginStranicaComponent{
         this.loginACT;
       },
       error: err => {
-        console.log(err);
         this.isSignUpFailed = true; 
-        this.toastr.error('User exists or error in input','Register');
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived =json.message;
+        this.toastr.error(messageReceived);
       }
     });  
   }
