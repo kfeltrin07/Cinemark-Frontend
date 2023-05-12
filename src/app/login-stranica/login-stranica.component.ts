@@ -63,7 +63,7 @@ export class LoginStranicaComponent{
           this.toastr.success('Your account has been activated');
         },
         error: err => {
-          const json = JSON.parse(JSON.stringify(err.error));
+        const json = JSON.parse(JSON.stringify(err.error));
         const messageReceived =json.message;
         this.toastr.error(messageReceived);
         }
@@ -94,7 +94,6 @@ export class LoginStranicaComponent{
   onSubmit(form:NgForm):void{
     this.service.postRegister().subscribe({ 
       next: res =>{
-        console.log(res);
         this.toastr.success('Submitted successfully','Register');
         this.isSuccessful = true;
         this.isSignUpFailed = false;
@@ -103,7 +102,7 @@ export class LoginStranicaComponent{
       error: err => {
         this.isSignUpFailed = true; 
         const json = JSON.parse(JSON.stringify(err.error));
-        const messageReceived =json.message;
+        const messageReceived = json.message;
         this.toastr.error(messageReceived);
       }
     });  
