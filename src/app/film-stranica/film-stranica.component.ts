@@ -140,26 +140,32 @@ export class FilmStranicaComponent{
     var rate4 = document.getElementById("rate-4") as HTMLInputElement;
     var rate5 = document.getElementById("rate-5") as HTMLInputElement;
 
-    if(rate1.checked){
-      this.ratingOfFilm=parseInt(rate1.value,10);
-      this.service.postNewRating(this.ratingOfFilm);
+    if(this.storageService.isLoggedIn()==true){
+
+      if(rate1.checked){
+        this.ratingOfFilm=parseInt(rate1.value,10);
+        this.service.postNewRating(this.ratingOfFilm);
+      }
+      if(rate2.checked){
+        this.ratingOfFilm=parseInt(rate2.value,10);
+        this.service.postNewRating(this.ratingOfFilm);
+      }
+      if(rate3.checked){
+        this.ratingOfFilm=parseInt(rate3.value,10);
+        this.service.postNewRating(this.ratingOfFilm);
+      }
+      if(rate4.checked){
+        this.ratingOfFilm=parseInt(rate4.value,10);
+        this.service.postNewRating(this.ratingOfFilm);
+      }
+      if(rate5.checked){
+        this.ratingOfFilm=parseInt(rate5.value,10);
+        this.service.postNewRating(this.ratingOfFilm);
+      } 
     }
-    if(rate2.checked){
-      this.ratingOfFilm=parseInt(rate2.value,10);
-      this.service.postNewRating(this.ratingOfFilm);
-    }
-    if(rate3.checked){
-      this.ratingOfFilm=parseInt(rate3.value,10);
-      this.service.postNewRating(this.ratingOfFilm);
-    }
-    if(rate4.checked){
-      this.ratingOfFilm=parseInt(rate4.value,10);
-      this.service.postNewRating(this.ratingOfFilm);
-    }
-    if(rate5.checked){
-      this.ratingOfFilm=parseInt(rate5.value,10);
-      this.service.postNewRating(this.ratingOfFilm);
-    }  
+    else{
+      this.toastr.error("You can't rate if you are not logged in!", "Rating error.")
+    } 
     
   }
 
