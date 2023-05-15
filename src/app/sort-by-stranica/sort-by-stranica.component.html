@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="pagination" *ngFor="let film of sortedFilms | paginate: { itemsPerPage: pageSize, currentPage: page }">
+    <div *ngFor="let film of sortedFilms | paginate: { id: 'paginate', itemsPerPage: pageSize, currentPage: page }">
       <div class="component">
         <div class="film-list">  
           <div class="film img" id="filmBox">
@@ -70,6 +70,14 @@
     </div>
 
     <div class="pagination">
-    <pagination-controls (pageChange)="page = $event; scrollToTop($event)"></pagination-controls>
+      <pagination-controls  id="paginate"
+      (pageChange)="page= ($event); scrollToTop($event)"
+      (pageBoundsCorrection)="page =(1)"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
     </div>
 </html>

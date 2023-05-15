@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FilmsService } from '../shared/films.service';
 import { Films } from '../shared/films.model';
 import { RouterLink } from '@angular/router';
@@ -7,27 +7,45 @@ import { Film_Genre } from './../shared/film_genre.model';
 import { GenreService } from './../shared/genre.service';
 import { Genres } from '../shared/genre.model';
 import { StorageService } from '../_services/storage.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { PaginationControlsComponent } from 'ngx-pagination';
 
 @Component({
   selector: 'app-sort-by-stranica',
   templateUrl: './sort-by-stranica.component.html',
   styleUrls: ['./sort-by-stranica.component.css']
 })
+
+
 export class SortByStranicaComponent implements OnInit {
 
+  currentPage = 1; 
   selectedFilm:Films;
   sortedFilms:Films[];
   page: number = 1;
   pageSize: number = 5;
   genres:Genres[];
   genre:string[];
-  Film_Genre:Film_Genre;
-  constructor(public service:FilmsService, public genreService:GenreService, public storageService:StorageService) {
+  filmGenre:Film_Genre;
+
+  filteredFilms:any[];
+
+  
+
+  constructor(public service:FilmsService, public genreService:GenreService, public storageService:StorageService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.service.getFilms();
     this.getAllFilms();
+
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentPage = 1; // reset to page 1 when the route changes
+      }
+    });
   }
  
   updateSelectedFilm(film:string){
@@ -48,6 +66,9 @@ export class SortByStranicaComponent implements OnInit {
         }
       }
     }
+
+    var x = document.getElementById("paginator") as unknown as PaginationControlsComponent;
+    x.pageChange
   }
 
   sortFilmByBestRated(){
@@ -58,7 +79,10 @@ export class SortByStranicaComponent implements OnInit {
       if((item.total_rating)/(item.rating_count) >= 4.4){
         this.sortedFilms.push(item);
       }
+
     }
+
+    
   }
 
   sortFilmByRatingCount(){
@@ -146,5 +170,11 @@ export class SortByStranicaComponent implements OnInit {
   scrollToTop(event: any){
     window.scrollTo({top:0, behavior: 'smooth'})
   }
+
+  /*onPageChange(event: any){
+    if (this.pageSize <= 5){
+      this.page = 1;
+    }
+  }*/
 
 }
