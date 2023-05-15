@@ -20,13 +20,17 @@
                    
                     <li class="nav-item2" *ngIf="isLoggedIn">
 
-                        <div *ngIf=" role$ ==='admin'|| role$ ==='superadmin'; else isuser">
+                        <div *ngIf="superadmin">
+                            <a class="nav-link2" routerLink="/admin">{{ username$ }}</a>
+                        </div>
+
+                        <div *ngIf="admin">
                             <a class="nav-link2" routerLink="/unos">{{ username$ }}</a>
                         </div>
                         
-                        <ng-template #isuser>
+                        <div *ngIf="!admin && !superadmin">
                             <a class="nav-link2" >{{ username$ }}</a>
-                        </ng-template>
+                        </div>
                     </li>
                 </ul>
             </div>

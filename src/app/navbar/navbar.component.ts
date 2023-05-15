@@ -23,6 +23,8 @@ export class NavbarComponent {
   public username$:string="";
   public role$:string="";
   public id_user$:string="";
+  superadmin=false;
+  admin=false;
 
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService, 
@@ -62,6 +64,10 @@ export class NavbarComponent {
       this.bookmarkservice.getBookmarks();
       const token=this.storageService.getToken();
       timer(1000);
+      if(this.role$==="superadmin")
+          this.superadmin=true;
+      if(this.role$==="admin")
+          this.admin=true;
 }
 
 }
