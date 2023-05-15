@@ -75,7 +75,6 @@ export class FilmStranicaComponent{
   
 
   changeToFilm(){
-    this.User=this.storageService.getUserID();
     const listcomments=this.storageService.getComments();
     const Allusers=this.storageService.getUsers();
     this.selectedComments=[];

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
-import { Login } from '../shared/Login.model';
+import { Login } from '../_shared/Login.model';
 import { NgModule, } from '@angular/core';
-import { LoginService } from '../shared/Login.service';
+import { LoginService } from '../_shared/Login.service';
 import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
