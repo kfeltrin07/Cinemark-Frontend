@@ -41,9 +41,7 @@ export class LoginService {
       activationCode: activationCode,
       idUser: idUser
     });
-    console.log("URL:" + `${this.baseURL}activate`);
     return this.http.post<any>(`${this.baseURL}activate?activationCode=${activationCode}&idUser=${idUser}`, httpOptions);
-
   }
 
 

@@ -26,6 +26,7 @@ import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TokenInterceptor } from './_helpers/token.interceptor';
+import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TokenInterceptor } from './_helpers/token.interceptor';
     SearchStranicaComponent,
     BookmarkStranicaComponent,
     UnosStranicaComponent,
-    NavbarComponent
+    NavbarComponent,
+    AdminStranicaComponent
   ],
   imports: [
     BrowserModule,

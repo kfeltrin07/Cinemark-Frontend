@@ -65,12 +65,12 @@ export class LoginStranicaComponent{
     if (this.activationCode && this.idUser) {
       this.service.postActivateUser(this.activationCode,this.idUser).subscribe({ 
         next: res =>{
-          console.log(res);
           this.toastr.success('Your account has been activated');
         },
         error: err => {
-          console.log(err);
-          this.toastr.error('There was an error');
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived =json.message;
+        this.toastr.error(messageReceived);
         }
       });
       }
@@ -99,17 +99,19 @@ export class LoginStranicaComponent{
   onSubmit(form:NgForm):void{
     this.service.postLogins().subscribe({ 
       next: res =>{
-        console.log(res);
         this.toastr.success('Submitted successfully','Register');
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.resetForm(form);
         this.loginACT;
+        this.resetForm(form);
       },
       error: err => {
-        console.log(err);
         this.isSignUpFailed = true; 
-        this.toastr.error('User exists or error in input','Register');
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+        this.resetForm(form);
       }
     });  
   }
@@ -132,8 +134,9 @@ export class LoginStranicaComponent{
         window.location.reload();
       },
       err=>{
-        console.log(err);
-        this.toastr.error('Wrong Username or Password');
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
         this.isLoginFailed = true;
       }
 

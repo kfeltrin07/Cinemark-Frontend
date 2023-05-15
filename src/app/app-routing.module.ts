@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'film', component:FilmStranicaComponent},
   {path: 'search', component:SearchStranicaComponent},
   {path: 'unos', component:UnosStranicaComponent, canActivate:[AuthGuard]},
+  {path: 'admin', component:AdminStranicaComponent, canActivate:[AuthGuard]},
   {path: '', redirectTo: 'navbar', pathMatch: 'full' }
 ];
 
