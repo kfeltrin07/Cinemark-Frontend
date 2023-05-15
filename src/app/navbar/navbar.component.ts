@@ -50,6 +50,8 @@ export class NavbarComponent {
     this.id_user$=val||id_userFromToken
   })
 
+  this.storageService.saveUserID(this.id_user$);
+
   this.genreservice.GetFilmGenre();
   this.genreservice.GetGenres();
   this.filmService.getFilms();

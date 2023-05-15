@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Films } from './films.model';
+import { UserStoreService } from '../_services/user-store.service';
+import { LoginService } from './Login.service';
 
 
 
@@ -21,8 +23,6 @@ const httpOptions = {
 
 export class BookmarksService {
 
-  constructor(private http:HttpClient, public storageService:StorageService,public router:Router, public toastr:ToastrService) { }
-
   formData:Bookmarks = new Bookmarks();
   form: any = {
     id_user:null,
@@ -32,6 +32,17 @@ export class BookmarksService {
   readonly baseURL = environment.baseURL+'api/Bookmark/'
 
   list : Bookmarks[];
+  public id_user$:string="";
+
+  constructor(private http:HttpClient, public storageService:StorageService,public router:Router, public toastr:ToastrService, private userstore:UserStoreService, private loginservice:LoginService) {
+    this.userstore.getIDUserFromStore()
+  .subscribe(val=>{
+    let id_userFromToken=this.loginservice.getIDUserFromToken();
+    this.id_user$=val||id_userFromToken
+  })
+   }
+
+  
 
   postBookmarks(bookmark:Bookmarks): Observable<any>{
     console.log(bookmark);
@@ -62,7 +73,7 @@ export class BookmarksService {
   saveBookmarks(id_film:any){
     if(this.storageService.isLoggedIn()==true){
       var id=this.storageService.getUserID();
-      this.form.id_user=id.id_user;
+      this.form.id_user=this.id_user$;
       this.form.id_film=id_film;
       this.authBookmark(this.form).subscribe(
         res=>{

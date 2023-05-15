@@ -62,7 +62,7 @@ export class LoginService {
 
 
   GetAllUsers(){
-    this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
+    this.http.get(this.baseURL).toPromise().then(
       res =>{ this.Allusers = res as Login[];
               this.storageService.saveUsers(this.Allusers);
       });

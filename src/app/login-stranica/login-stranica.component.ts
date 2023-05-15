@@ -28,6 +28,8 @@ import { UserStoreService } from '../_services/user-store.service';
 export class LoginStranicaComponent{
   activationCode: string | null;
   idUser: number;
+  public id_user$:string="";
+
 
   form: any = {
     username: null,
@@ -95,7 +97,7 @@ export class LoginStranicaComponent{
   }
 
   onSubmit(form:NgForm):void{
-    this.service.postRegister().subscribe({ 
+    this.service.postLogins().subscribe({ 
       next: res =>{
         console.log(res);
         this.toastr.success('Submitted successfully','Register');
@@ -127,7 +129,7 @@ export class LoginStranicaComponent{
         this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
         this.resetForm(form);
-        //window.location.reload();
+        window.location.reload();
       },
       err=>{
         console.log(err);
