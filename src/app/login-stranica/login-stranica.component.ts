@@ -97,12 +97,14 @@ export class LoginStranicaComponent{
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.loginACT;
+        this.resetForm(form);
       },
       error: err => {
         this.isSignUpFailed = true; 
         const json = JSON.parse(JSON.stringify(err.error));
         const messageReceived = json.message;
         this.toastr.error(messageReceived);
+        this.resetForm(form);
       }
     });  
   }
@@ -110,7 +112,6 @@ export class LoginStranicaComponent{
   onLogin(form:NgForm){
     this.service.authenticate(form).subscribe(
       res=>{
-        console.log(res);
         this.storageService.saveUser(form.value);
         this.storageService.saveUserID(res.user);
         this.isLoginFailed = false;
@@ -120,8 +121,9 @@ export class LoginStranicaComponent{
         window.location.reload();
       },
       err=>{
-        console.log(err);
-        this.toastr.error('Wrong Username or Password');
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
         this.isLoginFailed = true;
       }
 
