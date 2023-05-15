@@ -1,4 +1,4 @@
-import { StorageService } from './../_services/storage.service';
+import { StorageService } from '../_services/storage.service';
 import { Films } from './films.model';
 import { FilmsService } from './films.service';
 import { Film_Genre } from './film_genre.model';
@@ -62,20 +62,16 @@ export class GenreService {
     this.selectedGenres=[];
     this.selectedFilmGenres=[];
 
-    console.log(idfilm);
     for(var filmgenres of listfilmgenre){
       if(idfilm == filmgenres.id_film){
-        console.log(filmgenres.id_genre)
         for(var genres of listgenre){
           if(genres.id_genre == filmgenres.id_genre){          
             this.selectedGenres.push(genres.name);
-            console.log(this.selectedGenres);
           }
         }
       } 
     } 
     
-    console.log(this.selectedGenres);   
     return this.selectedGenres;
   }
 }

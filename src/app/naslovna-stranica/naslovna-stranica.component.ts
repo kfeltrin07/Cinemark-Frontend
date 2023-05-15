@@ -1,12 +1,12 @@
-import { LoginService } from 'src/app/shared/Login.service';
-import { CommentsService } from './../shared/comments.service';
-import { GenreService } from './../shared/genre.service';
+import { LoginService } from 'src/app/_shared/Login.service';
+import { CommentsService } from '../_shared/comments.service';
+import { GenreService } from '../_shared/genre.service';
 import { StorageService } from './../_services/storage.service';
-import { BookmarksService } from './../shared/bookmarks.service';
+import { BookmarksService } from '../_shared/bookmarks.service';
 import { Component, OnInit } from '@angular/core';
-import { FilmsService } from '../shared/films.service';
+import { FilmsService } from '../_shared/films.service';
 import { LoginStranicaComponent } from '../login-stranica/login-stranica.component';
-import { RatingsService } from '../shared/ratings.service';
+import { RatingsService } from '../_shared/ratings.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,20 +16,10 @@ import { Router } from '@angular/router';
 })
 export class NaslovnaStranicaComponent {
 
-  LoginPgStatus=false;
-  isLoggedIn=false;
 
-  constructor(public filmsService:FilmsService, public bookmarkService:BookmarksService, public loginserv:LoginStranicaComponent, 
-    public storageService:StorageService, public genreService:GenreService, public ratingservice:RatingsService, 
-    public commentService:CommentsService, public loginService:LoginService, private router: Router) 
+  constructor(public filmsService:FilmsService, private router: Router) 
     {
       this.filmsService.getFilms();
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.bookmarkService.getBookmarks();
-      this.storageService.getUser();
-      this.storageService.getUserID();
-    }
     }
 
 

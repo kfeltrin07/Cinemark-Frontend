@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FilmsService } from '../shared/films.service';
-import { Films } from '../shared/films.model';
+import { FilmsService } from '../_shared/films.service';
+import { Films } from '../_shared/films.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../_services/storage.service';
-import { Film_Genre } from '../shared/film_genre.model';
+import { Film_Genre } from '../_shared/film_genre.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

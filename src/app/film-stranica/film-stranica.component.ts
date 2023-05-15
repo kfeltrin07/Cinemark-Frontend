@@ -1,18 +1,19 @@
-import { Film_Genre } from './../shared/film_genre.model';
-import { GenreService } from './../shared/genre.service';
+import { Film_Genre } from '../_shared/film_genre.model';
+import { GenreService } from '../_shared/genre.service';
 import { BookmarkStranicaComponent } from './../bookmark-stranica/bookmark-stranica.component';
-import { LoginService } from 'src/app/shared/Login.service';
+import { LoginService } from 'src/app/_shared/Login.service';
 import { StorageService } from './../_services/storage.service';
 import { Component, OnInit } from '@angular/core';
-import { Films } from '../shared/films.model';
-import { FilmsService } from '../shared/films.service';
-import { CommentsService } from '../shared/comments.service';
+import { Films } from '../_shared/films.model';
+import { FilmsService } from '../_shared/films.service';
+import { CommentsService } from '../_shared/comments.service';
 import { ToastrService } from 'ngx-toastr';
-import { Genres } from '../shared/genre.model';
-import { Comments } from '../shared/comments.model';
-import { Login } from '../shared/Login.model';
-import { BookmarksService } from '../shared/bookmarks.service';
-import { RatingsService } from '../shared/ratings.service';
+import { Genres } from '../_shared/genre.model';
+import { Comments } from '../_shared/comments.model';
+import { Login } from '../_shared/Login.model';
+import { BookmarksService } from '../_shared/bookmarks.service';
+import { RatingsService } from '../_shared/ratings.service';
+import { UserStoreService } from '../_services/user-store.service';
 
 
 
@@ -20,28 +21,9 @@ import { RatingsService } from '../shared/ratings.service';
   selector: 'app-film-stranica',
   templateUrl: './film-stranica.component.html',
   styleUrls: ['./film-stranica.component.css'],
-  //providers: [FilmsService,GenreService,BookmarksService,LoginService,CommentsService]
 })
 export class FilmStranicaComponent{
   
-  
-
-  constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
-    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, public bookmarkService:BookmarksService) 
-    {
-      this.selectedFilm = this.storageService.getFilm();
-      this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
-      this.commentService.getComments();
-      this.loginservice.GetAllUsers();
-      this.changeToFilm();
-      this.service.updateRating();
-      this.Checkifbookmarked();
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      setTimeout(this.openInfo,400)
-
-    }
-
-
   ratingOfFilm:number=0;
   
   form: any = {
@@ -57,19 +39,51 @@ export class FilmStranicaComponent{
   selectedComments:Comments[];
   AllUsers:Login[];
   username:string[];
-  comment:string[];
-  date:string[];
+
+  comment:any[];
+  id_comment:number[];
+  id_commuser:number[];
+
+  date:any;
   bookmarked=false;
+  isuser=false;
+  User:any;
+  public id_user$:string="";
+
+
+  constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
+    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, 
+    public bookmarkService:BookmarksService, private userstore:UserStoreService) 
+    {
+      this.userstore.getIDUserFromStore()
+      .subscribe(val=>{
+        let id_userFromToken=this.loginservice.getIDUserFromToken();
+        this.id_user$=val||id_userFromToken
+      })
+      this.selectedFilm = this.storageService.getFilm();
+      this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
+      this.commentService.getComments();
+      this.loginservice.GetAllUsers();
+      this.service.updateRating();
+      this.changeToFilm();
+      this.Checkifbookmarked();
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setTimeout(this.openInfo,400)
+    }
+
+
+  
 
   changeToFilm(){
-    
+    this.User=this.storageService.getUserID();
     const listcomments=this.storageService.getComments();
     const Allusers=this.storageService.getUsers();
     this.selectedComments=[];
     this.comment=[];
     this.username=[];
     this.date=[];
-    console.log(Allusers);
+    this.id_comment=[];
+    this.id_commuser=[];
 
     if(listcomments!=null){
       for(var comments of listcomments){
@@ -78,18 +92,16 @@ export class FilmStranicaComponent{
         } 
       }
       for(var comm of this.selectedComments){
-        this.comment.push(comm.comment);
+        this.comment.push(comm);
+        this.date.push(comm.insert_date);
       }
       for(var comuser of this.selectedComments){
         for(var user of Allusers){
           if(user.id_user==comuser.id_user){
             this.username.push(user.username);
-            this.date.push(user.insert_date);
           }
         }
       }
-      console.log(this.username);
-      console.log(this.selectedComments);
     }
     else{
       console.log("there are no comments");
@@ -168,20 +180,33 @@ export class FilmStranicaComponent{
 
   Checkifbookmarked(){
     if(this.storageService.isLoggedIn()==true){
-      const id=this.storageService.getUserID();
       const filmid=this.storageService.getFilm();
-      this.form.id_user=id.id_user;
+      this.form.id_user=this.id_user$;
       this.form.id_film=filmid.id_film;
       this.bookmarkService.checkBookmark(this.form).subscribe(
         res=>{
           this.bookmarked=true;
-          
-          console.log("movie is bookmared");
             },
         err=>{
           this.bookmarked=false;
-          console.log("movie is not bookmared");
         });
     }
+  }
+
+  deleteComment(id:number,usid:number){
+    console.log(id);
+      if(this.User.role==1){
+          this.commentService.deleteComment(id);
+          this.toastr.success("User's comment will be permanently deleted after refresh");
+          history.go(0);
+      }
+      else if (+this.id_user$==usid) {
+          this.commentService.deleteComment(id);
+          this.toastr.success("User's comment will be permanently deleted after refresh");
+          history.go(0);
+      } else {
+        this.toastr.error("You cannot delete this comment");
+        
+      }
   }
 }
