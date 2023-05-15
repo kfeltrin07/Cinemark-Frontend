@@ -1,4 +1,4 @@
-import { StorageService } from './../_services/storage.service';
+import { StorageService } from '../_services/storage.service';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Bookmarks } from './bookmarks.model';
@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Films } from '../shared/films.model';
+import { Films } from './films.model';
 
 
 

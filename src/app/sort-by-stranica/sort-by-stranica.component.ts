@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FilmsService } from '../shared/films.service';
-import { Films } from '../shared/films.model';
+import { FilmsService } from '../_shared/films.service';
+import { Films } from '../_shared/films.model';
 import { RouterLink } from '@angular/router';
 import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
-import { Film_Genre } from './../shared/film_genre.model';
-import { GenreService } from './../shared/genre.service';
-import { Genres } from '../shared/genre.model';
+import { Film_Genre } from '../_shared/film_genre.model';
+import { GenreService } from '../_shared/genre.service';
+import { Genres } from '../_shared/genre.model';
 import { StorageService } from '../_services/storage.service';
 
 @Component({

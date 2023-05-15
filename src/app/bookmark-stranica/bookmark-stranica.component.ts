@@ -1,14 +1,16 @@
 import { Subscription, delay } from 'rxjs';
-import { BookmarksService } from './../shared/bookmarks.service';
+import { BookmarksService } from '../_shared/bookmarks.service';
 import { Component, OnInit } from '@angular/core';
-import { FilmsService } from '../shared/films.service';
-import { Films } from '../shared/films.model';
+import { FilmsService } from '../_shared/films.service';
+import { Films } from '../_shared/films.model';
 import { Router, RouterLink } from '@angular/router';
 import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
 import { StorageService } from '../_services/storage.service';
 import { ToastrService } from 'ngx-toastr';
-import { Bookmarks } from '../shared/bookmarks.model';
-import { GenreService } from '../shared/genre.service';
+import { Bookmarks } from '../_shared/bookmarks.model';
+import { GenreService } from '../_shared/genre.service';
+import { UserStoreService } from '../_services/user-store.service';
+import { LoginService } from '../_shared/Login.service';
 
 
 
@@ -36,9 +38,17 @@ export class BookmarkStranicaComponent {
   selectedFilm:Films[];
   bookmark:Bookmarks[];
   check:boolean=false;
+  public id_user$:string="";
+
 
   constructor(public filmsService:FilmsService,public storageService:StorageService,private toastr:ToastrService, public bookmarkService: BookmarksService, 
-    public genreService:GenreService, public router:Router) {
+    public genreService:GenreService, public router:Router, private userstore:UserStoreService, private loginservice:LoginService) {
+
+      this.userstore.getIDUserFromStore()
+      .subscribe(val=>{
+    let id_userFromToken=this.loginservice.getIDUserFromToken();
+    this.id_user$=val||id_userFromToken
+  })
       if (this.storageService.isLoggedIn()==true) {
       this.getBookmarksByUser();
       this.filmsService.getFilms();
@@ -104,11 +114,9 @@ export class BookmarkStranicaComponent {
     const bookmark = this.storageService.getBookmarks();
     const filmsl = this.storageService.getFilms();
     
-    console.log(bookmark);
     if(this.storageService.isLoggedIn()==true){
-      const id_us= this.storageService.getUserID();
       for(var films of bookmark){
-        if(films.id_user == id_us.id_user){
+        if(films.id_user == this.id_user$){
           for( var film of filmsl){
             if( films.id_film== film.id_film){
               this.Films.push(film);;

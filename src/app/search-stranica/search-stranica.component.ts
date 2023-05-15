@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { FilmsService } from '../shared/films.service';
-import { Films } from '../shared/films.model';
+import { FilmsService } from '../_shared/films.service';
+import { Films } from '../_shared/films.model';
 
 @Component({
   selector: 'app-search-stranica',

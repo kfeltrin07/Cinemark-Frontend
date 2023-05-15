@@ -1,18 +1,19 @@
-import { Film_Genre } from './../shared/film_genre.model';
-import { GenreService } from './../shared/genre.service';
+import { Film_Genre } from '../_shared/film_genre.model';
+import { GenreService } from '../_shared/genre.service';
 import { BookmarkStranicaComponent } from './../bookmark-stranica/bookmark-stranica.component';
-import { LoginService } from 'src/app/shared/Login.service';
+import { LoginService } from 'src/app/_shared/Login.service';
 import { StorageService } from './../_services/storage.service';
 import { Component, OnInit } from '@angular/core';
-import { Films } from '../shared/films.model';
-import { FilmsService } from '../shared/films.service';
-import { CommentsService } from '../shared/comments.service';
+import { Films } from '../_shared/films.model';
+import { FilmsService } from '../_shared/films.service';
+import { CommentsService } from '../_shared/comments.service';
 import { ToastrService } from 'ngx-toastr';
-import { Genres } from '../shared/genre.model';
-import { Comments } from '../shared/comments.model';
-import { Login } from '../shared/Login.model';
-import { BookmarksService } from '../shared/bookmarks.service';
-import { RatingsService } from '../shared/ratings.service';
+import { Genres } from '../_shared/genre.model';
+import { Comments } from '../_shared/comments.model';
+import { Login } from '../_shared/Login.model';
+import { BookmarksService } from '../_shared/bookmarks.service';
+import { RatingsService } from '../_shared/ratings.service';
+import { UserStoreService } from '../_services/user-store.service';
 
 
 
@@ -47,16 +48,18 @@ export class FilmStranicaComponent{
   bookmarked=false;
   isuser=false;
   User:any;
+  public id_user$:string="";
+
 
   constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
-    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, public bookmarkService:BookmarksService) 
+    public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, 
+    public bookmarkService:BookmarksService, private userstore:UserStoreService) 
     {
-      this.selectedComments=[];
-      this.comment=[];
-      this.username=[];
-      this.date=[];
-      this.id_comment=[];
-      this.id_commuser=[];
+      this.userstore.getIDUserFromStore()
+      .subscribe(val=>{
+        let id_userFromToken=this.loginservice.getIDUserFromToken();
+        this.id_user$=val||id_userFromToken
+      })
       this.selectedFilm = this.storageService.getFilm();
       this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
       this.commentService.getComments();
@@ -81,7 +84,6 @@ export class FilmStranicaComponent{
     this.date=[];
     this.id_comment=[];
     this.id_commuser=[];
-    console.log(Allusers);
 
     if(listcomments!=null){
       for(var comments of listcomments){
@@ -100,8 +102,6 @@ export class FilmStranicaComponent{
           }
         }
       }
-      console.log(this.username);
-      console.log(this.selectedComments);
     }
     else{
       console.log("there are no comments");
@@ -180,9 +180,8 @@ export class FilmStranicaComponent{
 
   Checkifbookmarked(){
     if(this.storageService.isLoggedIn()==true){
-      const id=this.storageService.getUserID();
       const filmid=this.storageService.getFilm();
-      this.form.id_user=id.id_user;
+      this.form.id_user=this.id_user$;
       this.form.id_film=filmid.id_film;
       this.bookmarkService.checkBookmark(this.form).subscribe(
         res=>{
@@ -201,7 +200,7 @@ export class FilmStranicaComponent{
           this.toastr.success("User's comment will be permanently deleted after refresh");
           history.go(0);
       }
-      else if (this.User.id_user==usid) {
+      else if (+this.id_user$==usid) {
           this.commentService.deleteComment(id);
           this.toastr.success("User's comment will be permanently deleted after refresh");
           history.go(0);

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { CommentsService } from '../shared/comments.service';
-import { FilmsService } from '../shared/films.service';
-import { GenreService } from '../shared/genre.service';
-import { BookmarksService } from '../shared/bookmarks.service';
+import { CommentsService } from '../_shared/comments.service';
+import { FilmsService } from '../_shared/films.service';
+import { GenreService } from '../_shared/genre.service';
+import { BookmarksService } from '../_shared/bookmarks.service';
 import { environment } from 'src/environments/environment';
-import { LoginService } from '../shared/Login.service';
+import { LoginService } from '../_shared/Login.service';
 import { StorageService } from '../_services/storage.service';
-import { EventBusService } from '../shared/event-bus.service';
+import { EventBusService } from '../_shared/event-bus.service';
 import { Subscription,timer } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserStoreService } from '../_services/user-store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,47 +19,47 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
 
   isLoggedIn = false;
-  rolestatus = false;
-  username?: string;
   eventBusSub?: Subscription;
+  public username$:string="";
+  public role$:string="";
+  public id_user$:string="";
 
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService, 
     public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService,
-    public router:Router
+    public router:Router, private userstore:UserStoreService
   ) 
 {
+
+
+  this.userstore.getUsernameFromStore()
+  .subscribe(val=>{
+    let usernameFromToken=this.loginservice.getUsernameFromToken();
+    this.username$=val||usernameFromToken
+  })
+
+  this.userstore.getRoleFromStore()
+  .subscribe(val=>{
+    let RoleFromToken=this.loginservice.getRoleFromToken();
+    this.role$=val||RoleFromToken
+  })
+
+  this.userstore.getIDUserFromStore()
+  .subscribe(val=>{
+    let id_userFromToken=this.loginservice.getIDUserFromToken();
+    this.id_user$=val||id_userFromToken
+  })
+
   this.genreservice.GetFilmGenre();
   this.genreservice.GetGenres();
   this.filmService.getFilms();
   this.commentsService.getComments();
   this.loginservice.GetAllUsers();
   this.isLoggedIn = this.storageService.isLoggedIn();
-  console.log(this.isLoggedIn);
   if (this.isLoggedIn) {
       this.bookmarkservice.getBookmarks();
-      const user = this.storageService.getUser();
-      const userID = this.storageService.getUserID();
-      console.log(userID.role)
-      if(userID.role==1){
-        this.rolestatus=true;
-        console.log(userID.role);
-        console.log(this.rolestatus);
-
-      }
-      else{
-        this.rolestatus=false;
-        console.log(userID.role);
-        console.log(this.rolestatus);
-      }
-      console.log(user);
-      this.username = user.username;
-      console.log(userID.id_user);
+      const token=this.storageService.getToken();
       timer(1000);
-
-    this.eventBusSub = this.eventBusService.on('logout', () => {
-      this.logout();  
-  });
 }
 
 }

@@ -1,20 +1,21 @@
-import { BookmarksService } from './../shared/bookmarks.service';
-import { FilmsService } from './../shared/films.service';
+import { BookmarksService } from '../_shared/bookmarks.service';
+import { FilmsService } from '../_shared/films.service';
 import { Router, Routes } from '@angular/router';
 import { Component, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgModule, } from '@angular/core';
-import { Login } from 'src/app/shared/Login.model';
-import { LoginService } from 'src/app/shared/Login.service';
+import { Login } from 'src/app/_shared/Login.model';
+import { LoginService } from 'src/app/_shared/Login.service';
 import { NaslovnaStranicaComponent } from 'src/app/naslovna-stranica/naslovna-stranica.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppComponent } from '../app.component';
 import { StorageService } from '../_services/storage.service';
 import { delay } from 'rxjs';
-import { GenreService } from '../shared/genre.service';
+import { GenreService } from '../_shared/genre.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ActivatedRoute } from '@angular/router';
+import { UserStoreService } from '../_services/user-store.service';
 
 
 
@@ -41,7 +42,10 @@ export class LoginStranicaComponent{
   errorMessage = '';
 
   constructor(public service:LoginService,private storageService: StorageService,private toastr:ToastrService, private router: Router,
-    public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService, public navbar:NavbarComponent,private route: ActivatedRoute) {
+    public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService, public navbar:NavbarComponent,
+    private route: ActivatedRoute, private userStore:UserStoreService) 
+    {
+
       if (this.storageService.isLoggedIn()) {
         this.isLoggedIn = true;
         this.bookmarkService.getBookmarks();
@@ -97,6 +101,7 @@ export class LoginStranicaComponent{
         this.toastr.success('Submitted successfully','Register');
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.resetForm(form);
         this.loginACT;
       },
       error: err => {
@@ -111,13 +116,18 @@ export class LoginStranicaComponent{
     this.service.authenticate(form).subscribe(
       res=>{
         console.log(res);
-        this.storageService.saveUser(form.value);
-        this.storageService.saveUserID(res.user);
+        this.storageService.storeToken(res.accessToken);
+        this.storageService.storeRefreshToken(res.refreshToken);
+        const tokenPayload= this.service.decodedToken();
+        this.userStore.setUsernameFromStore(tokenPayload.Username);
+        this.userStore.setRoleFromStore(tokenPayload.role);
+        this.userStore.setIDUserFromStore(tokenPayload.id_user);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.LoginPgStatus=true;
         this.toastr.success('You are logged in');
-        window.location.reload();
+        this.resetForm(form);
+        //window.location.reload();
       },
       err=>{
         console.log(err);

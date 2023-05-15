@@ -192,11 +192,24 @@ export class StorageService {
   }
 
   public isLoggedIn(): boolean {
-    const user = window.localStorage.getItem(USER_KEY);
-    if (user) {
-      return true;
-    }
+    return !!localStorage.getItem('token')
+  }
 
-    return false;
+
+
+  storeToken(tokenvalue:string){
+    localStorage.setItem('token',tokenvalue)
+  }
+
+  storeRefreshToken(tokenvalue:string){
+    localStorage.setItem('refreshToken',tokenvalue)
+  }
+  
+  getToken(){
+    return localStorage.getItem('token')
+  }
+
+  getRefreshToken(){
+    return localStorage.getItem('refreshToken')
   }
 }

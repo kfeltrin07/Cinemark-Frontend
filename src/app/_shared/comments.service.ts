@@ -31,7 +31,6 @@ export class CommentsService {
     this.formData.comment = comment;
     this.formData.id_user = userID.id_user;
 
-    console.log(this.formData);
 
     this.http.post(this.baseURL,this.formData).subscribe();
     this.toastr.success("Comment posted.","Success!")
@@ -45,14 +44,11 @@ export class CommentsService {
   getComments(){
     this.http.get(this.baseURL).toPromise().then(
       res =>{ this.listComments = res as Comments[];
-              console.log(res);
-              console.log(this.listComments); 
               this.storageService.saveComments(this.listComments);
       })  
   }
 
   deleteComment(id:number){
-    console.log(id);
     this.http.delete(`${this.baseURL}/${id}`).subscribe();
     this.getComments();
     history.go(0);
