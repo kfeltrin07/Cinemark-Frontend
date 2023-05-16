@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../_services/storage.service';
 import { Film_Genre } from '../_shared/film_genre.model';
 import { ToastrService } from 'ngx-toastr';
+import { UserStoreService } from '../_services/user-store.service';
+import { LoginService } from '../_shared/Login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-unos-stranica',
@@ -14,7 +17,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UnosStranicaComponent {
 
-  constructor(private http:HttpClient, public storageService:StorageService, private toastr:ToastrService, public filmService:FilmsService) {}
+  public role$:string="";
+
+  constructor(private http:HttpClient, public storageService:StorageService, private toastr:ToastrService, public filmService:FilmsService, 
+    private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
+
+    this.userstore.getRoleFromStore()
+  .subscribe(val=>{
+    let RoleFromToken=this.loginService.getRoleFromToken();
+    this.role$=val||RoleFromToken
+  })
+
+    if(this.role$="user"){
+      this.router.navigate(['']);
+    }
+  }
 
   readonly baseURL = environment.baseURL+'api/Films'
   readonly baseURL2 = environment.baseURL+'api/Film_Genre'

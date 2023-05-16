@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, FormC
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { UserStoreService } from '../_services/user-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-stranica',
@@ -18,11 +20,22 @@ export class AdminStranicaComponent {
 
   user:Login = new Login();
   userList:Login[];
+  public role$:string="";
 
-  constructor(public storageService:StorageService, public loginService:LoginService, private toastr:ToastrService, private http:HttpClient) {
 
+  constructor(public storageService:StorageService, public loginService:LoginService, private toastr:ToastrService, private http:HttpClient, 
+    private userstore:UserStoreService, private router:Router) {
+
+    this.userstore.getRoleFromStore()
+  .subscribe(val=>{
+    let RoleFromToken=this.loginService.getRoleFromToken();
+    this.role$=val||RoleFromToken
+  })
+
+    if(this.role$!='superadmin'){
+      this.router.navigate(['']);
+    }
     this.refreshList();
-    
   }
 
   readonly baseURL = environment.baseURL+'api/Users'

@@ -51,19 +51,19 @@ export class FilmStranicaComponent{
   public id_user$:string="";
 
 
-  constructor(public service:FilmsService, public storageService:StorageService,public loginservice:LoginService, public bookmark:BookmarkStranicaComponent, 
+  constructor(public service:FilmsService, public storageService:StorageService,public loginService:LoginService, public bookmark:BookmarkStranicaComponent, 
     public commentService:CommentsService, private toastr:ToastrService, public genreservice:GenreService, public ratingService:RatingsService, 
     public bookmarkService:BookmarksService, private userstore:UserStoreService) 
     {
       this.userstore.getIDUserFromStore()
       .subscribe(val=>{
-        let id_userFromToken=this.loginservice.getIDUserFromToken();
+        let id_userFromToken=this.loginService.getIDUserFromToken();
         this.id_user$=val||id_userFromToken
       })
       this.selectedFilm = this.storageService.getFilm();
       this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
       this.commentService.getComments();
-      this.loginservice.GetAllUsers();
+      this.loginService.GetAllUsers();
       this.service.updateRating();
       this.changeToFilm();
       this.Checkifbookmarked();
@@ -200,12 +200,12 @@ export class FilmStranicaComponent{
 
   deleteComment(id:number,usid:number){
     console.log(id);
-      if(this.User.role==1){
+      if(this.id_user$==="admin" || this.id_user$==="superadmin"){
           this.commentService.deleteComment(id);
           this.toastr.success("User's comment will be permanently deleted after refresh");
           history.go(0);
       }
-      else if (+this.id_user$==usid) {
+      else if (+this.id_user$===usid) {
           this.commentService.deleteComment(id);
           this.toastr.success("User's comment will be permanently deleted after refresh");
           history.go(0);

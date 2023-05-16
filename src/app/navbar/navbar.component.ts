@@ -28,7 +28,7 @@ export class NavbarComponent {
 
   constructor(
     private storageService: StorageService,private eventBusService: EventBusService, public bookmarkservice:BookmarksService, 
-    public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginservice:LoginService,
+    public genreservice:GenreService, public filmService:FilmsService, public commentsService:CommentsService, public loginService:LoginService,
     public router:Router, private userstore:UserStoreService
   ) 
 {
@@ -36,29 +36,29 @@ export class NavbarComponent {
 
   this.userstore.getUsernameFromStore()
   .subscribe(val=>{
-    let usernameFromToken=this.loginservice.getUsernameFromToken();
+    let usernameFromToken=this.loginService.getUsernameFromToken();
     this.username$=val||usernameFromToken
   })
 
   this.userstore.getRoleFromStore()
   .subscribe(val=>{
-    let RoleFromToken=this.loginservice.getRoleFromToken();
+    let RoleFromToken=this.loginService.getRoleFromToken();
     this.role$=val||RoleFromToken
   })
 
   this.userstore.getIDUserFromStore()
   .subscribe(val=>{
-    let id_userFromToken=this.loginservice.getIDUserFromToken();
+    let id_userFromToken=this.loginService.getIDUserFromToken();
     this.id_user$=val||id_userFromToken
   })
 
-  this.storageService.saveUserID(this.id_user$);
+  
 
   this.genreservice.GetFilmGenre();
   this.genreservice.GetGenres();
   this.filmService.getFilms();
   this.commentsService.getComments();
-  this.loginservice.GetAllUsers();
+  this.loginService.GetAllUsers();
   this.isLoggedIn = this.storageService.isLoggedIn();
   if (this.isLoggedIn) {
       this.bookmarkservice.getBookmarks();
