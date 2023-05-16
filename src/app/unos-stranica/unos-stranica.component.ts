@@ -27,8 +27,8 @@ export class UnosStranicaComponent {
     let RoleFromToken=this.loginService.getRoleFromToken();
     this.role$=val||RoleFromToken
   })
-
-    if(this.role$="user"){
+    
+    if(this.role$==="user"){
       this.router.navigate(['']);
     }
   }
