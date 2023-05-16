@@ -97,14 +97,13 @@ export class LoginStranicaComponent{
   }
 
   onSubmit(form:NgForm):void{
-    this.service.postLogins().subscribe({ 
+    this.service.postRegister().subscribe({ 
       next: res =>{
         this.toastr.success('Submitted successfully','Register');
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.resetForm(form);
         this.loginACT;
-        this.resetForm(form);
       },
       error: err => {
         this.isSignUpFailed = true; 
