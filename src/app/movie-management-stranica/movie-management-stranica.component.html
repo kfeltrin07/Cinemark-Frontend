@@ -27,9 +27,25 @@
                      name="actor" #actor="ngModel" [(ngModel)]="film.main_actor" >
                 </div>
                 <div class="form-group">
-                    <label>RELEASE </label>
+                    <label>RELEASE DATE</label>
                     <input class="form-control form-control-lg" placeholder="Year"
                     name="year" #year="ngModel" [(ngModel)]="film.release_date" >
+               </div>
+               <div class="form-group">
+                    <label>PICTURE URL</label>
+                    <input class="form-control form-control-lg" placeholder="Picture Url"
+                    name="picture" #picture="ngModel" [(ngModel)]="film.picture_url" >
+               </div>
+               <div class="form-group">
+                    <label>TRAILER URL</label>
+                    <input class="form-control form-control-lg" placeholder="Trailer Url"
+                    name="trailer" #trailer="ngModel" [(ngModel)]="film.video_url" >
+               </div>
+               <div class="genre-group">
+                    <label>DELETE GENRES</label>
+                    <div class="genres">
+                        <td *ngFor="let genres of genreList" (click)="deleteGenre(genres)">{{genres.name}}</td>
+                    </div>
                </div>
                <div class="form-group">
                     <button type="submit">SAVE CHANGES</button>
