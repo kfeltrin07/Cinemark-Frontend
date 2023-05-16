@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FilmsService } from '../_shared/films.service';
+import { FilmGenreService } from '../_shared/film-genre.service';
 import { Films } from '../_shared/films.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +21,7 @@ export class UnosStranicaComponent {
   public role$:string="";
 
   constructor(private http:HttpClient, public storageService:StorageService, private toastr:ToastrService, public filmService:FilmsService, 
-    private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
+    public filmGenreService:FilmGenreService,private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
 
     this.userstore.getRoleFromStore()
   .subscribe(val=>{
@@ -34,13 +35,13 @@ export class UnosStranicaComponent {
   }
 
   readonly baseURL = environment.baseURL+'api/Films'
-  readonly baseURL2 = environment.baseURL+'api/Film_Genre'
   newFilm:Films = new Films;
   idFilm:number;
   idGenre:number;
   genreFilm:Film_Genre = new Film_Genre;
   selectedGenre:number;
   check:boolean=false;
+  films: any;
 
   addNewMovie(){
     const title = document.getElementById("titleID") as HTMLInputElement;
@@ -60,35 +61,60 @@ export class UnosStranicaComponent {
     this.newFilm.summary = summary.value;
 
     var x = document.getElementById("selectedGenre") as HTMLSelectElement;
-    console.log(this.newFilm);
 
     this.selectedGenre = parseInt(x.value);
+    
 
-    const films = this.storageService.getFilms();
-    for(var film of films){
+    this.films = this.storageService.getFilms();
+    
+    for(var film of this.films){
       if(this.newFilm.title == film.title){
         this.check = true;
       }
     }
 
-   if(this.check == false){
-      this.http.post(this.baseURL,this.newFilm).subscribe();
-      this.toastr.success("Success!","Movie Added!")
-    }
-    this.filmService.getFilms();
-    this.addGenreToMovie(title.value, this.selectedGenre);
+   if(this.check == false)
+    this.AddMovie(this.newFilm, this.selectedGenre);
+
+    //else
+      //this.addGenreToMovie(title.value, this.selectedGenre);
   }
 
-  addGenreToMovie(title:string,genreID:number){
+   AddMovie(newFilm: Films, genre:Number) {
+
+    this.filmService.newMovie(newFilm).subscribe({ 
+      next: res =>{
+      this.toastr.success("Success!","Movie Added!")
+      },
+      error: err => {
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+      }
+    });
+
+    this.filmGenreService.addGenreToMovie(newFilm,genre).subscribe({ 
+      next: res =>{
+      this.toastr.success("Success!","Genre added!")
+      },
+      error: err => {
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+      }
+    });
+
+
+  }
+
+  /*addGenreToMovie(title:string,genreID:number){
     this.filmService.getFilms();
-    const films = this.storageService.getFilms();
-    for(var film of films){
+     this.films = this.storageService.getFilms();
+    for(var film of this.films){
       if(film.title == title){
         this.idFilm = film.id_film;
       }
     }
-
-    console.log(films);
 
     const genres = this.storageService.getGenres();
     for(var genre of genres){
@@ -100,12 +126,13 @@ export class UnosStranicaComponent {
     this.genreFilm.id_film = this.idFilm;
     this.genreFilm.id_genre = this.idGenre;
 
-    console.log(this.genreFilm);
-
     if(this.check==true){
       this.http.post(this.baseURL2,this.genreFilm).subscribe();
       this.toastr.success("Success!","Genre Updated!")
     }
-  }
+  }*/
 
+  
 }
+
+

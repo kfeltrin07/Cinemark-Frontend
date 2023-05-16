@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Films } from './films.model';
 import { RatingsService } from './ratings.service';
 import { environment } from 'src/environments/environment';
@@ -8,10 +8,15 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Ratings } from './ratings.model';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class FilmsService {
+  
 
 
   constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService,
@@ -32,7 +37,6 @@ export class FilmsService {
   user: any;
 
   searchFilms: Films[];
-
 
   getFilms(){
     this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
@@ -133,4 +137,9 @@ export class FilmsService {
       }
     }
   }
+
+  newMovie(film:Films): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}`,film,httpOptions);
+  }
+   
 }
