@@ -42,11 +42,11 @@ export class BookmarkStranicaComponent {
 
 
   constructor(public filmsService:FilmsService,public storageService:StorageService,private toastr:ToastrService, public bookmarkService: BookmarksService, 
-    public genreService:GenreService, public router:Router, private userstore:UserStoreService, private loginservice:LoginService) {
+    public genreService:GenreService, public router:Router, private userstore:UserStoreService, private loginService:LoginService) {
 
       this.userstore.getIDUserFromStore()
       .subscribe(val=>{
-    let id_userFromToken=this.loginservice.getIDUserFromToken();
+    let id_userFromToken=this.loginService.getIDUserFromToken();
     this.id_user$=val||id_userFromToken
   })
       if (this.storageService.isLoggedIn()==true) {

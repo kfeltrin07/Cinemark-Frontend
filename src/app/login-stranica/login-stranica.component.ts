@@ -132,6 +132,7 @@ export class LoginStranicaComponent{
         window.location.reload();
       },
       err=>{
+        console.log(err);
         const json = JSON.parse(JSON.stringify(err.error));
         const messageReceived = json.message;
         this.toastr.error(messageReceived);

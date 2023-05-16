@@ -16,7 +16,7 @@ import { LoginService } from '../_shared/Login.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private storage:StorageService, private toastr:ToastrService, private router:Router, private loginService:LoginService) {}
+  constructor(private storage:StorageService, private toastr:ToastrService, private router:Router, private loginService:LoginService, private storageService:StorageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -33,7 +33,7 @@ export class TokenInterceptor implements HttpInterceptor {
       if(err instanceof HttpErrorResponse){
         if(err.status===401){
           //handle
-          this.handleUnAuthorizedError(request,next);
+          return this.handleUnAuthorizedError(request,next);
 
         }
       }
@@ -43,6 +43,12 @@ export class TokenInterceptor implements HttpInterceptor {
       return throwError(()=> new Error(messageReceived))
     })
     );
+  }
+
+  logout(): void {
+    this.storageService.clean();
+    this.router.navigate(['']);
+    window.location.reload(); 
   }
 
   handleUnAuthorizedError(req:HttpRequest<any>, next:HttpHandler){
@@ -61,7 +67,7 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((err)=>{
         return throwError(()=>{
           this.toastr.warning("Token is expired, Login again");
-          this.router.navigate(["login"])
+          this.logout();
         })
       })
     )
