@@ -12,6 +12,7 @@ import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
+import { MovieManagementStranicaComponent } from './movie-management-stranica/movie-management-stranica.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'search', component:SearchStranicaComponent},
   {path: 'unos', component:UnosStranicaComponent, canActivate:[AuthGuard]},
   {path: 'admin', component:AdminStranicaComponent, canActivate:[AuthGuard]},
+  {path: 'movie-management', component:MovieManagementStranicaComponent, canActivate:[AuthGuard]},
   {path: '', redirectTo: 'navbar', pathMatch: 'full' }
 ];
 

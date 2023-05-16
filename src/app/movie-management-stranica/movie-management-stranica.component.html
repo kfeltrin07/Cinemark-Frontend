@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="movie-management-stranica.component.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    </head>
+
+    <div class="heading">
+        <h1>Movie details</h1>
+        <h2>Movie List</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form novalidate #form="ngForm" (submit)="onSubmit(form)">
+                <div class="form-group">
+                     <label>MOVIE TITLE</label>
+                     <input class="form-control form-control-lg" placeholder="Movie Title"
+                     name="moveTitle" #movieTitle="ngModel" [(ngModel)]="film.title" >
+                </div>
+                <div class="form-group">
+                    <label>DIRECTOR</label>
+                    <input class="form-control form-control-lg" placeholder="Director"
+                    name="director" #director="ngModel" [(ngModel)]="film.director" >
+               </div>
+                <div class="form-group">
+                     <label>ACTOR</label>
+                     <input class="form-control form-control-lg" placeholder="Main Actor"
+                     name="actor" #actor="ngModel" [(ngModel)]="film.main_actor" >
+                </div>
+                <div class="form-group">
+                    <label>RELEASE </label>
+                    <input class="form-control form-control-lg" placeholder="Year"
+                    name="year" #year="ngModel" [(ngModel)]="film.release_date" >
+               </div>
+               <div class="form-group">
+                    <button type="submit">SAVE CHANGES</button>
+               </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <section class="table_body">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Title</th>
+                            <th>Director</th>
+                            <th>Actor</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor ="let fi of filmService.list">
+                            <td (click)="populateForm(fi)">{{fi.title}}</td>
+                            <td (click)="populateForm(fi)">{{fi.director}}</td>
+                            <td (click)="populateForm(fi)">{{fi.main_actor}}</td>
+                            <td (click)="populateForm(fi)">{{fi.release_date.substring(0,4)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+</html>

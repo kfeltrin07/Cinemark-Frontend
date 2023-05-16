@@ -27,6 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TokenInterceptor } from './_helpers/token.interceptor';
 import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
+import { MovieManagementStranicaComponent } from './movie-management-stranica/movie-management-stranica.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AdminStranicaComponent } from './admin-stranica/admin-stranica.componen
     BookmarkStranicaComponent,
     UnosStranicaComponent,
     NavbarComponent,
-    AdminStranicaComponent
+    AdminStranicaComponent,
+    MovieManagementStranicaComponent
   ],
   imports: [
     BrowserModule,
