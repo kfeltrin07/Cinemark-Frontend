@@ -49,6 +49,7 @@ export class FilmStranicaComponent{
   isuser=false;
   User:any;
   public id_user$:string="";
+  public role$:string="";
 
 
   constructor(public service:FilmsService, public storageService:StorageService,public loginService:LoginService, public bookmark:BookmarkStranicaComponent, 
@@ -59,6 +60,11 @@ export class FilmStranicaComponent{
       .subscribe(val=>{
         let id_userFromToken=this.loginService.getIDUserFromToken();
         this.id_user$=val||id_userFromToken
+      })
+      this.userstore.getRoleFromStore()
+      .subscribe(val=>{
+        let RoleFromToken=this.loginService.getRoleFromToken();
+        this.role$=val||RoleFromToken
       })
       this.selectedFilm = this.storageService.getFilm();
       this.genre=this.genreservice.GenreForFilm(this.selectedFilm.id_film);
@@ -200,7 +206,7 @@ export class FilmStranicaComponent{
 
   deleteComment(id:number,usid:number){
     console.log(id);
-      if(this.id_user$==="admin" || this.id_user$==="superadmin"){
+      if(this.role$==="admin" || this.role$==="superadmin"){
           this.commentService.deleteComment(id);
           this.toastr.success("User's comment will be permanently deleted after refresh");
           history.go(0);
