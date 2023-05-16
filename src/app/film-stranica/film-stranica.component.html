@@ -73,7 +73,7 @@
                     <p>
                         {{comm.comment}}
                     </p>
-                    <button class="delete" (click)="deleteComment(comm.id_comment,comm.id_user)">Delete</button>
+                    <button *ngIf="role$==='admin' || role$==='superadmin' || id_user$===comm.id_user" class="delete" (click)="deleteComment(comm.id_comment,comm.id_user)">Delete</button>
                 </div>
             </div>
         </div>
