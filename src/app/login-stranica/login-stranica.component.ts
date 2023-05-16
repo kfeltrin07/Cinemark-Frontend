@@ -118,7 +118,6 @@ export class LoginStranicaComponent{
   onLogin(form:NgForm){
     this.service.authenticate(form).subscribe(
       res=>{
-        console.log(res);
         this.storageService.storeToken(res.accessToken);
         this.storageService.storeRefreshToken(res.refreshToken);
         const tokenPayload= this.service.decodedToken();

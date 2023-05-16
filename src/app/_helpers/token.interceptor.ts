@@ -37,7 +37,10 @@ export class TokenInterceptor implements HttpInterceptor {
 
         }
       }
-      return throwError(()=> new Error("Another error occured"))
+      const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+      return throwError(()=> new Error(messageReceived))
     })
     );
   }
