@@ -9,9 +9,6 @@ import { FilmsService } from '../_shared/films.service';
 import { GenreService } from '../_shared/genre.service';
 import { Film_Genre } from '../_shared/film_genre.model';
 import { Genres } from '../_shared/genre.model';
-import { UserStoreService } from '../_services/user-store.service';
-import { LoginService } from '../_shared/Login.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-management-stranica',
@@ -20,7 +17,6 @@ import { Router } from '@angular/router';
 })
 export class MovieManagementStranicaComponent {
 
-  public role$:string="";
   film:Films = new Films();
   filmList:Films[];
   genreList:Genres[];
@@ -29,17 +25,8 @@ export class MovieManagementStranicaComponent {
   readonly baseURL = environment.baseURL+'api/Films'
   readonly baseURL2 = environment.baseURL + 'api/Film_Genre'
   
-  constructor(public storageService:StorageService, private toastr:ToastrService, private http:HttpClient, public filmService:FilmsService, 
-    public genreService:GenreService, private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
+  constructor(public storageService:StorageService, private toastr:ToastrService, private http:HttpClient, public filmService:FilmsService, public genreService:GenreService) {
 
-    this.userstore.getRoleFromStore()
-  .subscribe(val=>{
-    let RoleFromToken=this.loginService.getRoleFromToken();
-    this.role$=val||RoleFromToken
-  })
-    if(this.role$!='superadmin'){
-      this.router.navigate(['']);
-    }
     this.refreshList();
     this.getGenres();
   }
