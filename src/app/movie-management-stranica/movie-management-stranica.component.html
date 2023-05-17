@@ -45,6 +45,7 @@
                     <label>DELETE GENRES</label>
                     <div class="genres">
                         <td *ngFor="let genres of genreList" (click)="deleteGenre(genres)">{{genres.name}}</td>
+                        <td class="new-genre">New Genre</td>
                     </div>
                </div>
                <div class="form-group">

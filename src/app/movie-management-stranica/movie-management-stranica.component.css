@@ -164,3 +164,12 @@ form button:hover{
     border: 1px solid rgb(73, 73, 73);
     border-radius: 4px;
 }
+
+.genre-group .new-genre{
+    background-color: #52ab68;
+    border: 1px solid #265030;
+}
+
+.genre-group .new-genre:hover{
+    background-color: #52ce71;
+}
