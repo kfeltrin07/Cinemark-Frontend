@@ -30,6 +30,11 @@ export class SortByStranicaComponent implements OnInit {
   filmGenre:Film_Genre;
 
   filteredFilms:any[];
+  genreFilter: number;
+  ratingFilter: number;
+  yearFilter: string;
+
+  displayedFilms: Films[];
 
   
 
@@ -53,7 +58,7 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByGenre(id_genre:number){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("test");
     const filmgenre=this.storageService.getFilmGenres()
     const films= this.storageService.getFilms()
@@ -61,23 +66,25 @@ export class SortByStranicaComponent implements OnInit {
       if(id_genre == item.id_genre){
         for(var film of films){
           if(item.id_film == film.id_film){
-            this.sortedFilms.push(film);
+            this.displayedFilms.push(film);
           }
         }
       }
     }
 
-    var x = document.getElementById("paginator") as unknown as PaginationControlsComponent;
-    x.pageChange
+    var x = document.getElementById("pagiator") as unknown as PaginationControlsComponent;
+    x.pageChange;
   }
 
+  
+
   sortFilmByBestRated(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testBestRated");
 
     for(var item of this.service.list){
       if((item.total_rating)/(item.rating_count) >= 4.4){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
 
     }
@@ -86,95 +93,106 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByRatingCount(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testRatingCount");
 
     for(var item of this.service.list){
       if(item.rating_count >= 15){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   sortFilmByYear2023(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testYear2023");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) == "2023"){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   sortFilmByYear2021_2022(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testYear21/22");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "2021" && item.release_date.substring(0,4) < "2023"){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   sortFilmByYear2010_2020(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testYear10/20");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "2010" && item.release_date.substring(0,4) < "2020"){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   sortFilmByYear2000_2010(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testYear00/10");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "2000" && item.release_date.substring(0,4) < "2010"){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   sortFilmByYear1990_2000(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testYear90/00");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "1990" && item.release_date.substring(0,4) < "2000"){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   sortFilmByYearOlder(){
-    this.sortedFilms = [];
+    this.displayedFilms = [];
     console.log("testYearOlder");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) <= "1990"){
-        this.sortedFilms.push(item);
+        this.displayedFilms.push(item);
       }
     }
   }
 
   getAllFilms(){
     const films= this.storageService.getFilms()
-    this.sortedFilms = films;
+    this.displayedFilms = films;
   }
 
   scrollToTop(event: any){
     window.scrollTo({top:0, behavior: 'smooth'})
   }
 
-  /*onPageChange(event: any){
-    if (this.pageSize <= 5){
-      this.page = 1;
-    }
+
+  /*currentPage(page: number){   
+      this.currentPage = 1;
   }*/
+  
+  checkboxCheck(){
+    var x = document.getElementById("checkbox") as HTMLInputElement;
+
+    console.log(x.checked);
+
+    if(x.checked){
+      this.displayedFilms = this.filteredFilms;
+    }else{
+      this.displayedFilms = this.sortedFilms;
+    }
+  }
 
 }
