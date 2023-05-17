@@ -147,4 +147,30 @@ form button:hover{
     text-align: center;
 }
 
+.form-group select{
+    font-family: "Nexa-Light";
+    font-size: 18px;
+    width: 100%;
+    margin:auto;
+    appearance: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    background-image: none;
+    background: rgba(22, 22, 22, 0.734);
+}
+
+.form-group select::-ms-expand{
+    display:none;
+}
+
+.form-group select{
+    flex:0.94;
+    padding: 0.5rem;
+    color:#fff;
+    cursor:pointer;
+    border: 1px solid rgb(61, 61, 61);
+    border-radius: 4px;
+}
+
 

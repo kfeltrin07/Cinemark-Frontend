@@ -57,6 +57,8 @@ export class AdminStranicaComponent {
   }
 
   resetForm(form:NgForm){
+    var x = document.getElementById("selectedRole") as HTMLSelectElement;
+    x.selectedIndex = 0;
     form.form.reset();
     this.user = new Login();
   }
@@ -71,6 +73,10 @@ export class AdminStranicaComponent {
   }
   
   updateUser(form: NgForm){
+    var x = document.getElementById("selectedRole") as HTMLSelectElement;
+    if(x.value != "Choose a role"){
+      this.user.role = x.value;
+    }
     this.http.put(`${this.baseURL}/${this.user.id_user}`,this.user).subscribe();
     this.toastr.info("All changes saved.","Updated!")
     this.refreshList();
@@ -95,6 +101,5 @@ export class AdminStranicaComponent {
     this.refreshList();
     this.toastr.error("User Viped Out.","Deleted!")
     this.refreshList();
-
   }
 }
