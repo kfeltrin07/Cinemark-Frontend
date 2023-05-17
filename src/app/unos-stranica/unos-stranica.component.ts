@@ -18,32 +18,32 @@ import { Router } from '@angular/router';
 })
 export class UnosStranicaComponent {
 
-  public role$:string="";
+  public role$: string = "";
 
-  constructor(private http:HttpClient, public storageService:StorageService, private toastr:ToastrService, public filmService:FilmsService, 
-    public filmGenreService:FilmGenreService,private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
+  constructor(private http: HttpClient, public storageService: StorageService, private toastr: ToastrService, public filmService: FilmsService,
+    public filmGenreService: FilmGenreService, private userstore: UserStoreService, private loginService: LoginService, private router: Router) {
 
     this.userstore.getRoleFromStore()
-  .subscribe(val=>{
-    let RoleFromToken=this.loginService.getRoleFromToken();
-    this.role$=val||RoleFromToken
-  })
-    
-    if(this.role$==="user"){
+      .subscribe(val => {
+        let RoleFromToken = this.loginService.getRoleFromToken();
+        this.role$ = val || RoleFromToken
+      })
+
+    if (this.role$ === "user") {
       this.router.navigate(['']);
     }
   }
 
-  readonly baseURL = environment.baseURL+'api/Films'
-  newFilm:Films = new Films;
-  idFilm:number;
-  idGenre:number;
-  genreFilm:Film_Genre = new Film_Genre;
-  selectedGenre:number;
-  check:boolean=false;
+  readonly baseURL = environment.baseURL + 'api/Films'
+  newFilm: Films = new Films;
+  idFilm: number;
+  idGenre: number;
+  genreFilm: Film_Genre = new Film_Genre;
+  selectedGenre: number;
+  check: boolean = false;
   films: any;
 
-  addNewMovie(){
+  addNewMovie() {
     const title = document.getElementById("titleID") as HTMLInputElement;
     const director = document.getElementById("directorID") as HTMLInputElement;
     const actor = document.getElementById("actorID") as HTMLInputElement;
@@ -51,7 +51,7 @@ export class UnosStranicaComponent {
     const picture = document.getElementById("pictureID") as HTMLInputElement;
     const trailer = document.getElementById("trailerID") as HTMLInputElement;
     const summary = document.getElementById("summaryID") as HTMLInputElement;
-    
+
     this.newFilm.title = title.value;
     this.newFilm.director = director.value;
     this.newFilm.main_actor = actor.value;
@@ -65,33 +65,31 @@ export class UnosStranicaComponent {
     this.selectedGenre = parseInt(x.value);
 
     this.films = this.storageService.getFilms();
-    
-    for(var film of this.films){
-      if(this.newFilm.title == film.title){
+
+    for (var film of this.films) {
+      if (this.newFilm.title == film.title) {
         this.check = true;
         this.newFilm.id_film = film.id_film;
       }
     }
 
-   if(this.check == false)
+    if (this.check == false)
       this.AddMovie(this.newFilm, this.selectedGenre);
     else
       this.AddGenreToMovie(this.newFilm.id_film, this.selectedGenre);
   }
- 
+
   AddMovie(newFilm: Films, genre: number) {
-    var idNewMovie = 0;
-  
-    this.filmService.newMovie(newFilm).subscribe({ 
+    this.filmService.newMovie(newFilm).subscribe({
       next: res => {
-        idNewMovie = res.id_film;
+        this.newFilm.id_film = res.id_film;
         this.toastr.success("Success!", "Movie Added!");
-  
+
         const newFilmGenre = new Film_Genre();
-        newFilmGenre.id_film = idNewMovie;
+        newFilmGenre.id_film = this.newFilm.id_film;
         newFilmGenre.id_genre = genre;
-  
-        this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({ 
+
+        this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({
           next: res => {
             this.toastr.success("Success!", "Genre added!");
           },
@@ -108,17 +106,16 @@ export class UnosStranicaComponent {
         this.toastr.error(messageReceived);
       }
     });
+    this.filmService.getFilms();
   }
 
   AddGenreToMovie(id_filmPassed: number, selectedGenre: number) {
-
     const newFilmGenre = new Film_Genre();
     newFilmGenre.id_film = id_filmPassed;
     newFilmGenre.id_genre = selectedGenre;
 
-    this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({ 
+    this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({
       next: res => {
-        console.log(res);
         this.toastr.success("Success!", "Genre added!");
       },
       error: err => {
@@ -130,5 +127,3 @@ export class UnosStranicaComponent {
   }
 
 }
-
-

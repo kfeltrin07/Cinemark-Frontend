@@ -73,7 +73,7 @@ export class BookmarkStranicaComponent {
       this.check=false;
 
       //generiranje random broja od 0-20
-      let x = Math.round(Math.random()*50);
+      let x = Math.round(Math.random()*250);
 
       //prolaz kroz listu svih filmova
       for(var film of films){
