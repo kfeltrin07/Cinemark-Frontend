@@ -25,6 +25,7 @@ export class MovieManagementStranicaComponent {
   filmList:Films[];
   genreList:Genres[];
   filmGenreList:Film_Genre[];
+  genreFilm:Film_Genre = new Film_Genre();
   idDelete:number;
   readonly baseURL = environment.baseURL+'api/Films'
   readonly baseURL2 = environment.baseURL + 'api/Film_Genre'
@@ -123,5 +124,26 @@ export class MovieManagementStranicaComponent {
         }
       }
     }
+  }
+
+  openPopup(){
+    let popup = document.getElementById("popup") as HTMLDivElement;
+    
+    popup.classList.add("open-popup");
+  }
+
+  closePopup(){
+    let popup = document.getElementById("popup") as HTMLDivElement;
+    
+    popup.classList.remove("open-popup");
+
+    var x = document.getElementById("selectedGenre") as HTMLSelectElement;
+
+    this.genreFilm.id_film = this.film.id_film;
+    this.genreFilm.id_genre = parseInt(x.value);
+
+    console.log(this.genreFilm);
+    this.http.post(this.baseURL2,this.genreFilm).subscribe();
+    this.toastr.success("Success!","Genre Updated!")
   }
 }
