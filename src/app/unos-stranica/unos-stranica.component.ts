@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FilmsService } from '../_shared/films.service';
+import { FilmGenreService } from '../_shared/film-genre.service';
 import { Films } from '../_shared/films.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +21,7 @@ export class UnosStranicaComponent {
   public role$:string="";
 
   constructor(private http:HttpClient, public storageService:StorageService, private toastr:ToastrService, public filmService:FilmsService, 
-    private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
+    public filmGenreService:FilmGenreService,private userstore:UserStoreService, private loginService:LoginService, private router:Router) {
 
     this.userstore.getRoleFromStore()
   .subscribe(val=>{
@@ -34,13 +35,13 @@ export class UnosStranicaComponent {
   }
 
   readonly baseURL = environment.baseURL+'api/Films'
-  readonly baseURL2 = environment.baseURL+'api/Film_Genre'
   newFilm:Films = new Films;
   idFilm:number;
   idGenre:number;
   genreFilm:Film_Genre = new Film_Genre;
   selectedGenre:number;
   check:boolean=false;
+  films: any;
 
   addNewMovie(){
     const title = document.getElementById("titleID") as HTMLInputElement;
@@ -60,52 +61,74 @@ export class UnosStranicaComponent {
     this.newFilm.summary = summary.value;
 
     var x = document.getElementById("selectedGenre") as HTMLSelectElement;
-    console.log(this.newFilm);
 
     this.selectedGenre = parseInt(x.value);
 
-    const films = this.storageService.getFilms();
-    for(var film of films){
+    this.films = this.storageService.getFilms();
+    
+    for(var film of this.films){
       if(this.newFilm.title == film.title){
         this.check = true;
+        this.newFilm.id_film = film.id_film;
       }
     }
 
-   if(this.check == false){
-      this.http.post(this.baseURL,this.newFilm).subscribe();
-      this.toastr.success("Success!","Movie Added!")
-    }
-    this.filmService.getFilms();
-    this.addGenreToMovie(title.value, this.selectedGenre);
+   if(this.check == false)
+      this.AddMovie(this.newFilm, this.selectedGenre);
+    else
+      this.AddGenreToMovie(this.newFilm.id_film, this.selectedGenre);
+  }
+ 
+  AddMovie(newFilm: Films, genre: number) {
+    var idNewMovie = 0;
+  
+    this.filmService.newMovie(newFilm).subscribe({ 
+      next: res => {
+        idNewMovie = res.id_film;
+        this.toastr.success("Success!", "Movie Added!");
+  
+        const newFilmGenre = new Film_Genre();
+        newFilmGenre.id_film = idNewMovie;
+        newFilmGenre.id_genre = genre;
+  
+        this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({ 
+          next: res => {
+            this.toastr.success("Success!", "Genre added!");
+          },
+          error: err => {
+            const json = JSON.parse(JSON.stringify(err.error));
+            const messageReceived = json.message;
+            this.toastr.error(messageReceived);
+          }
+        });
+      },
+      error: err => {
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+      }
+    });
   }
 
-  addGenreToMovie(title:string,genreID:number){
-    this.filmService.getFilms();
-    const films = this.storageService.getFilms();
-    for(var film of films){
-      if(film.title == title){
-        this.idFilm = film.id_film;
+  AddGenreToMovie(id_filmPassed: number, selectedGenre: number) {
+
+    const newFilmGenre = new Film_Genre();
+    newFilmGenre.id_film = id_filmPassed;
+    newFilmGenre.id_genre = selectedGenre;
+
+    this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({ 
+      next: res => {
+        console.log(res);
+        this.toastr.success("Success!", "Genre added!");
+      },
+      error: err => {
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
       }
-    }
-
-    console.log(films);
-
-    const genres = this.storageService.getGenres();
-    for(var genre of genres){
-      if(genre.id_genre == genreID){
-        this.idGenre = genre.id_genre;
-      }
-    }
-
-    this.genreFilm.id_film = this.idFilm;
-    this.genreFilm.id_genre = this.idGenre;
-
-    console.log(this.genreFilm);
-
-    if(this.check==true){
-      this.http.post(this.baseURL2,this.genreFilm).subscribe();
-      this.toastr.success("Success!","Genre Updated!")
-    }
+    });
   }
 
 }
+
+
