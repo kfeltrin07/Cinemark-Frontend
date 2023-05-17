@@ -15,9 +15,8 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class FilmsService {
-  
 
+export class FilmsService {
 
   constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService,
     private toastr:ToastrService) { }
@@ -56,9 +55,10 @@ export class FilmsService {
       }
   }
 
-  getFilmByName(){
+  getFilmByName(title : String){
     return this.selectedFilm;
   }
+  
 
   getSearchedFilms(searchInput:string){
       

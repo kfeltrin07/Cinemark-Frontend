@@ -63,76 +63,72 @@ export class UnosStranicaComponent {
     var x = document.getElementById("selectedGenre") as HTMLSelectElement;
 
     this.selectedGenre = parseInt(x.value);
-    
 
     this.films = this.storageService.getFilms();
     
     for(var film of this.films){
       if(this.newFilm.title == film.title){
         this.check = true;
+        this.newFilm.id_film = film.id_film;
       }
     }
 
    if(this.check == false)
-    this.AddMovie(this.newFilm, this.selectedGenre);
-
-    //else
-      //this.addGenreToMovie(title.value, this.selectedGenre);
+      this.AddMovie(this.newFilm, this.selectedGenre);
+    else
+      this.AddGenreToMovie(this.newFilm.id_film, this.selectedGenre);
   }
-
-   AddMovie(newFilm: Films, genre:Number) {
-
-    this.filmService.newMovie(newFilm).subscribe({ 
-      next: res =>{
-      this.toastr.success("Success!","Movie Added!")
-      },
-      error: err => {
-        const json = JSON.parse(JSON.stringify(err.error));
-        const messageReceived = json.message;
-        this.toastr.error(messageReceived);
-      }
-    });
-
-    this.filmGenreService.addGenreToMovie(newFilm,genre).subscribe({ 
-      next: res =>{
-      this.toastr.success("Success!","Genre added!")
-      },
-      error: err => {
-        const json = JSON.parse(JSON.stringify(err.error));
-        const messageReceived = json.message;
-        this.toastr.error(messageReceived);
-      }
-    });
-
-
-  }
-
-  /*addGenreToMovie(title:string,genreID:number){
-    this.filmService.getFilms();
-     this.films = this.storageService.getFilms();
-    for(var film of this.films){
-      if(film.title == title){
-        this.idFilm = film.id_film;
-      }
-    }
-
-    const genres = this.storageService.getGenres();
-    for(var genre of genres){
-      if(genre.id_genre == genreID){
-        this.idGenre = genre.id_genre;
-      }
-    }
-
-    this.genreFilm.id_film = this.idFilm;
-    this.genreFilm.id_genre = this.idGenre;
-
-    if(this.check==true){
-      this.http.post(this.baseURL2,this.genreFilm).subscribe();
-      this.toastr.success("Success!","Genre Updated!")
-    }
-  }*/
-
+ 
+  AddMovie(newFilm: Films, genre: number) {
+    var idNewMovie = 0;
   
+    this.filmService.newMovie(newFilm).subscribe({ 
+      next: res => {
+        idNewMovie = res.id_film;
+        this.toastr.success("Success!", "Movie Added!");
+  
+        const newFilmGenre = new Film_Genre();
+        newFilmGenre.id_film = idNewMovie;
+        newFilmGenre.id_genre = genre;
+  
+        this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({ 
+          next: res => {
+            this.toastr.success("Success!", "Genre added!");
+          },
+          error: err => {
+            const json = JSON.parse(JSON.stringify(err.error));
+            const messageReceived = json.message;
+            this.toastr.error(messageReceived);
+          }
+        });
+      },
+      error: err => {
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+      }
+    });
+  }
+
+  AddGenreToMovie(id_filmPassed: number, selectedGenre: number) {
+
+    const newFilmGenre = new Film_Genre();
+    newFilmGenre.id_film = id_filmPassed;
+    newFilmGenre.id_genre = selectedGenre;
+
+    this.filmGenreService.addGenreToMovie(newFilmGenre).subscribe({ 
+      next: res => {
+        console.log(res);
+        this.toastr.success("Success!", "Genre added!");
+      },
+      error: err => {
+        const json = JSON.parse(JSON.stringify(err.error));
+        const messageReceived = json.message;
+        this.toastr.error(messageReceived);
+      }
+    });
+  }
+
 }
 
 
