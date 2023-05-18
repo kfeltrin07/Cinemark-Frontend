@@ -16,10 +16,11 @@ import { Router } from '@angular/router';
   templateUrl: './unos-stranica.component.html',
   styleUrls: ['./unos-stranica.component.css']
 })
+
 export class UnosStranicaComponent {
 
   public role$: string = "";
-  genres:any[];
+  genres: any[];
 
 
 
@@ -32,7 +33,7 @@ export class UnosStranicaComponent {
         this.role$ = val || RoleFromToken
       })
 
-      this.genres=this.storageService.getGenres();
+    this.genres = this.storageService.getGenres();
     if (this.role$ === "user") {
       this.router.navigate(['']);
     }
@@ -48,7 +49,9 @@ export class UnosStranicaComponent {
   films: any;
 
   addNewMovie() {
+
     this.check = false;
+
     const title = document.getElementById("titleID") as HTMLInputElement;
     const director = document.getElementById("directorID") as HTMLInputElement;
     const actor = document.getElementById("actorID") as HTMLInputElement;
@@ -57,6 +60,7 @@ export class UnosStranicaComponent {
     const trailer = document.getElementById("trailerID") as HTMLInputElement;
     const summary = document.getElementById("summaryID") as HTMLInputElement;
 
+    this.newFilm.id_film = 0;
     this.newFilm.title = title.value;
     this.newFilm.director = director.value;
     this.newFilm.main_actor = actor.value;
@@ -64,24 +68,27 @@ export class UnosStranicaComponent {
     this.newFilm.picture_url = picture.value;
     this.newFilm.video_url = trailer.value;
     this.newFilm.summary = summary.value;
+    var genre = document.getElementById("selectedGenre") as HTMLSelectElement;
+    this.selectedGenre = parseInt(genre.value);
 
-    var x = document.getElementById("selectedGenre") as HTMLSelectElement;
+    this.filmService.getFilms().then(x => {
+      this.storageService.clean()
+      this.storageService.saveFilms(x);
+      this.films = x;
 
-    this.selectedGenre = parseInt(x.value);
-
-    this.films = this.storageService.getFilms();
-
-    for (var film of this.films) {
-      if (this.newFilm.title == film.title) {
-        this.check = true;
-        this.newFilm.id_film = film.id_film;
+      for (var film of this.films) {
+        if (this.newFilm.title == film.title) {
+          this.check = true;
+          this.newFilm.id_film = film.id_film;
+        }
       }
-    }
 
-    if (this.check == false)
-      this.AddMovie(this.newFilm, this.selectedGenre);
-    else
-      this.AddGenreToMovie(this.newFilm.id_film, this.selectedGenre);
+      if (this.check == false)
+        this.AddMovie(this.newFilm, this.selectedGenre);
+      else
+        this.AddGenreToMovie(this.newFilm.id_film, this.selectedGenre);
+    });
+
   }
 
   AddMovie(newFilm: Films, genre: number) {
@@ -111,10 +118,6 @@ export class UnosStranicaComponent {
         this.toastr.error(messageReceived);
       }
     });
-
-    this.filmService.getFilms().then(x=>{
-      this.films = x;
-    } );
   }
 
   AddGenreToMovie(id_filmPassed: number, selectedGenre: number) {
