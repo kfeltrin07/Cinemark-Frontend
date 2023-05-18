@@ -19,6 +19,9 @@ import { Router } from '@angular/router';
 export class UnosStranicaComponent {
 
   public role$: string = "";
+  genres:any[];
+
+
 
   constructor(private http: HttpClient, public storageService: StorageService, private toastr: ToastrService, public filmService: FilmsService,
     public filmGenreService: FilmGenreService, private userstore: UserStoreService, private loginService: LoginService, private router: Router) {
@@ -29,6 +32,7 @@ export class UnosStranicaComponent {
         this.role$ = val || RoleFromToken
       })
 
+      this.genres=this.storageService.getGenres();
     if (this.role$ === "user") {
       this.router.navigate(['']);
     }

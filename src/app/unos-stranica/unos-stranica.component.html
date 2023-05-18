@@ -44,20 +44,7 @@
                 <label>Genre</label>
                 <select name="format" id="selectedGenre">
                     <option selected disabled>Choose a genre</option>
-                    <option value="1">Action</option>
-                    <option value="2">Romance</option>
-                    <option value="3">Drama</option>
-                    <option value="4">Historical</option>
-                    <option value="5">Adventure</option>
-                    <option value="6">War</option>
-                    <option value="7">Comedy</option>
-                    <option value="8">Fantasy</option>
-                    <option value="9">Horror</option>
-                    <option value="10">Sci-Fi</option>
-                    <option value="11">Mystery</option>
-                    <option value="12">Thriller</option>
-                    <option value="13">Crime</option>
-                    <option value="14">Western</option>
+                    <option value="{{genre.id_genre}}" *ngFor="let genre of this.genres; index as i; first as isFirst">{{genre.name}}</option>
                 </select>
               </div>
         

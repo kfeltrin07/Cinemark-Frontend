@@ -27,6 +27,7 @@ export class MovieManagementStranicaComponent {
   filmGenreList:Film_Genre[];
   genreFilm:Film_Genre = new Film_Genre();
   idDelete:number;
+  genres:any[];
   readonly baseURL = environment.baseURL+'api/Films'
   readonly baseURL2 = environment.baseURL + 'api/Film_Genre'
   
@@ -41,6 +42,7 @@ export class MovieManagementStranicaComponent {
     if(this.role$!='superadmin'){
       this.router.navigate(['']);
     }
+    this.genres=this.storageService.getGenres();
     this.refreshList();
     this.getGenres();
   }
