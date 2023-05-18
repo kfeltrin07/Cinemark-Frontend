@@ -81,9 +81,9 @@ export class LoginStranicaComponent{
     var y = document.getElementById("registerID") as HTMLDivElement;
     var z = document.getElementById("btn") as HTMLDivElement;
     
-    x.style.left = "-400px";
-    y.style.left = "50px";
-    z.style.left = "110px";
+    x.style.left = "-24vw";
+    y.style.left = "2vw";
+    z.style.left = "5.6vw";
   }
 
   loginACT(){
@@ -91,9 +91,9 @@ export class LoginStranicaComponent{
     var y = document.getElementById("registerID") as HTMLDivElement;
     var z = document.getElementById("btn") as HTMLDivElement;
 
-    x.style.left = "50px";
-    y.style.left = "450px";
-    z.style.left = "0px";
+    x.style.left = "2vw";
+    y.style.left = "24vw";
+    z.style.left = "0vw";
   }
 
   onSubmit(form:NgForm):void{

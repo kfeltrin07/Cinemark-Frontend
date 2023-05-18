@@ -14,7 +14,7 @@
 }
 
 .content h1{
-    font-size: 70px;
+    font-size: 3.4vw;
     margin-top: 80px;
 }
 
@@ -22,17 +22,19 @@
     margin: 20px auto;
     font-weight: 100;
     line-height: 25px;
+    font-size: 1vw;
 }
 
 button{
-    width: 200px; 
-    padding: 15px 0;
+    width: 15vw; 
+    padding: 1vw 0;
     text-align: center;
-    margin: 20px 10px;
-    border-radius: 25px;
+    margin: 2vw 1vw;
+    border-radius: 1.5vw;
     font-weight: bold;
     border: 2px solid #009688;
     background: transparent;
+    font-size: 1.3vw;
     color: #fff;
     cursor: pointer;
     position: relative;
@@ -60,13 +62,15 @@ button:hover{
 }
 
 .search-bar{
-    width: 100%;
+    width: 40vw;
     margin:auto;
-    max-width: 500px;
+    max-width: 40vw;
     background: rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
-    border-radius: 60px;
+    border-radius: 3vw;
+    font-size: 1.5vw;
+
     
 }
 
@@ -76,7 +80,7 @@ button:hover{
     border: 0;
     outline: none;
     padding: 24px 20px;
-    font-size: 20px;
+    font-size: 1.5vw;
     color: #00d6c1;
 }
 

@@ -57,7 +57,7 @@ table, th, td {
 
 main.table{
     width: 80vw;
-    height: 60vh;
+    height: 100%;
     background-color: rgba(57, 57, 57, 0.333);
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
@@ -133,6 +133,7 @@ tbody tr:hover{
 .refresh{
     background-color: #39801d;
     font-family: "Nexa";
+    font-size: 1vw;
     padding: .4rem 0;
     border-radius: 2rem;
     text-align: center;
@@ -160,19 +161,21 @@ tbody tr:hover{
 .table_header h1{
     color: white;
     font-family: "Nexa-Light";
-    font-size: 35px;
+    font-size: 2vw;
 }
 
 .table_body th{
     text-transform: uppercase;
     color: black;
     font-family: "Nexa";
-    font-size: 17px;
+    font-size: 1vw;
 }
 
 .table_body td{
     color: white;
     font-family: "Nexa";
+    height: 100%;
+    font-size:1vw;
 }
 
 .table_body .filmTitle:hover{

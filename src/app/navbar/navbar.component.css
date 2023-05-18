@@ -11,9 +11,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 1vw;
 }
 .logo{
-    width: 380px;
+    width: 20vw;
     cursor: pointer;
 }
 
