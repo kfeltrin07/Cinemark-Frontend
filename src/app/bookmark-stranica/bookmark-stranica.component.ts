@@ -107,6 +107,8 @@ export class BookmarkStranicaComponent {
 
   saveBookmarks(id_film:any){
     this.bookmarkService.saveBookmarks(id_film);
+    this.bookmarkService.getBookmarks();
+    this.Films = this.storageService.getMyBookmarks();
   }
   
   getBookmarksByUser(){
@@ -119,7 +121,7 @@ export class BookmarkStranicaComponent {
         if(films.id_user == this.id_user$){
           for( var film of filmsl){
             if( films.id_film== film.id_film){
-              this.Films.push(film);;
+              this.Films.push(film);
             }
           }
         }       

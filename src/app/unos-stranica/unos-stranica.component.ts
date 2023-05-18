@@ -44,6 +44,7 @@ export class UnosStranicaComponent {
   films: any;
 
   addNewMovie() {
+    this.check = false;
     const title = document.getElementById("titleID") as HTMLInputElement;
     const director = document.getElementById("directorID") as HTMLInputElement;
     const actor = document.getElementById("actorID") as HTMLInputElement;
@@ -106,7 +107,10 @@ export class UnosStranicaComponent {
         this.toastr.error(messageReceived);
       }
     });
-    this.filmService.getFilms();
+
+    this.filmService.getFilms().then(x=>{
+      this.films = x;
+    } );
   }
 
   AddGenreToMovie(id_filmPassed: number, selectedGenre: number) {

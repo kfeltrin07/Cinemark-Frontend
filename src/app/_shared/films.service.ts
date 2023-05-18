@@ -38,9 +38,10 @@ export class FilmsService {
   searchFilms: Films[];
 
   getFilms(){
-    this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
+    return this.http.get(this.baseURL,{ withCredentials: true }).toPromise().then(
       res =>{this.list = res as Films[];
           this.storageService.saveFilms(this.list);
+          return this.list;
       });
   }
 
