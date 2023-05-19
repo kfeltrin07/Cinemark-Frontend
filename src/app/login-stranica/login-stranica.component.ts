@@ -81,9 +81,9 @@ export class LoginStranicaComponent{
     var y = document.getElementById("registerID") as HTMLDivElement;
     var z = document.getElementById("btn") as HTMLDivElement;
     
-    x.style.left = "-24vw";
-    y.style.left = "2vw";
-    z.style.left = "5.6vw";
+    x.style.left = "-41.2796697626419vh";
+    y.style.left = "5.159958720330238vh";
+    z.style.left = "11.351909184726523vh";
   }
 
   loginACT(){
@@ -91,8 +91,8 @@ export class LoginStranicaComponent{
     var y = document.getElementById("registerID") as HTMLDivElement;
     var z = document.getElementById("btn") as HTMLDivElement;
 
-    x.style.left = "2vw";
-    y.style.left = "24vw";
+    x.style.left = "5.159958720330238vh";
+    y.style.left = "46.43962848297214vh";
     z.style.left = "0vw";
   }
 
