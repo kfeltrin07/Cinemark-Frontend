@@ -28,8 +28,15 @@ export class SortByStranicaComponent implements OnInit {
   genres:Genres[];
   genre:string[];
   filmGenre:Film_Genre;
+  check:boolean = false;
 
-  filteredFilms:any[];
+  filteredFilmsHolder:Films[];
+  filteredFilms:Films[];
+  genreFilter: number;
+  ratingFilter: number;
+  yearFilter: string;
+
+  displayedFilms: Films[];
 
   
 
@@ -56,27 +63,33 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByGenre(id_genre:number){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("test");
-    const filmgenre=this.storageService.getFilmGenres();
-    const films= this.storageService.getFilms();
+    const filmgenre=this.storageService.getFilmGenres()
+    const films= this.storageService.getFilms()
     for(var item of filmgenre){
       if(id_genre == item.id_genre){
         for(var film of films){
+          this.check = false;
           if(item.id_film == film.id_film){
             this.sortedFilms.push(film);
           }
         }
       }
     }
+    
+    this.filterFilms();
+    this.displayFilteredFilms();
 
-    var x = document.getElementById("paginator") as unknown as PaginationControlsComponent;
-    x.pageChange
+    var x = document.getElementById("pagiator") as unknown as PaginationControlsComponent;
+    x.pageChange;
   }
+
+  
 
   sortFilmByBestRated(){
     this.sortedFilms = [];
-    console.log("testBestRated");
+    this.filteredFilms = [];
 
     for(var item of this.service.list){
       if((item.total_rating)/(item.rating_count) >= 4.4){
@@ -84,100 +97,160 @@ export class SortByStranicaComponent implements OnInit {
       }
 
     }
-
     
+    this.filterFilms();
+    this.displayFilteredFilms();
   }
 
   sortFilmByRatingCount(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testRatingCount");
 
     for(var item of this.service.list){
       if(item.rating_count >= 15){
         this.sortedFilms.push(item);
       }
     }
+    this.filterFilms();
+    this.displayFilteredFilms();
   }
 
   sortFilmByYear2023(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testYear2023");
+
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) == "2023"){
         this.sortedFilms.push(item);
       }
     }
+
+    this.filterFilms();
+
+    this.displayFilteredFilms();
   }
 
   sortFilmByYear2021_2022(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testYear21/22");
+    
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "2021" && item.release_date.substring(0,4) < "2023"){
         this.sortedFilms.push(item);
       }
     }
+
+    this.filterFilms();
+
+    this.displayFilteredFilms();
   }
 
   sortFilmByYear2010_2020(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testYear10/20");
+    
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "2010" && item.release_date.substring(0,4) < "2020"){
         this.sortedFilms.push(item);
       }
     }
+
+    this.filterFilms();
+
+    this.displayFilteredFilms();
   }
 
   sortFilmByYear2000_2010(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testYear00/10");
+   
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "2000" && item.release_date.substring(0,4) < "2010"){
         this.sortedFilms.push(item);
       }
     }
+
+    this.filterFilms();
+
+    this.displayFilteredFilms();
   }
 
   sortFilmByYear1990_2000(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testYear90/00");
+    
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) >= "1990" && item.release_date.substring(0,4) < "2000"){
         this.sortedFilms.push(item);
       }
     }
+
+    this.filterFilms();
+
+    this.displayFilteredFilms();
   }
 
   sortFilmByYearOlder(){
+    this.filteredFilms = [];
     this.sortedFilms = [];
-    console.log("testYearOlder");
 
     for(var item of this.service.list){
       if(item.release_date.substring(0,4) <= "1990"){
         this.sortedFilms.push(item);
       }
     }
+
+    this.filterFilms();
+
+    this.displayFilteredFilms();
   }
 
   getAllFilms(){
     const films= this.storageService.getFilms()
-    this.sortedFilms = films;
+    this.displayedFilms = films;
   }
 
   scrollToTop(event: any){
     window.scrollTo({top:0, behavior: 'smooth'})
   }
 
-  /*onPageChange(event: any){
-    if (this.pageSize <= 5){
-      this.page = 1;
+  displayFilteredFilms(){
+    var x = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(x.checked){
+      this.displayedFilms = this.filteredFilms;
+    }else{
+      this.displayedFilms = this.sortedFilms;
     }
-  }*/
+  }
+
+  initializeFilteredFilmsList(){
+    this.filteredFilmsHolder = [];
+    this.displayedFilms = [];
+  }
+
+  filterFilms(){
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){  
+      if(this.filteredFilmsHolder.length == 0){
+        this.filteredFilmsHolder = this.sortedFilms;
+        this.filteredFilms = this.sortedFilms;
+      }
+      else{
+        for(var filteredFilm of this.filteredFilmsHolder){
+          for(var sortedFilm of this.sortedFilms){
+            if(filteredFilm.id_film == sortedFilm.id_film){this.filteredFilms.push(sortedFilm)}
+          }      
+        }
+        this.filteredFilmsHolder = this.filteredFilms;
+      }         
+    }
+  }
 
 }

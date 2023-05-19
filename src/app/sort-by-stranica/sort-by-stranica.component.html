@@ -10,7 +10,7 @@
       </div>
 
       <div class="dropdown">
-        <button class="dropbtn">Genre</button>
+        <button class="dropdownGenre dropbtn">Genre</button>
         <div class="dropdown-content">
           <ul *ngFor="let genre of this.genres; index as i; first as isFirst">
             <li><a (click)="sortFilmByGenre(genre.id_genre)">{{genre.name}}</a></li>
@@ -22,7 +22,7 @@
       <button class="dropbtn">Rating</button>
       <div class="dropdown-content">
         <ul>
-          <li><a (click)="sortFilmByBestRated()">Best Rated</a></li>
+          <li><a (click)="sortFilmByBestRated()" >Best Rated</a></li>
           <li><a (click)="sortFilmByRatingCount()">Most Rated</a></li>
         </ul>
     </div>
@@ -42,7 +42,12 @@
       </div>
     </div>
 
-    <div *ngFor="let film of sortedFilms | paginate: { id: 'paginate', itemsPerPage: pageSize, currentPage: page }">
+    <label class="container">Filter
+      <input (click)="initializeFilteredFilmsList()" id="checkbox" type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+
+    <div *ngFor="let film of displayedFilms | paginate: { id: 'paginate', itemsPerPage: pageSize, currentPage: page }">
       <div class="component">
         <div class="film-list">  
           <div class="film img" id="filmBox">
@@ -62,9 +67,11 @@
     <div class="pagination">
       <pagination-controls  id="paginate"
       (pageChange)="page= ($event); scrollToTop($event)"
+
       (pageBoundsCorrection)="page =(1)"
       previousLabel="PREVIOUS"
       nextLabel="NEXT"
+
       screenReaderPaginationLabel="Pagination"
       screenReaderPageLabel="page"
       screenReaderCurrentLabel="You're on page">

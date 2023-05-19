@@ -81,5 +81,42 @@ span{
 
 .film img:hover{
     transition: 0.2s ease-in-out;
-    width: 10vw;
+    width: 8.3vh;
 }
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+.page-link {
+    padding: 0.5rem 0.75rem;
+    margin: 0 2px;
+    background-color: #009688;
+    border: 1px solid #009688;
+    border-radius: 0.25rem;
+    color: #009688;
+    cursor: pointer;
+  }
+  
+  .page-link.active {
+    background-color: #009688;
+    color: #fff;
+    border-color: #009688;
+  }
+  
+  .page-link:hover {
+    background-color: #364e4e;
+    border-color: #364e4e;
+    color: #009688;
+  }
+
+

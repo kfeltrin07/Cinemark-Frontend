@@ -12,6 +12,8 @@ export class SearchStranicaComponent implements OnInit{
   constructor(public service:FilmsService) {}
 
   searchedFilms:Films[];
+  page: number = 1;
+  pageSize: number = 5;
 
   ngOnInit(): void {
 
@@ -19,6 +21,10 @@ export class SearchStranicaComponent implements OnInit{
 
   updateSelectedFilm(film:string){
     this.service.updateFilmByName(film);
+  }
+
+  scrollToTop(event: any){
+    window.scrollTo({top:0, behavior: 'smooth'})
   }
 
 }

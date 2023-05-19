@@ -7,7 +7,7 @@
     <h1>Searh results:</h1>
   </div>
 
-  <div *ngFor="let film of service.searchFilms" class="component">
+  <div *ngFor="let film of service.searchFilms | paginate: { id: 'paginate', itemsPerPage: pageSize, currentPage: page }" class="component ">
     <div class="film-list">  
       <div class="film img" id="filmBox">
         <img src={{film.picture_url}} (click)="updateSelectedFilm(film.title)" alt="film picture" routerLink="/film">
@@ -18,6 +18,18 @@
           </div>
       </div>
     </div>
+  </div>
+
+  <div class="pagination">
+    <pagination-controls  id="paginate"
+    (pageChange)="page= ($event); scrollToTop($event)"
+    (pageBoundsCorrection)="page =(1)"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page">
+  </pagination-controls>
   </div>
 
 </html>
