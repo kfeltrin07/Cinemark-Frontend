@@ -32,8 +32,6 @@ export class RatingsService {
 
   postRating(film:Films, rating:number){
     const currentDate = new Date();
-    console.log("Evo ti IDJA:")
-    console.log(this.id_user$);
     this.formData.change_date = currentDate;
     this.formData.insert_date = currentDate;
     this.formData.id_film = film.id_film;
