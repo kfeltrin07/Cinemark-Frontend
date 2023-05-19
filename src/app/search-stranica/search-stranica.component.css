@@ -13,8 +13,7 @@
 .content h1{
     margin-left: 1%;
     font-family: "Nexa";
-    font-size: 50px;
-    margin-top: 80px;
+    font-size: 3vw;
 }
 
 .bookmark-content{
@@ -25,7 +24,7 @@
 
 span{
     color:#fff;
-    font-size: 25px;
+    font-size: 1.6vw;
     font-family: "Nexa";
     display:inline-block;
     font-weight: bold;
@@ -35,11 +34,13 @@ span{
 }
 
 .title:hover span{
-    font-size: 25px;
+    transition: 0.3s ease-in-out;
+    font-size: 1.7vw;
     color: #009688;
     cursor: pointer;
     font-family: "Nexa";
 }
+
 
 .film{
     width: fit-content;
@@ -48,7 +49,7 @@ span{
 }
 
 .film img{
-    width: 150px;
+    width: 9vw;
     cursor: pointer;
     border-radius: 10px;
     position: relative;
@@ -64,17 +65,21 @@ span{
 }
 
 .info{
-    width:1000px;
-    padding: 5px 50px;  
+    width:70vw;
+    font-family: "Nexa";
+    font-size: 0.8vw;
+    padding: 3px 40px;  
     transform: translateX(0px);
     opacity: 1;
     color:#fefed6;
     transition: transform 1s, opacity 1s;
     word-wrap: break-word;
+    margin-left: 1vw;
+    margin-top: 1vw;
     font-weight: bold;
 }
 
 .film img:hover{
     transition: 0.2s ease-in-out;
-    width: 160px;
+    width: 10vw;
 }

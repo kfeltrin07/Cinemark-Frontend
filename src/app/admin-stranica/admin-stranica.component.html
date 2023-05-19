@@ -50,7 +50,6 @@
                 <thead class="thead-light">
                     <tr>
                         <th>Username</th>
-                        <th>Password</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th></th>
@@ -59,7 +58,6 @@
                 <tbody>
                     <tr *ngFor ="let us of loginService.Allusers">
                         <td (click)="populateForm(us)">{{us.username}}</td>
-                        <td (click)="populateForm(us)">{{us.password.substring(0,7)}}</td>
                         <td (click)="populateForm(us)">{{us.email}}</td>
                         <td class="role" (click)="populateForm(us)">{{us.role}}</td>
                         <td>
