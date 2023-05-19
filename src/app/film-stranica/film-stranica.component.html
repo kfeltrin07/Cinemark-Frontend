@@ -14,7 +14,7 @@
             <p>Director: {{selectedFilm.director}}</p>
             <p>Main Actor: {{selectedFilm.main_actor}}</p>
             <p>Rating: {{service.rating.toFixed(2)}} </p>
-            <p class="genre">Genres:<var *ngFor="let genr of genre; index as i; first as isFirst">{{" "+genr+" "}}</var></p>
+            <p class="genre">Genres:<var title="{{genr.description}}" *ngFor="let genr of genre; index as i; first as isFirst">{{" "+genr.name+" "}}</var></p>
             <button type="button" (click)="openPopup()"><span></span>RATE</button>
             <button type="button" (click)="trailer()"><span></span>TRAILER</button>
             

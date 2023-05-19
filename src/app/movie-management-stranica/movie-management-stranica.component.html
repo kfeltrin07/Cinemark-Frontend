@@ -82,7 +82,7 @@
         <div class="input-group">
             <select name="format" id="selectedGenre">
                 <option selected disabled>Choose a genre</option>
-                <option value="{{genre.id_genre}}" *ngFor="let genre of this.genres; index as i; first as isFirst">{{genre.name}}</option>
+                <option title="{{genre.description}}" value="{{genre.id_genre}}" *ngFor="let genre of this.genres; index as i; first as isFirst">{{genre.name}}</option>
             </select>
         </div>
         <button (click)="closePopup()">Add Genre</button>

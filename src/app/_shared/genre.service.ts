@@ -20,7 +20,7 @@ export class GenreService {
   listGenres:Genres[];
   listFilmGenre: Film_Genre[];
 
-  selectedGenres:string[];
+  selectedGenres:Genres[];
   selectedFilmGenres:number[];
 
   selectedfilm:Films;
@@ -66,7 +66,7 @@ export class GenreService {
       if(idfilm == filmgenres.id_film){
         for(var genres of listgenre){
           if(genres.id_genre == filmgenres.id_genre){          
-            this.selectedGenres.push(genres.name);
+            this.selectedGenres.push(genres);
           }
         }
       } 

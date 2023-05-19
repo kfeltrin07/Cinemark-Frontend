@@ -12,6 +12,7 @@ import { Login } from '../_shared/Login.model';
 import { BookmarksService } from '../_shared/bookmarks.service';
 import { RatingsService } from '../_shared/ratings.service';
 import { UserStoreService } from '../_services/user-store.service';
+import { Genres } from '../_shared/genre.model';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class FilmStranicaComponent {
   };
 
   selectedFilm: Films;
-  genre: string[];
+  genre: Genres[];
   allComments: Comments[];
   selectedComments: Comments[];
   allUsers: Login[];
