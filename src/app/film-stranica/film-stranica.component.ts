@@ -67,21 +67,14 @@ export class FilmStranicaComponent {
   }
 
   async changeToFilm() {
+    await this.UpdateLists();
+  }
+
+  async UpdateLists() {
     this.selectedComments = [];
     this.allComments = [];
     this.usernameList = [];
     this.dateList = [];
-
-    await this.UpdateLists();
-
-    if (this.allComments != null)
-      this.LoadComments();
-    else
-      console.log("there are no comments");
-
-  }
-
-  async UpdateLists() {
 
     await this.loginService.GetAllUsers().then(x => {
       this.storageService.saveUsers(x);
@@ -92,30 +85,40 @@ export class FilmStranicaComponent {
       this.storageService.saveComments(comments);
       this.allComments = comments;
       this.selectedComments = this.allComments.filter((comment) => comment.id_film === this.selectedFilm.id_film);
+      this.dateList = this.selectedComments.map((comment) => comment.insert_date.toString().substring(0, 10));
+      this.selectedComments.forEach(comuser => {
+        const matchingUsers = this.allUsers.filter(user => user.id_user === comuser.id_user);
+        this.usernameList.push(...matchingUsers.map(user => user.username));
+      });
+      
     });
-
   }
 
-  LoadComments() {
+  async saveComment() {
+    const val = document.getElementById("commentInput") as HTMLInputElement;
+    this.commentService.postComment(this.selectedFilm, val.value);
+    val.value = "";
 
-    for (var comments of this.allComments) {
-      if (this.selectedFilm.id_film == comments.id_film) {
-        this.selectedComments.push(comments);
-      }
-    }
+    await this.UpdateLists();
+  }
 
-    for (var comm of this.selectedComments) {
-      var dateObj = comm.insert_date.toString().substring(0,10);
-      this.dateList.push(dateObj);
-    }
+  async deleteComment(id: number, usid: number) {
 
-    for (var comuser of this.selectedComments) {
-      for (var user of this.allUsers) {
-        if (user.id_user == comuser.id_user) {
-          this.usernameList.push(user.username);
-        }
-      }
+    if (this.role$ === "admin" || this.role$ === "superadmin") {
+
+      this.commentService.deleteComment(id);
+      this.toastr.success("User's comment will be permanently deleted after refresh");
+      await this.UpdateLists();
+
     }
+    else if (+this.id_user$ === usid) {
+
+      this.commentService.deleteComment(id);
+      this.toastr.success("User's comment will be permanently deleted after refresh");
+      await this.UpdateLists();
+
+    } else 
+      this.toastr.error("You cannot delete this comment");
   }
 
   openInfo() {
@@ -184,15 +187,6 @@ export class FilmStranicaComponent {
     this.Checkifbookmarked();
   }
 
-  async saveComment() {
-    const val = document.getElementById("commentInput") as HTMLInputElement;
-    this.commentService.postComment(this.selectedFilm, val.value);
-    val.value = "";
-
-    await this.UpdateLists();
-    this.LoadComments;
-  }
-
   Checkifbookmarked() {
     if (this.storageService.isLoggedIn() == true) {
       const filmid = this.storageService.getFilm();
@@ -205,23 +199,6 @@ export class FilmStranicaComponent {
         err => {
           this.bookmarked = false;
         });
-    }
-  }
-
-  deleteComment(id: number, usid: number) {
-    console.log(id);
-    if (this.role$ === "admin" || this.role$ === "superadmin") {
-      this.commentService.deleteComment(id);
-      this.toastr.success("User's comment will be permanently deleted after refresh");
-      history.go(0);
-    }
-    else if (+this.id_user$ === usid) {
-      this.commentService.deleteComment(id);
-      this.toastr.success("User's comment will be permanently deleted after refresh");
-      history.go(0);
-    } else {
-      this.toastr.error("You cannot delete this comment");
-
     }
   }
 }

@@ -60,7 +60,6 @@ export class CommentsService {
   deleteComment(id:number){
     this.http.delete(`${this.baseURL}/${id}`).subscribe();
     this.getComments();
-    history.go(0);
   }
 
     
