@@ -433,7 +433,7 @@ form .btn p{
     color: #fff;
     cursor:pointer;
     font-weight: 700;
-    padding: 15px 30px;
+    padding: 11px 28px;
     text-transform: uppercase;
 }
 
@@ -456,4 +456,5 @@ form .btn p{
 
 .delete:hover{
     background: #2b2b2b;
+    border: 1px solid #2b2b2b;;
 }
