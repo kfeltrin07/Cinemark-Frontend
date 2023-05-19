@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
@@ -15,17 +15,19 @@ import { FilmStranicaComponent } from './film-stranica/film-stranica.component';
 import { environment } from 'src/environments/environment';
 import { SearchStranicaComponent } from './search-stranica/search-stranica.component';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
-import { BookmarksService } from './shared/bookmarks.service';
-import { FilmsService } from './shared/films.service';
-import { LoginService } from './shared/Login.service';
+import { BookmarksService } from './_shared/bookmarks.service';
+import { FilmsService } from './_shared/films.service';
+import { LoginService } from './_shared/Login.service';
 import { StorageService } from './_services/storage.service';
-import { GenreService } from './shared/genre.service';
-import { RatingsService } from './shared/ratings.service';
-import { CommentsService } from './shared/comments.service';
+import { GenreService } from './_shared/genre.service';
+import { RatingsService } from './_shared/ratings.service';
+import { CommentsService } from './_shared/comments.service';
 import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TokenInterceptor } from './_helpers/token.interceptor';
 import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
+import { MovieManagementStranicaComponent } from './movie-management-stranica/movie-management-stranica.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { AdminStranicaComponent } from './admin-stranica/admin-stranica.componen
     BookmarkStranicaComponent,
     UnosStranicaComponent,
     NavbarComponent,
-    AdminStranicaComponent
+    AdminStranicaComponent,
+    MovieManagementStranicaComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,11 @@ import { AdminStranicaComponent } from './admin-stranica/admin-stranica.componen
     AppRoutingModule,
     NgxPaginationModule
   ],
-  providers: [httpInterceptorProviders,
+  providers: [//httpInterceptorProviders,
+              {provide: HTTP_INTERCEPTORS,
+              useClass:TokenInterceptor,
+              multi:true
+            },
               BookmarksService,
               FilmsService,
               LoginService,

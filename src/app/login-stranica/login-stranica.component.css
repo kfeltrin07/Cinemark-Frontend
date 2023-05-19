@@ -5,25 +5,27 @@
 }
 
 .form-box{
-    width: 380px;
-    height: 480px;
+    width: 20vw;
+    height: 25vw;
     position: relative;
     margin: auto;
-    background: #fff;
-    padding: 5px;
+    background: #ffffff;
+    padding: 1vw;
     overflow: hidden;
+    border-radius: 0.5vw;
 }
 
 .button-box{
-    width: 220px;
-    margin: 35px auto;
+    width: 11vw;
+    font-size: 0.8vw;
+    margin: 10% auto;
     position: relative;
     box-shadow: 0 0 20px 9px #ff61241f;
-    border-radius: 30px;
+    border-radius: 1vw;
 }
 
 .toggle-btn{
-    padding: 10px 28.6px;
+    padding: 5% 13%;
     cursor: pointer;
     background: transparent;
     border: 0;
@@ -35,7 +37,7 @@
     top: 0;
     left: 0;
     position: absolute;
-    width: 110px;
+    width: 50%;
     height: 100%;
     background: linear-gradient(to right, #ff105f, #ffad06);
     border-radius: 30px;
@@ -43,16 +45,18 @@
 }
 
 .input-group{
-    top: 180px;
+    margin-left: auto;
+    top: 33%;
     position:absolute;
-    width: 280px;
+    width: 70%;
     transition: .5s;
 }
 
 .form-control{
+    font-size: 1vw;
+    
     width: 100%;
-    padding: 10px 0;
-    margin: 5px 0;
+    padding: 0.5vw 0;
     border-left: 0;
     border-top: 0;
     border-right: 0;
@@ -62,23 +66,24 @@
 }
 
 .submit-btn{
-    width: 105;
-    padding: 10px 30px;
+    width: 6vw;
+    padding: 0.5vw 0.8vw;
     position: absolute;
-    left: 80px;
+    left: 27.5%;
     cursor: pointer;
     display: block;
     margin: auto;
-    margin-top: 210px;
+    margin-top: 10vw;
     background: linear-gradient(to right, #ff105f, #ffad06);
     border: 0;
     outline: none;
+    font-size: 1vw;
 }
 
 #loginID{
-    left: 50px;
+    left: 5.159958720330238vh;
 }
 
 #registerID{
-    left: 450px;
+    left: 46.43962848297214vh;
 }

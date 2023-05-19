@@ -1,4 +1,4 @@
-import { LoginService } from 'src/app/shared/Login.service';
+import { LoginService } from 'src/app/_shared/Login.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginStranicaComponent } from './login-stranica/login-stranica.component';
@@ -10,7 +10,9 @@ import { SearchStranicaComponent } from './search-stranica/search-stranica.compo
 import { AppComponent } from './app.component';
 import { UnosStranicaComponent } from './unos-stranica/unos-stranica.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AuthGuard } from './_guards/auth.guard';
 import { AdminStranicaComponent } from './admin-stranica/admin-stranica.component';
+import { MovieManagementStranicaComponent } from './movie-management-stranica/movie-management-stranica.component';
 
 
 const routes: Routes = [
@@ -18,12 +20,13 @@ const routes: Routes = [
   {path: '', component: NaslovnaStranicaComponent},
   {path: 'navbar', component: NavbarComponent},
   {path: 'login', component: LoginStranicaComponent},
-  {path: 'bookmarks', component: BookmarkStranicaComponent},
+  {path: 'bookmarks', component: BookmarkStranicaComponent, canActivate:[AuthGuard]},
   {path: 'sort', component:SortByStranicaComponent},
   {path: 'film', component:FilmStranicaComponent},
   {path: 'search', component:SearchStranicaComponent},
-  {path: 'unos', component:UnosStranicaComponent},
-  {path: 'admin', component:AdminStranicaComponent},
+  {path: 'unos', component:UnosStranicaComponent, canActivate:[AuthGuard]},
+  {path: 'admin', component:AdminStranicaComponent, canActivate:[AuthGuard]},
+  {path: 'movie-management', component:MovieManagementStranicaComponent, canActivate:[AuthGuard]},
   {path: '', redirectTo: 'navbar', pathMatch: 'full' }
 ];
 

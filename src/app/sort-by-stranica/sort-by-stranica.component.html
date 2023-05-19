@@ -9,22 +9,11 @@
       <h1>SORT BY:</h1>
       </div>
 
-      <div class="dropdownGenre" >
+      <div class="dropdown">
         <button class="dropdownGenre dropbtn">Genre</button>
-        <div class="dropdownGenre-content">
-          <ul>
-            <li><a (click) ="sortFilmByGenre(1)">Action</a></li>
-            <li><a (click) ="sortFilmByGenre(2)">Romance</a></li>
-            <li><a (click) ="sortFilmByGenre(3)">Drama</a></li>
-            <li><a (click) ="sortFilmByGenre(4)">Historical</a></li>
-            <li><a (click) ="sortFilmByGenre(5)">Adventure</a></li>
-            <li><a (click) ="sortFilmByGenre(6)">War</a></li>
-            <li><a (click) ="sortFilmByGenre(7)">Comedy</a></li>
-            <li><a (click) ="sortFilmByGenre(8)">Fantasy</a></li>
-            <li><a (click) ="sortFilmByGenre(9)">Horror</a></li>
-            <li><a (click) ="sortFilmByGenre(10)">Sci-Fi</a></li>
-            <li><a (click) ="sortFilmByGenre(11)">Mystery</a></li>
-            <li><a (click) ="sortFilmByGenre(12)">Thriller</a></li>
+        <div class="dropdown-content">
+          <ul *ngFor="let genre of this.genres; index as i; first as isFirst">
+            <li><a (click)="sortFilmByGenre(genre.id_genre)">{{genre.name}}</a></li>
           </ul>
       </div>
     </div>
@@ -74,12 +63,15 @@
       </div>
     </div>
 
+    
     <div class="pagination">
       <pagination-controls  id="paginate"
       (pageChange)="page= ($event); scrollToTop($event)"
-      (pageBoundsCorrection)="page = (1)"
-      previousLabel="Previous"
-      nextLabel="Next"
+
+      (pageBoundsCorrection)="page =(1)"
+      previousLabel="PREVIOUS"
+      nextLabel="NEXT"
+
       screenReaderPaginationLabel="Pagination"
       screenReaderPageLabel="page"
       screenReaderCurrentLabel="You're on page">

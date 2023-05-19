@@ -65,13 +65,15 @@
                     <button class="add-btn" (click)="saveComment()">send</button>
                 </div>
             </div>
-            <div class="comment-container">
-                <div class="comment-card" *ngFor="let user of username; index as i; first as isFirst">
-                    <h3 class="comment-title">{{user}}</h3>
-                    <h3 class="comment-title">{{date[i]}}</h3>
+            <div id="commentContainer" class="comment-container">
+                <div class="comment-card" *ngFor="let comment of selectedComments; index as i; first as isFirst">
+                    <h3 class="comment-title">{{usernameList[i]}}</h3>
+                    <h3 class="date">{{dateList[i]}}</h3>
+                    
                     <p>
-                        {{comment[i]}}
+                        {{comment.comment}}
                     </p>
+                    <button *ngIf="role$==='admin' || role$==='superadmin' || +id_user$===comment.id_user" class="delete" (click)="deleteComment(comment.id_comment,comment.id_user)">Delete</button>
                 </div>
             </div>
         </div>
