@@ -50,9 +50,10 @@ export class CommentsService {
   }
 
   getComments(){
-    this.http.get(this.baseURL).toPromise().then(
+    return this.http.get(this.baseURL).toPromise().then(
       res =>{ this.listComments = res as Comments[];
               this.storageService.saveComments(this.listComments);
+              return this.listComments;
       })  
   }
 

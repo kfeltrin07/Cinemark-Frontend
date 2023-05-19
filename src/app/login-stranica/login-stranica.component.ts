@@ -1,7 +1,7 @@
 import { BookmarksService } from '../_shared/bookmarks.service';
 import { FilmsService } from '../_shared/films.service';
 import { Router, Routes } from '@angular/router';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgModule, } from '@angular/core';
@@ -25,10 +25,10 @@ import { UserStoreService } from '../_services/user-store.service';
   styleUrls: ['./login-stranica.component.css'],
 
 })
-export class LoginStranicaComponent{
+export class LoginStranicaComponent {
   activationCode: string | null;
   idUser: number;
-  public id_user$:string="";
+  public id_user$: string = "";
 
 
   form: any = {
@@ -40,53 +40,52 @@ export class LoginStranicaComponent{
   isLoginFailed = false;
   isSuccessful = false;
   isSignUpFailed = false;
-  LoginPgStatus=false;
+  LoginPgStatus = false;
   errorMessage = '';
 
-  constructor(public service:LoginService,private storageService: StorageService,private toastr:ToastrService, private router: Router,
-    public genreService:GenreService, public filmsService: FilmsService, public bookmarkService:BookmarksService, public navbar:NavbarComponent,
-    private route: ActivatedRoute, private userStore:UserStoreService) 
-    {
+  constructor(public service: LoginService, private storageService: StorageService, private toastr: ToastrService, private router: Router,
+    public genreService: GenreService, public filmsService: FilmsService, public bookmarkService: BookmarksService, public navbar: NavbarComponent,
+    private route: ActivatedRoute, private userStore: UserStoreService) {
 
-      if (this.storageService.isLoggedIn()) {
-        this.isLoggedIn = true;
-        this.bookmarkService.getBookmarks();
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.bookmarkService.getBookmarks();
       const user = this.storageService.getUser();
       const userID = this.storageService.getUserID();
       this.navbar.checkreload(0);
-      }
-      this.filmsService.getFilms();
-
     }
+    this.filmsService.getFilms();
 
-    ngOnInit() {
+  }
+
+  ngOnInit() {
     this.activationCode = this.route.snapshot.queryParamMap.get('activate');
     this.idUser = Number(this.route.snapshot.queryParamMap.get('idUser'));
     if (this.activationCode && this.idUser) {
-      this.service.postActivateUser(this.activationCode,this.idUser).subscribe({ 
-        next: res =>{
+      this.service.postActivateUser(this.activationCode, this.idUser).subscribe({
+        next: res => {
           this.toastr.success('Your account has been activated');
         },
         error: err => {
-        const json = JSON.parse(JSON.stringify(err.error));
-        const messageReceived =json.message;
-        this.toastr.error(messageReceived);
+          const json = JSON.parse(JSON.stringify(err.error));
+          const messageReceived = json.message;
+          this.toastr.error(messageReceived);
         }
       });
-      }
     }
-   
-  registerACT(){
+  }
+
+  registerACT() {
     var x = document.getElementById("loginID") as HTMLDivElement;
     var y = document.getElementById("registerID") as HTMLDivElement;
     var z = document.getElementById("btn") as HTMLDivElement;
-    
+
     x.style.left = "-400px";
     y.style.left = "50px";
     z.style.left = "110px";
   }
 
-  loginACT(){
+  loginACT() {
     var x = document.getElementById("loginID") as HTMLDivElement;
     var y = document.getElementById("registerID") as HTMLDivElement;
     var z = document.getElementById("btn") as HTMLDivElement;
@@ -96,42 +95,42 @@ export class LoginStranicaComponent{
     z.style.left = "0px";
   }
 
-  onSubmit(form:NgForm):void{
-    this.service.postRegister().subscribe({ 
-      next: res =>{
-        this.toastr.success('Submitted successfully','Register');
+  onSubmit(form: NgForm): void {
+    this.service.postRegister().subscribe({
+      next: res => {
+        this.toastr.success('Submitted successfully', 'Register');
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.resetForm(form);
         this.loginACT;
       },
       error: err => {
-        this.isSignUpFailed = true; 
+        this.isSignUpFailed = true;
         const json = JSON.parse(JSON.stringify(err.error));
         const messageReceived = json.message;
         this.toastr.error(messageReceived);
         this.resetForm(form);
       }
-    });  
+    });
   }
 
-  onLogin(form:NgForm){
+  onLogin(form: NgForm) {
     this.service.authenticate(form).subscribe(
-      res=>{
+      res => {
         this.storageService.storeToken(res.accessToken);
         this.storageService.storeRefreshToken(res.refreshToken);
-        const tokenPayload= this.service.decodedToken();
+        const tokenPayload = this.service.decodedToken();
         this.userStore.setUsernameFromStore(tokenPayload.Username);
         this.userStore.setRoleFromStore(tokenPayload.role);
         this.userStore.setIDUserFromStore(tokenPayload.id_user);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.LoginPgStatus=true;
+        this.LoginPgStatus = true;
         this.toastr.success('You are logged in');
         this.resetForm(form);
         window.location.reload();
       },
-      err=>{
+      err => {
         console.log(err);
         const json = JSON.parse(JSON.stringify(err.error));
         const messageReceived = json.message;
@@ -142,7 +141,7 @@ export class LoginStranicaComponent{
     );
   }
 
-  resetForm(form:NgForm){
+  resetForm(form: NgForm) {
     form.form.reset();
     this.service.formData = new Login();
   }

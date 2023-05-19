@@ -72,7 +72,6 @@ export class UnosStranicaComponent {
     this.selectedGenre = parseInt(genre.value);
 
     this.filmService.getFilms().then(x => {
-      this.storageService.clean()
       this.storageService.saveFilms(x);
       this.films = x;
 
