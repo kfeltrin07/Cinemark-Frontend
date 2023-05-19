@@ -5,13 +5,26 @@ import { environment } from 'src/environments/environment.development';
 import { getLocaleDateFormat } from '@angular/common';
 import { Films } from './films.model';
 import { StorageService } from '../_services/storage.service';
+import { FilmStranicaComponent } from '../film-stranica/film-stranica.component';
+import { LoginService } from './Login.service';
+import { UserStoreService } from '../_services/user-store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatingsService {
 
-  constructor(private http:HttpClient, public storageService:StorageService) { }
+  public id_user$: string = "";
+
+  constructor(private http:HttpClient, public storageService:StorageService, private userstore: UserStoreService, private loginService:LoginService) { 
+
+    this.userstore.getIDUserFromStore()
+      .subscribe(val=>{
+    let id_userFromToken=this.loginService.getIDUserFromToken();
+    this.id_user$=val||id_userFromToken
+  })
+
+  }
 
   formData:Ratings = new Ratings();
   readonly baseURL = environment.baseURL+'api/Ratings';
@@ -19,12 +32,13 @@ export class RatingsService {
 
   postRating(film:Films, rating:number){
     const currentDate = new Date();
-    const userID = this.storageService.getUserID();
+    console.log("Evo ti IDJA:")
+    console.log(this.id_user$);
     this.formData.change_date = currentDate;
     this.formData.insert_date = currentDate;
     this.formData.id_film = film.id_film;
     this.formData.rating = rating;
-    this.formData.id_user = userID.id_user;
+    this.formData.id_user = parseInt(this.id_user$);
     
     this.http.post(this.baseURL,this.formData).subscribe();
 

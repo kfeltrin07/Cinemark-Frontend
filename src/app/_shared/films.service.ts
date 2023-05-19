@@ -7,6 +7,8 @@ import { StorageService } from '../_services/storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Ratings } from './ratings.model';
+import { UserStoreService } from '../_services/user-store.service';
+import { LoginService } from './Login.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,8 +20,18 @@ const httpOptions = {
 
 export class FilmsService {
 
+  public id_user$: string = "";
+
   constructor(private http:HttpClient, public ratingService:RatingsService, public storageService:StorageService,
-    private toastr:ToastrService) { }
+    private toastr:ToastrService, private userstore: UserStoreService, private loginService:LoginService) { 
+
+      this.userstore.getIDUserFromStore()
+      .subscribe(val=>{
+    let id_userFromToken=this.loginService.getIDUserFromToken();
+    this.id_user$=val||id_userFromToken
+  })
+
+    }
 
 
   formData:Films = new Films();
@@ -126,13 +138,12 @@ export class FilmsService {
   }
 
   checkIfVoted(){
-    const user = this.storageService.getUserID();
     const film=this.storageService.getFilm();
     const ratings = this.storageService.getRatings();
     this.check = false;
 
     for(var rating of ratings){
-      if(film.id_film == rating.id_film && user.id_user == rating.id_user){
+      if(film.id_film == rating.id_film && parseInt(this.id_user$) == rating.id_user){
         this.check = true;
         this.changeRating = rating.rating;
       }
