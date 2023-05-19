@@ -172,6 +172,7 @@ span{
   }
 
 .pagination{
+    font-family: "Nexa";
     display: flex;
     justify-content: center;
     color: white;
