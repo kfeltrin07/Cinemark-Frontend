@@ -195,10 +195,41 @@ span{
     background-color: #009688;
 }
 
+/*.dropdown-content a{
+  visibility: inherit;
+  list-style: none;
+  color: #fff;
+  background-color: #00968777;
+}*/
+
+.dropdown-content a .list-container {
+  border: 1px solid #ccc;
+}
+
+.dropdown-content a .list-container ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.dropdown-content a .list-container li {
+  padding-left: 20px;
+}
+
+.dropdown-content a .list-container li.active {
+  border-left: 4px solid red;
+  padding-left: 16px; /* 20px - 4px = 16px */
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
-  
+
+.dropdown:hover .dropdown-content a.active {
+  display: block;
+  color: #fff;
+  background-color: #009688;
+}
+
 .dropdown .dropbtn {
     border: none;
     border-radius: 5%;
@@ -219,6 +250,126 @@ span{
 .dropdown:hover .dropbtn {
     transition-delay: 0,2s;
 }
+
+/*-------------------------- GENRE DROPDOWN -------------------*/
+
+.dropdownGenre{
+  margin-left: 10%;
+  margin-right: -9%;
+  display:inline-block;
+  margin-bottom: 3%;
+}
+
+.dropdownGenre input{
+  border: none;
+  border-radius: 5%;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  background-color:rgb(59, 59, 59);
+  font-family: "Nexa";
+  padding: 14px 16px;
+  margin: 0;
+  width: 35%;
+}
+
+.dropdownGenre ul{
+  padding-left: 0%;
+  margin-block-end: auto;
+  transition: all 0.10s ease;
+}
+
+.dropdownGenre ul li{
+  list-style: none;
+}
+
+.dropdownGenre ul li.active li.active a {
+  list-style: none;
+  background: #eee;
+  color:#000
+}
+
+.dropdownGenre-content {
+  font-family: "Nexa";
+  display: none;
+  position: absolute;
+  background-color:#fff2;
+  backdrop-filter: blur(7px);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  transition-delay: 0.2s;
+  height: 288px;
+  overflow: auto;
+}
+
+.selected::after {
+content: '\2713'; /* Unicode for checkmark symbol */
+margin-left: 5px; /* Add some spacing between the text and checkmark */
+color: rgb(158, 54, 161); /* Customize the color of the checkmark */
+}
+
+.dropdownGenre-content a {
+  float:none;
+  font-family: "Nexa";
+  color: #fff;
+  list-style: none;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  overflow: auto;
+  cursor: pointer;
+}
+
+
+.dropdownGenre-content a:hover {
+  list-style: none;
+  background-color: #009688;
+}
+
+.dropdownGenre:hover .dropdownGenre-content {
+  display: block;
+}
+
+.dropdownGenre .dropbtn {
+  border: none;
+  border-radius: 5%;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  background-color:rgb(59, 59, 59);
+  font-family: "Nexa";
+  padding: 14px 16px;
+  margin: 0;
+  
+}
+
+.dropdownGenre .dropbtn.active{
+  background-color: #009688;
+}
+
+.dropdownGenre:hover .dropbtn {
+  transition-delay: 0,2s;
+}
+
+.dropdownGenre-content::-webkit-scrollbar{
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.dropdownGenre-content::-webkit-scrollbar-thumb{
+  
+  background-color: rgba(181, 240, 240, 0.808);
+  visibility: hidden;
+}
+
+.dropdownGenre-content:hover::-webkit-scrollbar-thumb{
+  visibility: visible;
+}
+
+
+/* ------------------------- PAGINATION -----------------------*/
 
 .pagination-container {
     display: flex;
@@ -335,69 +486,6 @@ span{
     transform: rotate(45deg);
   }
 
-
-  /*                         new shi                 */
-
-  /* The container must be positioned relative: */
-.custom-select {
-    position: relative;
-    font-family: Arial;
-
-  }
-  
-  .custom-select select {
-    display: none; /*hide original SELECT element: */
-  }
-  
-  .select-selected {
-    background-color: DodgerBlue;
-  }
-  
-  /* Style the arrow inside the select element: */
-  .select-selected:after {
-    position: absolute;
-    content: "";
-    top: 14px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
-  }
-  
-  /* Point the arrow upwards when the select box is open (active): */
-  .select-selected.select-arrow-active:after {
-    border-color: transparent transparent #fff transparent;
-    top: 7px;
-  }
-  
-  /* style the items (options), including the selected item: */
-  .select-items div,.select-selected {
-    color: #ffffff;
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-    cursor: pointer;
-  }
-  
-  /* Style items (options): */
-  .select-items {
-    position: absolute;
-    background-color: DodgerBlue;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-  }
-  
-  /* Hide the items when the select box is closed: */
-  .select-hide {
-    display: none;
-  }
-  
-  .select-items div:hover, .same-as-selected {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
 
 
   

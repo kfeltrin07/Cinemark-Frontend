@@ -46,13 +46,6 @@ export class SortByStranicaComponent implements OnInit {
   ngOnInit(): void {
     this.service.getFilms();
     this.getAllFilms();
-
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentPage = 1; // reset to page 1 when the route changes
-      }
-    });
   }
  
   updateSelectedFilm(film:string){
