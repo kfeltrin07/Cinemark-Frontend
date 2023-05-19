@@ -254,7 +254,7 @@ span{
 .dropdownGenre ul li.active li.active a {
   list-style: none;
   background: #eee;
-  color:#000
+  color: white;
 }
 
 .dropdownGenre-content {
@@ -341,8 +341,8 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
 
 .pagination-container {
     display: flex;
-    justify-content: center;
-    
+    justify-content: center; 
+
   }
 
 .pagination{
@@ -362,6 +362,11 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
     padding: 0.1%;
 }
 
+.pagination-content{
+  padding-top: 3.5%;
+  margin-left: -7.5%;
+}
+
 
 .page-link {
     padding: 0.5rem 0.75rem;
@@ -375,7 +380,7 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
   
   .page-link.active {
     background-color: #009688;
-    color: #000000;
+    color: white;
     border-color: #009688;
   }
   
@@ -383,7 +388,7 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
   .page-link:hover {
     background-color: #364e4e;
     border-color: #364e4e;
-    color: #000000;
+    color: white;
   }
   
   /* The container */
@@ -394,7 +399,7 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
     position: relative;
     padding-left: 40px;
     margin-bottom: 12px;
-    margin-right: -30%;
+    margin-right: -40%;
     cursor: pointer;
     font-size: 16px;
     font-family: "Nexa";

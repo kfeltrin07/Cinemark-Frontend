@@ -80,8 +80,8 @@ span{
 }
 
 .film img:hover{
-    transition: 0.2s ease-in-out;
-    width: 8.3vh;
+    transition: 0.2s;
+    width: 11vw;
 }
 
 .pagination-container {

@@ -9,9 +9,9 @@
       <h1>SORT BY:</h1>
       </div>
 
-      <div class="dropdown">
+      <div class="dropdownGenre">
         <button class="dropdownGenre dropbtn">Genre</button>
-        <div class="dropdown-content">
+        <div class="dropdownGenre-content">
           <ul *ngFor="let genre of this.genres; index as i; first as isFirst">
             <li><a (click)="sortFilmByGenre(genre.id_genre)">{{genre.name}}</a></li>
           </ul>
@@ -65,7 +65,7 @@
 
     
     <div class="pagination">
-      <pagination-controls  id="paginate"
+      <pagination-controls  id="paginate" class="pagination-content"
       (pageChange)="page= ($event); scrollToTop($event)"
 
       (pageBoundsCorrection)="page =(1)"
