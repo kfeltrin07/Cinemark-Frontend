@@ -46,6 +46,9 @@ export class SortByStranicaComponent implements OnInit {
         this.currentPage = 1; // reset to page 1 when the route changes
       }
     });
+    const genre=this.storageService.getGenres();
+    this.genres=genre;
+
   }
  
   updateSelectedFilm(film:string){
@@ -55,8 +58,8 @@ export class SortByStranicaComponent implements OnInit {
   sortFilmByGenre(id_genre:number){
     this.sortedFilms = [];
     console.log("test");
-    const filmgenre=this.storageService.getFilmGenres()
-    const films= this.storageService.getFilms()
+    const filmgenre=this.storageService.getFilmGenres();
+    const films= this.storageService.getFilms();
     for(var item of filmgenre){
       if(id_genre == item.id_genre){
         for(var film of films){
