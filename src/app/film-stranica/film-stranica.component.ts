@@ -91,16 +91,21 @@ export class FilmStranicaComponent {
         const matchingUsers = this.allUsers.filter(user => user.id_user === comuser.id_user);
         this.usernameList.push(...matchingUsers.map(user => user.username));
       });
-      
+
     });
   }
 
   async saveComment() {
     const val = document.getElementById("commentInput") as HTMLInputElement;
-    this.commentService.postComment(this.selectedFilm, val.value);
-    val.value = "";
+    
+    if (val.value!= null && val.value != "" && val.value != " ") {
+      this.commentService.postComment(this.selectedFilm, val.value);
+      val.value = "";
 
-    await this.UpdateLists();
+      await this.UpdateLists();
+    }
+    else
+      this.toastr.error("Error must not be empty");
   }
 
   async deleteComment(id: number, usid: number) {
@@ -118,7 +123,7 @@ export class FilmStranicaComponent {
       this.toastr.success("User's comment will be permanently deleted after refresh");
       await this.UpdateLists();
 
-    } else 
+    } else
       this.toastr.error("You cannot delete this comment");
   }
 
