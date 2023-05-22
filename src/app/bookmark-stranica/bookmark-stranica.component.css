@@ -69,6 +69,8 @@ main.table{
 .table_header{
     width: 100%;
     background-color: #fff4;
+    border: 0;
+    border-style: hidden;
     padding: .1rem 1rem;
     display:flex;
     justify-content: space-between;
@@ -108,6 +110,7 @@ thead th{
     top: 0;
     left: 0;
     background-color: #cecbd6fe;
+    border-style: hidden;
 }
 
 
@@ -125,6 +128,7 @@ tbody tr:hover{
     border-radius: 2rem;
     text-align: center;
     width: 68%;
+    min-width: 88%;
     font-size: 0.8vw;
 }
 
