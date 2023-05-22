@@ -12,48 +12,6 @@
     background-position: center;
 }
 
-.navbar{
-    width: 85%;
-    margin: auto;
-    padding: 35px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo{
-    width: 380px;
-    cursor: pointer;
-}
-
-.navbar ul li{
-    list-style: none;
-    display: inline-block;
-    margin: 0 20px;
-    position: relative;
-}
-
-.navbar ul li a{
-    text-decoration: none;
-    color: #fff;
-    text-transform: uppercase;
-}
-
-.navbar ul li::after{
-    content: '';
-    height: 3px;
-    width: 0;
-    background: #009688;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
-}
-
-.navbar ul li:hover::after{
-    width: 100%;  
-}
-
 .content{
     width: 100%;
     position: relative;
@@ -65,18 +23,19 @@
 .content h1{
     margin-left: 1%;
     font-family: "Nexa";
-    font-size: 50px;
-    margin-top: 80px;
+    font-size: 5vw;
+    margin-top: 11vh;
 }
 
 .film{
     width: fit-content;
-    margin: 60px auto;
+    margin: 3vw auto;
     display: flex;
 }
 
 .film img{
-    width: 320px;
+    width: 20vw;
+    height: 30vw;
     cursor: pointer;
     border-radius: 10px;
     position: relative;
@@ -86,17 +45,18 @@
 }
 
 .info{
-    width:1000px;
+    width:70vw;
     padding: 10px 50px;  
     transform: translateX(0px);
     opacity: 1;
     color:#fefed6;
     transition: transform 1s, opacity 1s;
     word-wrap: break-word;
+    font-size: 1vw;
 }
 
 .info h1{
-    font-size: 80px;
+    font-size: 11vh;
     font-weight: 500; 
     font-family: "Nexa";
 }
@@ -108,8 +68,8 @@
 }
 
 .info button{
-    width: 200px; 
-    padding: 12px 40px;
+    width: 13vw; 
+    padding: 0.7vw 2.6vw;
     text-align: center;
     border-radius: 25px;
     font-weight: bold;
@@ -188,6 +148,7 @@ button:hover{
     color:#fefed6;
     font-family: "Nexa";
     margin-left: 6%;
+    font-size: 	3vw;
 }
 
 .container{
@@ -266,7 +227,7 @@ input#rate-1:checked ~ label{
  
 form header{
     width: 100%;
-    font-size: 25px;
+    font-size: 1.6vw;
     color: #fe7;
     font-weight: 500;
     text-align: center;
@@ -274,9 +235,9 @@ form header{
 }
 
 form .btn{
-    height: 45px;
+    height: 2.9vw;
     width: 100%;
-    margin: 8px 0;
+    margin: 0.5vw 0;
 }
 
 form .btn button{
@@ -286,7 +247,7 @@ form .btn button{
     outline: none;
     background: #222;
     color: #999;
-    font-size: 17px;
+    font-size: 1.1vw;
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
@@ -330,6 +291,7 @@ form .btn p{
     color:#fefed6;
     font-family: "Nexa";
     margin-left: 6%;
+    font-size: 3vw;
 }
 
 .comment-container{
@@ -358,7 +320,7 @@ form .btn p{
 
 .date{
     font-family: "Nexa";
-    font-size: 14px;
+    font-size: 1vw;
     color:#ffffff;
     text-transform: uppercase;
     margin-left: 60%;
@@ -373,7 +335,7 @@ form .btn p{
 
 .comment-title{
     font-family: "Nexa";
-    font-size: 22px;
+    font-size: 1.5vw;
     color:#fefed6;
     text-transform: uppercase;
 }
@@ -381,19 +343,21 @@ form .btn p{
 .comment-card p{
     font-family: "Nexa-Light";
     color: white;
-    font-size: 20px;
+    font-size: 1.3vw;
     border:0;
     background-color: transparent;
     margin-top: 2%;
 }
 
 .add-comment{
-    height: 150px;
+    height: 9.7vw;
     border: 1px solid rgb(47, 47, 47);
     display:flex;
     background-color: #111;
     border-radius: 10px;
     margin-bottom: 2%;
+    font-size: 1vw;
+
 }
 
 .add-comment .profile-pic{
@@ -402,7 +366,7 @@ form .btn p{
 }
 
 .profile-pic img{
-    width: 60px;
+    width: 4vw;
 }
 
 .add-comment .comment-input{
@@ -410,10 +374,10 @@ form .btn p{
     width:70%;
     border: 1px solid #eaecf1;
     background-color: #353535;
-    border-radius: 10px;
+    border-radius: 0.6vw;
     color: rgb(255, 255, 255);
-    height: 100px;
-    padding: 15px 25px;
+    height: 6.5vw;
+    padding: 0.9vw 1.6vw;
     position:relative;
     resize: none;
 }
@@ -429,11 +393,11 @@ form .btn p{
 .add-comment .add-btn{
     background: #5457b6;
     border: 0;
-    border-radius: 10px;
+    border-radius: 0.6vw;
     color: #fff;
     cursor:pointer;
     font-weight: 700;
-    padding: 11px 28px;
+    padding: 0.7vw 1.8vw;
     text-transform: uppercase;
 }
 
@@ -452,9 +416,16 @@ form .btn p{
     color: white;
     width: 10%;
     margin-left: 90%;
+    font-size: 1vw;
 }
 
 .delete:hover{
     background: #2b2b2b;
     border: 1px solid #2b2b2b;;
+}
+
+
+.bk{
+    height: 10vw;
+    width: 10vw;
 }

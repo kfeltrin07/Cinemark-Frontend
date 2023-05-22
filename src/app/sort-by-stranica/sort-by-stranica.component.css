@@ -226,6 +226,7 @@ span{
   margin-right: -9%;
   display:inline-block;
   margin-bottom: 3%;
+  font-size: 1vw;
 }
 
 .dropdownGenre input{
@@ -397,11 +398,10 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
     right: -10%;
     display: inline-block;
     position: relative;
-    padding-left: 40px;
-    margin-bottom: 12px;
+    padding-left: 3vw;
+    margin-bottom: 1vw;
     margin-right: -40%;
     cursor: pointer;
-    font-size: 16px;
     font-family: "Nexa";
     font-weight: bold;
     color: white;
@@ -410,6 +410,9 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    max-width: 0px;
+    font-size: 1vw;
+    text-align: center;
   }
 
   .container .label{
@@ -423,17 +426,19 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
     cursor: pointer;
     height: 0;
     width: 0;
+    left: 0;
+    bottom: 0;
   }
   
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    display: inline-block;
     top: 0;
     left: 0;
-    height: 23px;
-    
+    height: 1.5vw;
+    width: 1.5vw;
     background-color: #eee;
+    padding-left: 0px;
   }
   
   /* On mouse-over, add a grey background color */
@@ -459,15 +464,13 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
   }
   
   /* Style the checkmark/indicator */
-  .container .checkmark:after {
-    left: 12px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
+  .checkmark:after {
+    left: 0.4vw;
+    top: 0.1vw;
+    width: 0.7vw;
+    height: 1.1vw;
     border: solid white;
     border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 
