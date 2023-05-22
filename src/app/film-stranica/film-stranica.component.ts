@@ -97,9 +97,11 @@ export class FilmStranicaComponent {
 
   async saveComment() {
     const val = document.getElementById("commentInput") as HTMLInputElement;
+    var userComment = val.value.trim();
+    console.log(userComment);
     
-    if (val.value!= null && val.value != "" && val.value != " ") {
-      this.commentService.postComment(this.selectedFilm, val.value);
+    if (userComment != null && userComment != "" && userComment != " ") {
+      this.commentService.postComment(this.selectedFilm, userComment);
       val.value = "";
 
       await this.UpdateLists();
