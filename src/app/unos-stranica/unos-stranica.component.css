@@ -10,10 +10,10 @@
 }
 
 .container form{
-    width: 90%;
-    max-width: 50%;
+    width: 38.5%;
     margin: auto;
-    padding: 3vw 2vw 1vw;
+    margin-bottom: 8%;
+    padding: 2vw 2vw 1vw;
     background: rgba(22, 22, 22, 0.734);
     backdrop-filter: blur(10px);
     border-radius: 4px;
@@ -41,8 +41,9 @@
     position: relative;
     color: #fff;
 }
+
 .input-group label{
-    flex-basis: 28%;
+    flex-basis: 30%;
     text-align:left;
     align-self: center;
 }
@@ -52,12 +53,15 @@
     background: transparent;
     border: 0;
     outline: 0;
-    padding: 10px 4px;
+    padding: 8px 4px;
     border-bottom: 0.1vw solid rgb(133, 133, 133);
     color: #fff;
-    align-self: center;
 }
 
+.add-movie-btn{
+    margin-top: 7%;
+    margin-bottom: 4%;
+}
 
 .input-group textarea{
     font-family: "Nexa-Light";
@@ -85,7 +89,7 @@ form button{
     color: #fff;
     border-radius: 4px;
     border: 0;
-    padding: 1vw 2vw;
+    padding: 0.6vw 1.6vw;
     outline: 0;
     cursor: pointer;
     display: block;

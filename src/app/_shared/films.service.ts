@@ -76,20 +76,19 @@ export class FilmsService {
   getSearchedFilms(searchInput:string){
       
       this.searchFilms = [];
-    
+
       for(var item of this.list){
-          if(searchInput.toLowerCase() == item.title.toLowerCase()){
-            this.searchFilms.push(item);
-            break;
-          }
           if(searchInput.length == 1){
             if(searchInput[0].toLowerCase() == item.title[0].toLowerCase()){
               this.searchFilms.push(item);
             }
           }
-          else{
+          if(searchInput.length==2){
             if(searchInput[0].toLowerCase() == item.title[0].toLowerCase() && searchInput[1].toLowerCase() == item.title[1].toLowerCase())
             this.searchFilms.push(item);
+          }
+          if(searchInput.length>2 && item.title.toLowerCase().includes(searchInput.toLowerCase())){
+            if(this.searchFilms.includes(item) != true){this.searchFilms.push(item)};
           }
 
       }

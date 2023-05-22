@@ -54,9 +54,9 @@ export class MovieManagementStranicaComponent {
   }
 
   populateForm(selectedFilm:Films){
+    selectedFilm.release_date = selectedFilm.release_date.substring(0,10);
     this.film = Object.assign({},selectedFilm);
     this.getGenres();
-
     this.genreList = [];
     this.filmGenreList = [];
     const list = this.storageService.getFilmGenres();
