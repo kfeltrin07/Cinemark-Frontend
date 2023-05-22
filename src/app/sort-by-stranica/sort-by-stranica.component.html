@@ -13,7 +13,7 @@
         <button class="dropdownGenre dropbtn">Genre</button>
         <div class="dropdownGenre-content">
           <ul *ngFor="let genre of this.genres; index as i; first as isFirst">
-            <li><a title="{{genre.description}}" (click)="sortFilmByGenre(genre.id_genre)">{{genre.name}}</a></li>
+            <li><a id={{genre.name}} title="{{genre.description}}" (click)="sortFilmByGenre(genre)">{{genre.name}}</a></li>
           </ul>
       </div>
     </div>

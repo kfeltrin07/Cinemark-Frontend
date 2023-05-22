@@ -272,6 +272,7 @@ span{
   overflow: auto;
 }
 
+
 .selected::after {
 content: '\2713'; /* Unicode for checkmark symbol */
 margin-left: 5px; /* Add some spacing between the text and checkmark */

@@ -30,6 +30,7 @@ export class SortByStranicaComponent implements OnInit {
   filmGenre:Film_Genre;
   check:boolean = false;
 
+
   filteredFilmsHolder:Films[];
   filteredFilms:Films[];
   genreFilter: number;
@@ -62,13 +63,16 @@ export class SortByStranicaComponent implements OnInit {
     this.service.updateFilmByName(film);
   }
 
-  sortFilmByGenre(id_genre:number){
+  sortFilmByGenre(gnre:Genres){
+    var g = document.getElementById(gnre.name) as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+    if(c.checked){g.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
     const filmgenre=this.storageService.getFilmGenres()
     const films= this.storageService.getFilms()
     for(var item of filmgenre){
-      if(id_genre == item.id_genre){
+      if(gnre.id_genre == item.id_genre){
         for(var film of films){
           this.check = false;
           if(item.id_film == film.id_film){
@@ -232,6 +236,7 @@ export class SortByStranicaComponent implements OnInit {
   initializeFilteredFilmsList(){
     this.filteredFilmsHolder = [];
     this.displayedFilms = [];
+    this.resetAllDropDowns();
   }
 
   filterFilms(){
@@ -250,6 +255,13 @@ export class SortByStranicaComponent implements OnInit {
         }
         this.filteredFilmsHolder = this.filteredFilms;
       }         
+    }
+  }
+
+  resetAllDropDowns(){
+    for(var item of this.genres){
+      const g = document.getElementById(item.name) as HTMLAnchorElement;
+      g.style.color = '#fff';
     }
   }
 
