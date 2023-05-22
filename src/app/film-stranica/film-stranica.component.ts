@@ -184,8 +184,13 @@ export class FilmStranicaComponent {
 
   saveBookmark(id_film: any) {
     console.log(id_film)
-    this.bookmark.saveBookmarks(id_film);
-    this.Checkifbookmarked();
+    if (this.storageService.isLoggedIn() == true){
+      this.bookmark.saveBookmarks(id_film);
+      this.Checkifbookmarked();
+    }
+    else{
+      this.toastr.error("You have to be logged in to bookmark")
+    }
   }
 
   Checkifbookmarked() {
