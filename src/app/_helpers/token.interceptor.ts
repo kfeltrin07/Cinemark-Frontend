@@ -39,6 +39,7 @@ export class TokenInterceptor implements HttpInterceptor {
       }
       const json = JSON.parse(JSON.stringify(err.error));
         const messageReceived = json.message;
+        if(messageReceived != null && messageReceived != "")
         this.toastr.error(messageReceived);
       return throwError(()=> new Error(messageReceived))
     })
