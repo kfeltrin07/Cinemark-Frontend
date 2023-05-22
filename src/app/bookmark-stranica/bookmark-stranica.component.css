@@ -195,6 +195,7 @@ tbody tr:hover{
     margin-top:1.5%;
     margin-left: 17%;
     margin-right: 17%;
+    margin-bottom: 1%;
     display: flex;
     justify-content: space-around;
 }
