@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="search-stranica.component.css">
 </head>
 <div class="content">
-    <h1>Searh results:</h1>
+    <h1>Search results:</h1>
   </div>
 
   <div *ngFor="let film of service.searchFilms | paginate: { id: 'paginate', itemsPerPage: pageSize, currentPage: page }" class="component ">
