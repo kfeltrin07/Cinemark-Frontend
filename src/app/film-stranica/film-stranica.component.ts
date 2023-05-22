@@ -98,7 +98,6 @@ export class FilmStranicaComponent {
   async saveComment() {
     const val = document.getElementById("commentInput") as HTMLInputElement;
     var userComment = val.value.trim();
-    console.log(userComment);
     
     if (userComment != null && userComment != "" && userComment != " ") {
       this.commentService.postComment(this.selectedFilm, userComment);
@@ -107,7 +106,7 @@ export class FilmStranicaComponent {
       await this.UpdateLists();
     }
     else
-      this.toastr.error("Error must not be empty");
+      this.toastr.error("Comment must not be empty");
   }
 
   async deleteComment(id: number, usid: number) {
