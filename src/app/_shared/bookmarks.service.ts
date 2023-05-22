@@ -50,7 +50,7 @@ export class BookmarksService {
   }
 
   getBookmarks(){
-    this.http.get(this.baseURL).toPromise().then(
+    return this.http.get(this.baseURL).toPromise().then(
       res =>{ this.list = res as Bookmarks[];
         this.storageService.saveBookmarks(this.list);
         return this.list;
