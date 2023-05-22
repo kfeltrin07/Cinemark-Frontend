@@ -81,7 +81,7 @@ export class BookmarksService {
             res=>{
               this.toastr.success("Added Bookmark");
               console.log("Added Bookmark");
-              this.checkreload(0);
+              //this.checkreload(0);
             },
             err=>{
               console.log(err);
@@ -93,7 +93,7 @@ export class BookmarksService {
           this.toastr.success("Bookmark Removed");
           console.log("Već ste bookmarkali određen film");
           console.log(err);
-          this.checkreload(0);
+          //this.checkreload(0);
         });
     }
     else{
