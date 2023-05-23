@@ -367,6 +367,7 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
 .pagination-content{
   padding-top: 3.5%;
   margin-left: -7.5%;
+  color: #009688;
 }
 
 
@@ -466,10 +467,10 @@ color: rgb(158, 54, 161); /* Customize the color of the checkmark */
   
   /* Style the checkmark/indicator */
   .checkmark:after {
-    left: 0.4vw;
-    top: 0.1vw;
-    width: 0.7vw;
-    height: 1.1vw;
+    left: 0.6vw;
+    top: 0.3vw;
+    width: 0.4vw;
+    height: 0.8vw;
     border: solid white;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);

@@ -84,18 +84,36 @@ span{
     width: 11vw;
 }
 
+* ------------------------- PAGINATION -----------------------*/
+
 .pagination-container {
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    justify-content: center; 
+
   }
 
 .pagination{
+    font-family: "Nexa";
     display: flex;
     justify-content: center;
-    color: #fff;
+    color: white;
+    font-size: 1vw;
+    text-align: center;
+    background-color:rgb(59, 59, 59);
+    width: 35vw;
+    margin: auto;
+    border: #000000;
+    border-style: double;
+    border-width: 1%;
+    margin-bottom: 1%;
+    padding: 0.1%;
 }
+
+.pagination-content{
+    padding-top: 3.5%;
+    margin-left: -7.5%;
+    color: #009688;
+  }
 
 .page-link {
     padding: 0.5rem 0.75rem;
@@ -108,7 +126,7 @@ span{
   }
   
   .page-link.active {
-    background-color: #009688;
+    background-color: #960020;
     color: #fff;
     border-color: #009688;
   }

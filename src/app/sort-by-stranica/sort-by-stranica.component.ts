@@ -37,6 +37,10 @@ export class SortByStranicaComponent implements OnInit {
   ratingFilter: number;
   yearFilter: string;
 
+  ratings: string[];
+
+  years:string[] = ["","","",""];
+
   displayedFilms: Films[];
 
   
@@ -92,6 +96,10 @@ export class SortByStranicaComponent implements OnInit {
   
 
   sortFilmByBestRated(){
+    var b = document.getElementById("BestRated") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){b.style.color = '#00ffe58e';}
     this.sortedFilms = [];
     this.filteredFilms = [];
 
@@ -107,6 +115,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByRatingCount(){
+    var m = document.getElementById("MostRated") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){m.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
 
@@ -120,6 +132,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByYear2023(){
+    var y2023 = document.getElementById("2023") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){y2023.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
 
@@ -136,6 +152,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByYear2021_2022(){
+    var y2021_2022 = document.getElementById("2021 - 2022") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){y2021_2022.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
     
@@ -152,6 +172,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByYear2010_2020(){
+    var y2010_2020 = document.getElementById("2010 - 2020") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){y2010_2020.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
     
@@ -168,6 +192,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByYear2000_2010(){
+    var y2000_2010 = document.getElementById("2000 - 2010") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){y2000_2010.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
    
@@ -184,6 +212,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByYear1990_2000(){
+    var y1990_2000 = document.getElementById("1990 - 2000") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){y1990_2000.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
     
@@ -200,6 +232,10 @@ export class SortByStranicaComponent implements OnInit {
   }
 
   sortFilmByYearOlder(){
+    var o = document.getElementById("Older") as HTMLAnchorElement;
+    var c = document.getElementById("checkbox") as HTMLInputElement;
+
+    if(c.checked){o.style.color = '#00ffe58e';}
     this.filteredFilms = [];
     this.sortedFilms = [];
 
@@ -263,6 +299,30 @@ export class SortByStranicaComponent implements OnInit {
       const g = document.getElementById(item.name) as HTMLAnchorElement;
       g.style.color = '#fff';
     }
+
+    const b = document.getElementById("BestRated") as HTMLAnchorElement;
+    b.style.color = '#fff';
+
+    const m = document.getElementById("MostRated") as HTMLAnchorElement;
+    m.style.color = '#fff';
+
+    const y2023 = document.getElementById("2023") as HTMLAnchorElement;
+    y2023.style.color = '#fff';
+
+    const y2021_2022 = document.getElementById("2021 - 2022") as HTMLAnchorElement;
+    y2021_2022.style.color = '#fff';
+
+    const y2010_2020 = document.getElementById("2010 - 2020") as HTMLAnchorElement;
+    y2010_2020.style.color = '#fff';
+
+    const y2000_2010 = document.getElementById("2000 - 2010") as HTMLAnchorElement;
+    y2000_2010.style.color = '#fff';
+
+    const y1990_2000 = document.getElementById("1990 - 2000") as HTMLAnchorElement;
+    y1990_2000.style.color = '#fff';
+
+    const o = document.getElementById("Older") as HTMLAnchorElement;
+    o.style.color = '#fff';
   }
 
 }
