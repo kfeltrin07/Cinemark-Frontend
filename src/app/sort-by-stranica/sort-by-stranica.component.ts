@@ -104,7 +104,7 @@ export class SortByStranicaComponent implements OnInit {
     this.filteredFilms = [];
 
     for(var item of this.service.list){
-      if((item.total_rating)/(item.rating_count) >= 4.4){
+      if((item.total_rating)/(item.rating_count) >= 4.5){
         this.sortedFilms.push(item);
       }
 
@@ -181,7 +181,7 @@ export class SortByStranicaComponent implements OnInit {
     
 
     for(var item of this.service.list){
-      if(item.release_date.substring(0,4) >= "2010" && item.release_date.substring(0,4) < "2020"){
+      if(item.release_date.substring(0,4) >= "2010" && item.release_date.substring(0,4) <= "2020"){
         this.sortedFilms.push(item);
       }
     }
@@ -240,7 +240,7 @@ export class SortByStranicaComponent implements OnInit {
     this.sortedFilms = [];
 
     for(var item of this.service.list){
-      if(item.release_date.substring(0,4) <= "1990"){
+      if(item.release_date.substring(0,4) < "1990"){
         this.sortedFilms.push(item);
       }
     }
