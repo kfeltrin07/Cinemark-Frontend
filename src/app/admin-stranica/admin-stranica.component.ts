@@ -41,6 +41,7 @@ export class AdminStranicaComponent {
   readonly baseURL = environment.baseURL+'api/Users'
   readonly commentURL = environment.baseURL+'api/Comments'
   readonly bookmarkURL = environment.baseURL+'api/Bookmark'
+  readonly ratingURL = environment.baseURL+'api/Ratings'
 
 
   onSubmit(form:NgForm){
@@ -93,10 +94,11 @@ export class AdminStranicaComponent {
     this.refreshList();
   }
 
-  deleteUser(id:number){
+  async deleteUser(id:number){
     console.log(id);
-    this.http.post<any>(`${this.commentURL}/DeleteCommentsOfUser/${id}`,id,{ withCredentials: true }).subscribe();
-    this.http.post<any>(`${this.bookmarkURL}/DeleteBookmarksOfUser/${id}`,id,{ withCredentials: true }).subscribe();
+    await this.http.post<any>(`${this.commentURL}/DeleteCommentsOfUser/${id}`,id,{ withCredentials: true }).subscribe();
+    await this.http.post<any>(`${this.bookmarkURL}/DeleteBookmarksOfUser/${id}`,id,{ withCredentials: true }).subscribe();
+    await this.http.post<any>(`${this.ratingURL}/DeleteRatingsOfUser/${id}`,id,{ withCredentials: true }).subscribe();
     this.http.delete(`${this.baseURL}/${id}`).subscribe();
     this.refreshList();
     this.toastr.error("User Viped Out.","Deleted!")
