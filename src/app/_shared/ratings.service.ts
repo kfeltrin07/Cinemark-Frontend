@@ -27,7 +27,7 @@ export class RatingsService {
   }
 
   formData:Ratings = new Ratings();
-  readonly baseURL = environment.baseURL+'api/Ratings';
+  readonly baseURL = environment.baseURL+'api/Ratings/';
   list : Ratings[];
 
   postRating(film:Films, rating:number){
