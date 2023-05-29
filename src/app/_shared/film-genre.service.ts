@@ -16,7 +16,7 @@ const httpOptions = {
 
 export class FilmGenreService {
 
-  readonly baseURL = environment.baseURL+'api/Film_Genre';
+  readonly baseURL = environment.baseURL+'api/Film_Genre/';
 
   addGenreToMovie(newFG : Film_Genre ): Observable<any> {  
     return this.http.post<any>(`${this.baseURL}`,newFG,httpOptions);

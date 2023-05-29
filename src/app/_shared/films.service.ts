@@ -35,7 +35,7 @@ export class FilmsService {
 
 
   formData:Films = new Films();
-  readonly baseURL = environment.baseURL+'api/Films'
+  readonly baseURL = environment.baseURL+'api/Films/'
 
   list : Films[];
   selectedFilm:Films;

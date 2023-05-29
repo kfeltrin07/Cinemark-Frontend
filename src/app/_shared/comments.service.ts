@@ -23,7 +23,7 @@ export class CommentsService {
     })
   }
 
-  readonly baseURL = environment.baseURL+'api/Comments'
+  readonly baseURL = environment.baseURL+'api/Comments/'
   formData:Comments = new Comments();
 
   listComments:Comments[];
