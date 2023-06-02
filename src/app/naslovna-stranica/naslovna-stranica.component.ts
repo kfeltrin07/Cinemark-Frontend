@@ -23,9 +23,9 @@ export class NaslovnaStranicaComponent {
     }
 
 
-  onSearchClick(){
+  async onSearchClick(){
     const val = document.getElementById("inputValue") as HTMLInputElement;
-    this.filmsService.getSearchedFilms(val.value);
+    await this.filmsService.getSearchedFilms(val.value);
     this.router.navigate(['search']);
   }
 }
