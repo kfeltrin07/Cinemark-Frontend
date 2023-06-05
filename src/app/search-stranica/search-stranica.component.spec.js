@@ -90,5 +90,47 @@ describe('SearchStranicaComponent', function () {
     const currentPage = await currentPageElement.getText();
     assert.strictEqual(currentPage, '2');
   });
+
+  it('should navigate to previous page', async function () {
+    this.timeout(10000);
+  
+    const filmListContainerSecondPage = await driver.wait(until.elementLocated(By.className('film-list')), 5000);
+    await driver.wait(until.elementIsVisible(filmListContainerSecondPage), 5000);
+  
+    const previousPageButton = await driver.findElement(By.xpath("//a[contains(text(),'Previous')]"));
+  
+    await driver.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+    await driver.sleep(1000);
+  
+    await previousPageButton.click();
+  
+    const filmListContainerFirstPage = await driver.wait(until.elementLocated(By.className('film-list')), 5000);
+    await driver.wait(until.elementIsVisible(filmListContainerFirstPage), 5000);
+    
+    const currentPageElement = await driver.findElement(By.xpath("//li[@class='current']/span[@aria-live='polite']/span[not(@class='show-for-sr')]"));
+    const currentPage = await currentPageElement.getText();
+    assert.strictEqual(currentPage, '1');
+  });
+
+  it('should navigate to next page', async function () {
+    this.timeout(10000);
+  
+    const filmListContainerFirstPage = await driver.wait(until.elementLocated(By.className('film-list')), 5000);
+    await driver.wait(until.elementIsVisible(filmListContainerFirstPage), 5000);
+  
+    const previousPageButton = await driver.findElement(By.xpath("//a[contains(text(),'Next')]"));
+  
+    await driver.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+    await driver.sleep(1000);
+  
+    await previousPageButton.click();
+  
+    const filmListContainerSecondPage = await driver.wait(until.elementLocated(By.className('film-list')), 5000);
+    await driver.wait(until.elementIsVisible(filmListContainerSecondPage), 5000);
+    
+    const currentPageElement = await driver.findElement(By.xpath("//li[@class='current']/span[@aria-live='polite']/span[not(@class='show-for-sr')]"));
+    const currentPage = await currentPageElement.getText();
+    assert.strictEqual(currentPage, '2');
+  });
   
 });
